@@ -1,0 +1,18 @@
+# .htaccess for enabling clean URLs
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  # Modify the RewriteBase if you are using Drupal in a subdirectory and the
+  # rewrite rules are not working properly.
+  #RewriteBase /drupal
+
+  # Rewrite URLs of the form 'x' to the form 'index.php?q=x'.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.php [L]
+
+  # Block access to "hidden" directories whose names begin with a period. This
+  # includes directories used by version control systems such as Subversion or
+  # Git to store control files.
+  RewriteRule "^(.*/)?\.[^/]+(/.*)?$" - [F]
+</IfModule>
