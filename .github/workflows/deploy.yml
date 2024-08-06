@@ -59,6 +59,11 @@ jobs:
         # Use the custom dump file from the repository
         mysql --ssl-mode=REQUIRED --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < database/mysqlsampledatabase.sql
 
+    - name: Verify Database Import
+      run: |
+        # Run a simple query to verify data import
+        echo "SHOW TABLES;" | mysql --ssl-mode=REQUIRED --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
+      
     # - name: Log in to Azure
     #   uses: azure/login@v1
     #   with:
