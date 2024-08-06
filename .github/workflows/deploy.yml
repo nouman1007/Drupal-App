@@ -54,10 +54,11 @@ jobs:
         # Replace with actual database dump command
         mysqldump --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} > dump.sql
 
-    - name: Import Database to Azure MySQL Flexible Server
+    - name: Import Custom Database to Azure MySQL Flexible Server
       run: |
-        mysql --ssl-mode=REQUIRED --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < mysqlsampledatabase.sql
-  
+        # Use the custom dump file from the repository
+        mysql --ssl-mode=REQUIRED --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < database/mysqlsampledatabase.sql
+
     # - name: Log in to Azure
     #   uses: azure/login@v1
     #   with:
