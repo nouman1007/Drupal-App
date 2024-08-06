@@ -54,10 +54,10 @@ jobs:
   #       # Replace with actual database dump command
   #       mysqldump --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} > dump.sql
 
-  #   - name: Deploy to Azure App Service
-  #     uses: azure/webapps-deploy@v3
-  #     with:
-  #       app-name: ${{ secrets.APP_NAME }}
-  #       slot-name: production
-  #       images: |
-  #         ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ secrets.APP_NAME }}
+        slot-name: production
+        images: |
+          ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
