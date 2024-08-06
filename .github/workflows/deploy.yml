@@ -44,20 +44,20 @@ jobs:
     # - name: Checkout Code
     #   uses: actions/checkout@v3
 
-    # - name: Log in to Azure CLI
-    #   uses: azure/login@v1
-    #   with:
-    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    # - name: Dump Database
-    #   run: |
-    #     # Replace with actual database dump command
-    #     mysqldump --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} > dump.sql
-
-    - name: Log in to Azure
+    - name: Log in to Azure CLI
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Dump Database
+      run: |
+        # Replace with actual database dump command
+        mysqldump --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} > dump.sql
+
+    # - name: Log in to Azure
+    #   uses: azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy to Azure App Service
       uses: azure/webapps-deploy@v3
