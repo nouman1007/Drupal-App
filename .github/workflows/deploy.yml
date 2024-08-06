@@ -58,6 +58,6 @@ jobs:
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ secrets.APP_NAME }}
-        slot-name: production
+        # slot-name: production
         images: |
           ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
