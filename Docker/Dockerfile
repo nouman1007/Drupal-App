@@ -83,7 +83,8 @@ EXPOSE 2222
 EXPOSE 8000
 EXPOSE 22
 
-COPY init_container.sh /opt/startup/
-RUN chmod 775 /opt/startup/init_container.sh
+# COPY init_container.sh /opt/startup/
+# RUN chmod 775 /opt/startup/init_container.sh
 
-ENTRYPOINT ["/opt/startup/init_container.sh"]
+# ENTRYPOINT ["/opt/startup/init_container.sh"]
+CMD ["sh", "-c", "service ssh start && vendor/bin/drush && vendor/bin/drush updb -y && vendor/bin/drush cim -y && vendor/bin/drush cr && apache2ctl -D FOREGROUND"]
