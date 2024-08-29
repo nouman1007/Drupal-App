@@ -6,3 +6,5 @@ service ssh start
 
 # Start Apache service
 exec apache2-foreground
+
+service ssh status
