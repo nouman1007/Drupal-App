@@ -1,22 +1,78 @@
-# Use the official PHP image with Apache
-FROM php:8.2-apache
+    FROM ubuntu:22.04
 
-# Install necessary PHP extensions and other dependencies
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libxml2-dev \
-    git \
-    unzip \
-    wget \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    && docker-php-ext-install opcache
+    # Set environment variables for non-interactive apt installs
+    ENV DEBIAN_FRONTEND=noninteractive
+    
+    # Add repository for PHP 8.3
+    RUN apt-get update && apt-get install -y software-properties-common \
+        && add-apt-repository ppa:ondrej/php \
+        && apt-get update
+    
+    
+    # Install Apache, PHP 8.3, and other necessary dependencies
+    RUN apt-get update && apt-get install -y \
+        apache2 \
+        php8.3 \
+        libapache2-mod-php8.3 \
+        php8.3-mysql \
+        php8.3-pgsql \
+        php8.3-gd \
+        php8.3-zip \
+        php8.3-opcache \
+        php8.3-mbstring \
+        php8.3-xml \
+        php8.3-curl \
+        php8.3-bcmath \
+        php8.3-intl \
+        php8.3-soap \
+        php8.3-readline \
+        php8.3-ldap \
+        php8.3-imagick \
+        libfreetype6-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libpq-dev \
+        libwebp-dev \
+        libzip-dev \
+        dos2unix \
+        unzip \
+        curl \
+        wget \
+        git \
+        openssh-server \
+        && apt-get clean
+    
+    # Install Composer
+    RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    
+    # Install Drush globally
+    RUN composer global require drush/drush
+    
+    ENV PATH="$PATH:/root/.composer/vendor/bin"
+    # RUN composer global require drush/drush \
+    #     && ln -s /root/.composer/vendor/bin/drush /usr/local/bin/drush
+    # Environment variables
+    ENV DRUPAL_VERSION=10.3.1 \
+        COMPOSER_ALLOW_SUPERUSER=1
+    
+    # Set recommended PHP.ini settings
+    RUN mkdir -p /etc/php/8.3/apache2/conf.d \
+        && { \
+            echo 'opcache.enable=1'; \
+            echo 'opcache.memory_consumption=256'; \
+            echo 'opcache.interned_strings_buffer=8'; \
+            echo 'opcache.max_accelerated_files=10000'; \
+            echo 'opcache.revalidate_freq=60'; \
+            echo 'opcache.validate_timestamps=0'; \
+            echo 'opcache.save_comments=1'; \
+            echo 'opcache.enable_cli=0'; \
+        } > /etc/php/8.3/apache2/conf.d/opcache-recommended.ini
+    
+# # Install PHP extensions
+# RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+#     && docker-php-ext-install gd \
+#     && docker-php-ext-install mysqli pdo pdo_mysql \
+#     && docker-php-ext-install opcache
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -24,54 +80,34 @@ RUN a2enmod rewrite
 # Set the working directory
 WORKDIR /var/www/html
 
-# Download Drupal
+# Download and set up Drupal
 RUN wget https://www.drupal.org/download-latest/zip -O drupal.zip \
-    || { echo 'Failed to download Drupal'; exit 1; }
+    && unzip drupal.zip \
+    && mv drupal-*/* . \
+    && rm drupal.zip \
+    && rm -rf drupal-*
 
-# Unzip Drupal
-RUN unzip drupal.zip \
-    || { echo 'Failed to unzip Drupal'; exit 1; }
-
-# Cleanup
-RUN rm drupal.zip \
-    || { echo 'Failed to remove Drupal zip'; exit 1; }
-
-# Move files
-RUN mv drupal-*/* . \
-    || { echo 'Failed to move files'; exit 1; }
-
-# Remove leftover directories
-RUN rm -rf drupal-* \
-    || { echo 'Failed to remove directory'; exit 1; }
-
-# Copy custom settings.php file
+# Copy settings and .htaccess
 COPY settings.php sites/default/settings.php
+COPY .htaccess /var/www/html/.htaccess
 
-# Ensure permissions are correct
+# Set permissions
 RUN chmod 664 sites/default/settings.php \
     && chown www-data:www-data sites/default/settings.php \
     && chmod 775 sites/default \
-    && chown www-data:www-data sites/default
+    && chown www-data:www-data sites/default \
+    && chown -R www-data:www-data /var/www/html
 
-# Set ownership for the entire Drupal directory
-RUN chown -R www-data:www-data /var/www/html
+# Start and enable SSH
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends dialog \
+    && apt-get install -y --no-install-recommends openssh-server \
+    && echo "root:Docker!" | chpasswd
 
-# Copy the default .htaccess file and ensure it's in place
-COPY .htaccess /var/www/html/.htaccess
+COPY sshd_config /etc/ssh/
 
-# Create OPcache configuration
-RUN echo 'opcache.memory_consumption=128' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.interned_strings_buffer=8' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.max_accelerated_files=4000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.revalidate_freq=2' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.fast_shutdown=1' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.enable_cli=1' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+EXPOSE 8000 2222 80
 
-# Copy SSL certificate file to preferred location
-COPY DigiCertGlobalRootCA.pem /var/www/html/bin/DigiCertGlobalRootCA.pem
-
-# Expose port 80
-EXPOSE 80
-
-# Start Apache in the foreground
-CMD ["apache2-foreground"]
+COPY init_container.sh /opt/startup/
+RUN chmod 775 /opt/startup/init_container.sh
+ENTRYPOINT ["/opt/startup/init_container.sh"]
