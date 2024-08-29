@@ -1,0 +1,65 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Top Banner
+description: 'Utility navigation component with links.'
+props:
+  type: object
+  properties:
+    media:
+      type: string
+      title: Media
+      description: Top Banner U.S. Flag image
+      default: ''
+    endorsement:
+      type: string
+      title: Media
+      description: Top Banner U.S. Flag image
+      default: ''
+    button:
+      type: object
+      title: Button
+      description: Button for the card.
+      properties:
+        text:
+          type: string
+          title: Text
+          description: The text for the button.
+          default: 'Read More'
+        url:
+          type: string
+          title: URL
+          description: The link for the button.
+          default: '#'
+        modifier:
+          type: string
+          title: Modifier
+          description: CSS class modifiers for the button.
+          default: 'btn-primary'
+    links:
+      type: array
+      title: Links
+      description: An array of links for the utility navigation.
+      items:
+        type: object
+        properties:
+          url:
+            type: string
+            title: URL
+            description: The URL the link points to.
+            default: '#'
+          text:
+            type: string
+            title: Text
+            description: The text for the link.
+            default: 'Link text'
+      default:
+        -
+          endorsement: 'An official website of the United States government.'
+        -
+          url: '#'
+          text: 'Here’s how you know'
+        -
+          url: '#'
+          text: 'Visit AmeriCorps Website'
+        -
+          url: '#'
+          text: 'Help'

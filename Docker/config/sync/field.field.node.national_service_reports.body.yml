@@ -1,0 +1,24 @@
+uuid: 9b8e33cb-c7d0-4b93-8e42-9a81dac18ddf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.national_service_reports
+  module:
+    - text
+id: node.national_service_reports.body
+field_name: body
+entity_type: node
+bundle: national_service_reports
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

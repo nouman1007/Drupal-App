@@ -1,0 +1,28 @@
+<?php
+use Drupal\migrate\MigrateExecutable;
+use Drupal\migrate\MigrateMessage;
+use Psr\Log\LoggerInterface;
+
+function americorps_migrate_update_10001() {
+  // already ran
+}
+
+function americorps_migrate_update_10002() {
+  americorps_migrate_run_migrations([
+    'migrate_evidence_report_to_nodes',
+    'migrate_webinar_to_nodes',
+  ]);
+}
+
+function americorps_migrate_run_migrations(array $migration_ids) {
+  /** @var LoggerInterface $logger */
+  $logger = \Drupal::logger('americorps_migrate');
+  /** @var \Drupal\migrate\Plugin\MigrationPluginManagerInterface $migration_manager */
+  $migration_manager = \Drupal::service('plugin.manager.migration');
+  foreach ($migration_ids as $migration_id) {
+    $migration = $migration_manager->createInstance($migration_id);
+    $executable = new MigrateExecutable($migration, new MigrateMessage());
+    $executable->import();
+    $logger->info('Ran ' . $migration_id . ' migration.');
+  }
+}

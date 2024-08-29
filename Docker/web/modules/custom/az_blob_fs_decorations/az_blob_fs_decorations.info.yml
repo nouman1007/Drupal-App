@@ -1,0 +1,7 @@
+name: Azure Blob File System Decorations
+type: module
+description: Custom module to decorate certain functionality provided by az_blob_fs.
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - drupal:az_blob_fs

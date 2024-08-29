@@ -1,0 +1,29 @@
+uuid: 3d9f273a-caa8-4e32-bd10-dfe8dca832cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_full_report
+    - media.type.document
+    - node.type.evidence_report
+id: node.evidence_report.field_full_report
+field_name: field_full_report
+entity_type: node
+bundle: evidence_report
+label: 'Full Report'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: document
+field_type: entity_reference

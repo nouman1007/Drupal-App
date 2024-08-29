@@ -1,0 +1,22 @@
+uuid: ef6d22a1-fd0d-4b57-af7a-39a21f51d3b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.evidence_report
+id: node.evidence_report.promote
+field_name: promote
+entity_type: node
+bundle: evidence_report
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

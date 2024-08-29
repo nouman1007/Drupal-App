@@ -1,0 +1,19 @@
+uuid: 2c4c5c83-2d1f-42c8-924a-8ecab2ed5c4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_report_citation
+    - node.type.evidence_report
+id: node.evidence_report.field_report_citation
+field_name: field_report_citation
+entity_type: node
+bundle: evidence_report
+label: 'Report Citation '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

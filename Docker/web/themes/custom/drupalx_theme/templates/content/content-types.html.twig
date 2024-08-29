@@ -1,0 +1,48 @@
+{{ attach_library('drupalx_theme/card') }}
+{{ attach_library('drupalx_theme/card-group') }}
+
+{% if attributes %}
+  {% set bg_color = content.field_background_color[0]['#markup']|lower %}
+{% else %}
+  {% set bg_color = background_color %}
+{% endif %}
+
+<section class="card-group-wrapper blue pt-6 pb-12 mb-6">
+  <div class="container">
+    <div class="card-group">
+      <h2 class="heading card-group-heading text-center" style="color:#1550ed;">Explore The Learning Campus</h2>
+      <p class="card-group-subtitle text-center mb-4 mb-lg-6"><small><strong>Choose one of the items below to browse our wide range of topics and content.</strong></small></p>
+      <div class="row">
+        <div class="d-flex justify-content-center gap-4">
+
+          {% block content_types %}
+            {% for content_type in content_types_data %}
+              {% if content_type.name == 'Evidence Report' %}
+                <div class="card node-count-card col-sm-12 col-md-6 col-lg-3 shadow">
+                  <img src="/themes/custom/drupalx_theme/static/images/evidence-report.webp" class="card-img-top" alt="test image">
+                  <div class="card-body">
+                    <h2 class="heading card-title">
+                      <a href="/search?type[]=evidence_report">{{ content_type.name }}</a>
+                    </h2>
+                    <p class="card-node-count">{{ content_type.count }} items</p>
+                  </div>
+                </div>
+              {% endif %}
+              {% if content_type.name == 'Webinar' %}
+              <div class="card node-count-card col-sm-12 col-md-6 col-lg-3 shadow">
+                <img src="/themes/custom/drupalx_theme/static/images/webinar.png" class="card-img-top" alt="test image">
+                  <div class="card-body">
+                    <h2 class="heading card-title">
+                      <a href="/search?type[]=webinar">{{ content_type.name }}</a>
+                    </h2>
+                    <p class="card-node-count">{{ content_type.count }} items</p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endblock %}
+        </div>{# .d-grid #}
+      </div>{# .row #}
+    </div>{# .card-group #}
+  </div>{# .container #}
+</div>

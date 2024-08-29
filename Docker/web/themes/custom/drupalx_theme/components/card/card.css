@@ -1,0 +1,138 @@
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+body .btn {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1;
+  width: fit-content;
+}
+
+.card {
+  background-color: #112542;
+  border: none;
+  position: relative;
+}
+.card .card-body {
+  color: #ffffff;
+}
+.card.flag-card {
+  border-radius: 16px;
+}
+.card.flag-card .card-title {
+  align-items: center;
+  background: #1550ed;
+  display: flex;
+  font-weight: 900;
+  margin: 0;
+  max-width: calc(100% - 20px);
+  min-height: 85px;
+  padding: 0 10px 0 73px;
+  position: relative;
+  text-overflow: clip;
+  transform: translateX(-14px);
+  white-space: nowrap;
+  width: max-content;
+}
+.card.flag-card .card-title::after,
+.card.flag-card .card-title::before {
+  content: "";
+  display: block;
+}
+.card.flag-card .card-title::before {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg width='14' height='15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 0H0l14 14.5V0Z' fill='%23849324'/%3E%3C/svg%3E") transparent no-repeat 100% 0;
+  bottom: 0;
+  height: 14px;
+  left: 0;
+  position: absolute;
+  transform: translateY(14px);
+  width: 14px;
+}
+.card.flag-card .card-title::after {
+  background: transparent url("data:image/svg+xml;charset=utf-8,%3Csvg width='41' height='84' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M.14 0H41L.14 84V0Z' fill='%231550ED'/%3E%3C/svg%3E") no-repeat 0;
+  background-size: cover;
+  height: 85px;
+  transform: translateX(49px);
+  width: 40px;
+}
+.card.flag-card .card-body {
+  padding: 48px 64px 72px 0;
+}
+.card.flag-card .card-body .card-text {
+  padding-left: 64px;
+}
+.card.image-card {
+  border-radius: 50px;
+  /* Make img 100% width. */
+}
+.card.image-card img {
+  width: 100%;
+  border-top-left-radius: 50px !important;
+  border-top-right-radius: 50px !important;
+}
+.card.image-card .card-title {
+  font-size: 1.75rem;
+}
+.card.image-card .card-title a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.card.image-card .card-title a:hover, .card.image-card .card-title a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.card.image-card .card-text {
+  padding-bottom: 72px;
+}
+.card.image-card .card-body {
+  padding: 32px;
+}
+.card.image-card .card-type {
+  position: absolute;
+  bottom: 15px;
+}
+.card.node-count-card {
+  background-color: #ffffff;
+  color: #212529;
+  border-radius: 16px;
+}
+.card.node-count-card img {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  width: 30%;
+}
+.card.node-count-card .card-title {
+  color: #1550ed;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0 0 8px calc(30% + 24px);
+}
+.card.node-count-card .card-title a {
+  color: #212529;
+  text-decoration: none;
+}
+.card.node-count-card .card-title a:hover, .card.node-count-card .card-title a:focus {
+  color: #212529;
+  text-decoration: underline;
+}
+.card.node-count-card .card-body {
+  padding: 12px;
+}
+.card.node-count-card .card-body .card-node-count {
+  color: #212529;
+  font-size: 1rem;
+  margin-bottom: 0;
+  padding-left: calc(30% + 24px);
+}

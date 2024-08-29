@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme override for the "teaser" view mode.
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {%
+    include 'drupalx_theme:side-by-side' with {
+      eyebrow: content.field_eyebrow,
+      title: label,
+      body: content.field_summary,
+      button: url,
+      media: content.field_thumbnail,
+      layout: 'left',
+      modifier: '',
+    } only
+  %}
+</div>

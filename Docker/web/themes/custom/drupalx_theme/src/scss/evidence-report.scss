@@ -1,0 +1,56 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+// Include variables.
+@import './src/scss/_variables.scss';
+
+.evidence-report,
+.webinar {
+
+  .body .btn {
+    border-radius: var(--bs-border-radius-pill) !important;
+    display: block;
+    line-height: 1;
+    padding: 0.85rem 1.25rem;
+    text-align: center;
+    text-transform: uppercase;
+    width: fit-content;
+
+    &.btn-solid-blue {
+      background-color: $blue-secondary;
+      border: 2px solid $blue-secondary;
+      color: $white;
+    }
+  }
+}
+
+.evidence-report {
+
+  .intended-audience,
+  .tags {
+
+    a:not(:last-child)::after {
+      content: ',';
+    }
+  }
+
+  .full-report a {
+
+    &.rounded-pill {
+      max-width: 368px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .further-info {
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.14;
+      text-transform: uppercase;
+    }
+  }
+}

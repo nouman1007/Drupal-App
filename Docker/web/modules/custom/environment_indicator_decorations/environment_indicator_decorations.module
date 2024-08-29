@@ -1,0 +1,27 @@
+<?php
+
+use Symfony\Component\Process\Process;
+
+/**
+ * Automatically update current release.
+ */
+function environment_indicator_decorations_cron() {
+  $process = new Process(['sh', '-c', 'git describe --contains --all HEAD']);
+  $process->run();
+
+  // Check if the command was successful.
+  if ($process->isSuccessful()) {
+    $git_description = trim($process->getOutput());
+    $process = new Process(['sh', '-c', 'git describe --tags --abbrev=0']);
+    $process->run();
+    if ($process->isSuccessful()) {
+      $output = trim($process->getOutput());
+      if (!str_ends_with($git_description, $output)) {
+        $git_description .= ' ' . $output;
+      }
+    }
+
+    // Set the State value.
+    \Drupal::state()->set('environment_indicator.current_release', $git_description);
+  }
+}

@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: 5rSwCDDXxIHa7TR5w5_Svp0-japDhjvVQeMoJSMjScg
+langcode: en
+uuid: 792825de-3fa3-410b-948c-4424d1808605
+name: AmeriCorps
+mail: admin@example.com
+slogan: ''
+page:
+  403: /node/2
+  404: /node/1
+  front: /node/18
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

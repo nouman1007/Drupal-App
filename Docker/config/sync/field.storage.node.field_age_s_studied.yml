@@ -1,0 +1,39 @@
+uuid: a7459a16-52d8-400f-8c4e-424da0be4952
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_age_s_studied
+field_name: field_age_s_studied
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 0_5_early_childhood
+      label: '0-5 (Early Childhood)'
+    -
+      value: 6_12_childhood
+      label: '6-12 (Childhood)'
+    -
+      value: 13_17_adolescent
+      label: '13-17 (Adolescent)'
+    -
+      value: 18_25_young_adult
+      label: '18-25 (young Adult)'
+    -
+      value: 26_55_adult
+      label: '26-55 (Adult)'
+    -
+      value: 55_older_adult
+      label: '55+ (Older adult)'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

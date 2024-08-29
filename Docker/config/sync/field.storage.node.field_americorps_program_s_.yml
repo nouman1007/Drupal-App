@@ -1,0 +1,45 @@
+uuid: 4ff38090-7156-4264-a015-a00d56619e90
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_americorps_program_s_
+field_name: field_americorps_program_s_
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: americorps_nccc
+      label: 'AmeriCorps NCCC'
+    -
+      value: americorps_state_and_national
+      label: 'AmeriCorps State and National'
+    -
+      value: americorps_vista
+      label: 'AmeriCorps VISTA'
+    -
+      value: americorps_seniors
+      label: 'AmeriCorps Seniors'
+    -
+      value: volunteer_generation_fund
+      label: 'Volunteer Generation Fund'
+    -
+      value: social_innovation_fund
+      label: 'Social Innovation Fund'
+    -
+      value: office_of_research_and_evaluation
+      label: 'Office of Research and Evaluation'
+    -
+      value: public_health_americorps
+      label: 'Public Health AmeriCorps'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

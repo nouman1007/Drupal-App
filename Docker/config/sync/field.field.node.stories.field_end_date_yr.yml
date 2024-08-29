@@ -1,0 +1,25 @@
+uuid: a900cc48-700d-4d5b-a998-d1427c3afa8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_end_date_yr
+    - node.type.stories
+  module:
+    - yearonly
+id: node.stories.field_end_date_yr
+field_name: field_end_date_yr
+entity_type: node
+bundle: stories
+label: 'End Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '2024'
+default_value_callback: ''
+settings:
+  yearonly_from: '1990'
+  yearonly_to: '2030'
+field_type: yearonly

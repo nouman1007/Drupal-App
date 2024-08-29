@@ -1,0 +1,21 @@
+uuid: f0e1c42d-1333-40cd-873c-90b1cd4bbad7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_study_types_s_
+    - node.type.evidence_report
+  module:
+    - options
+id: node.evidence_report.field_study_types_s_
+field_name: field_study_types_s_
+entity_type: node
+bundle: evidence_report
+label: 'Study Types(s) '
+description: 'Multi-select list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

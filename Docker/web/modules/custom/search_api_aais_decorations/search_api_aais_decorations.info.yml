@@ -1,0 +1,9 @@
+name: Search API AAIS Decorations
+type: module
+description: Custom module to decorate certain functionality provided by search_api_aais.
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - search_api:search_api
+  - drupal:search_api_aais
+  - drupal:views

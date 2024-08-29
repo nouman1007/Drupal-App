@@ -1,0 +1,31 @@
+uuid: 66a05303-f134-4da1-85de-1087268f9bb4
+langcode: en
+status: true
+dependencies:
+  config:
+    - feeds.feed_type.webinar_content_importer
+    - field.storage.node.feeds_item
+    - node.type.webinar
+  module:
+    - feeds
+id: node.webinar.feeds_item
+field_name: feeds_item
+entity_type: node
+bundle: webinar
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings:
+    target_bundles:
+      webinar_content_importer: webinar_content_importer
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: feeds_item

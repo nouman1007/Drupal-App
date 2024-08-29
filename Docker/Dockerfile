@@ -1,77 +1,132 @@
-# Use the official PHP image with Apache
-FROM php:8.2-apache
 
-# Install necessary PHP extensions and other dependencies
+
+FROM ubuntu:22.04
+
+# Set environment variables for non-interactive apt installs
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Add repository for PHP 8.3
+RUN apt-get update && apt-get install -y software-properties-common \
+    && add-apt-repository ppa:ondrej/php \
+    && apt-get update
+
+# Install Apache, PHP 8.3, and other necessary dependencies
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
+    apache2 \
+    php8.3 \
+    libapache2-mod-php8.3 \
+    php8.3-mysql \
+    php8.3-pgsql \
+    php8.3-gd \
+    php8.3-zip \
+    php8.3-opcache \
+    php8.3-mbstring \
+    php8.3-xml \
+    php8.3-curl \
+    php8.3-bcmath \
+    php8.3-intl \
+    php8.3-soap \
+    php8.3-readline \
+    php8.3-ldap \
+    php8.3-imagick \
     libfreetype6-dev \
-    libxml2-dev \
-    git \
+    libjpeg-dev \
+    libpng-dev \
+    libpq-dev \
+    libwebp-dev \
+    libzip-dev \
+    dos2unix \
     unzip \
+    curl \
     wget \
-    && rm -rf /var/lib/apt/lists/*
+    git \
+    openssh-server \
+    && apt-get clean
 
-# Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    && docker-php-ext-install opcache
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Install Drush globally
+RUN composer global require drush/drush
 
-# Set the working directory
-WORKDIR /var/www/html
+ENV PATH="$PATH:/root/.composer/vendor/bin"
+# RUN composer global require drush/drush \
+#     && ln -s /root/.composer/vendor/bin/drush /usr/local/bin/drush
+# Environment variables
+ENV DRUPAL_VERSION=10.3.1 \
+    COMPOSER_ALLOW_SUPERUSER=1
 
-# Download Drupal
-RUN wget https://www.drupal.org/download-latest/zip -O drupal.zip \
-    || { echo 'Failed to download Drupal'; exit 1; }
+# Set recommended PHP.ini settings
+RUN mkdir -p /etc/php/8.3/apache2/conf.d \
+    && { \
+        echo 'opcache.enable=1'; \
+        echo 'opcache.memory_consumption=256'; \
+        echo 'opcache.interned_strings_buffer=8'; \
+        echo 'opcache.max_accelerated_files=10000'; \
+        echo 'opcache.revalidate_freq=60'; \
+        echo 'opcache.validate_timestamps=0'; \
+        echo 'opcache.save_comments=1'; \
+        echo 'opcache.enable_cli=0'; \
+    } > /etc/php/8.3/apache2/conf.d/opcache-recommended.ini
 
-# Unzip Drupal
-RUN unzip drupal.zip \
-    || { echo 'Failed to unzip Drupal'; exit 1; }
+WORKDIR /opt/drupal
 
-# Cleanup
-RUN rm drupal.zip \
-    || { echo 'Failed to remove Drupal zip'; exit 1; }
+# Copy your Drupal code to /opt/drupal
+COPY . /opt/drupal
 
-# Move files
-RUN mv drupal-*/* . \
-    || { echo 'Failed to move files'; exit 1; }
+# Install Composer dependencies
+RUN set -eux; \
+    export COMPOSER_HOME="$(mktemp -d)"; \
+    composer install --no-scripts --no-interaction; \
+    if [ ! -d "web/core" ]; then \
+        echo "Error: Drupal core is not installed"; \
+        exit 1; \
+    fi; \
+    chown -R www-data:www-data web/sites web/modules web/themes; \
+    rm -rf /var/www/html/*; \
+    ln -sf /opt/drupal/web /var/www/html; \
+    rm -rf "$COMPOSER_HOME"
 
-# Remove leftover directories
-RUN rm -rf drupal-* \
-    || { echo 'Failed to remove directory'; exit 1; }
+# Use bash explicitly for the RUN instruction
+RUN apt-get update && apt-get install -y curl
+ENV NVM_DIR=/root/.nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash \
+    && bash -c "source $NVM_DIR/nvm.sh && nvm install node && nvm use node"
 
-# Copy custom settings.php file
-COPY settings.php sites/default/settings.php
+# Ensure NVM and NPM are in the PATH
+RUN echo "export NVM_DIR=$NVM_DIR" >> /root/.bashrc \
+    && echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\"" >> /root/.bashrc \
+    && echo "export PATH=\$NVM_DIR/versions/node/\$(nvm current)/bin:\$PATH" >> /root/.bashrc
 
-# Ensure permissions are correct
-RUN chmod 664 sites/default/settings.php \
-    && chown www-data:www-data sites/default/settings.php \
-    && chmod 775 sites/default \
-    && chown www-data:www-data sites/default
+# Copy and build the Drupal theme and install Storybook
+RUN bash -c "source $NVM_DIR/nvm.sh && cd web/themes/custom/drupalx_theme && nvm install && nvm use && npm ci"
+# Copy Apache configuration
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY settings.php web/sites/default/settings.php
 
-# Set ownership for the entire Drupal directory
-RUN chown -R www-data:www-data /var/www/html
+# Enable Apache modules
+RUN a2enmod rewrite headers
 
-# Copy the default .htaccess file and ensure it's in place
-COPY .htaccess /var/www/html/.htaccess
+# Ensure correct permissions for the web root directory
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-# Create OPcache configuration
-RUN echo 'opcache.memory_consumption=128' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.interned_strings_buffer=8' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.max_accelerated_files=4000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.revalidate_freq=2' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.fast_shutdown=1' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo 'opcache.enable_cli=1' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+# Set up SSH
+RUN mkdir /var/run/sshd \
+    && echo 'root:password' | chpasswd \
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed -i 's/Port 22/Port 2222/' /etc/ssh/sshd_config \
+    && echo "PermitUserEnvironment yes" >> /etc/ssh/sshd_config
 
 # Copy SSL certificate file to preferred location
-COPY DigiCertGlobalRootCA.pem /var/www/html/bin/DigiCertGlobalRootCA.pem
+COPY DigiCertGlobalRootCA.crt.pem /var/www/html/DigiCertGlobalRootCA.crt.pem
 
-# Expose port 80
-EXPOSE 80
+# Expose ports
+EXPOSE 80 2222 6006
 
-# Start Apache in the foreground
-CMD ["apache2-foreground"]
+# Set the entrypoint script
+#COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+#RUN chmod +x /usr/local/bin/entrypoint.sh
+#ENTRYPOINT ["entrypoint.sh"]
+
+# Optional: If you need to run Drush commands on container start
+CMD ["sh", "-c", "vendor/bin/drush && vendor/bin/drush updb -y && vendor/bin/drush cim -y && vendor/bin/drush cr && apache2ctl -D FOREGROUND"]

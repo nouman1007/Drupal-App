@@ -1,0 +1,21 @@
+uuid: 6fa4b462-1faf-49f1-9d14-dd9a4696c077
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_age_s_studied
+    - node.type.evidence_report
+  module:
+    - options
+id: node.evidence_report.field_age_s_studied
+field_name: field_age_s_studied
+entity_type: node
+bundle: evidence_report
+label: 'Age(s) Studied '
+description: 'Multi-select field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

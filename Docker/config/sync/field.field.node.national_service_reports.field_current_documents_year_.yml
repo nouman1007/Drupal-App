@@ -1,0 +1,25 @@
+uuid: 9f563c16-e175-4002-a12c-35a7699a3e50
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_current_documents_year_
+    - node.type.national_service_reports
+  module:
+    - yearonly
+id: node.national_service_reports.field_current_documents_year_
+field_name: field_current_documents_year_
+entity_type: node
+bundle: national_service_reports
+label: 'Current Documents Year'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '2024'
+default_value_callback: ''
+settings:
+  yearonly_from: '2005'
+  yearonly_to: now
+field_type: yearonly

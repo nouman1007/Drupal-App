@@ -1,0 +1,153 @@
+id: migrate_evidence_report_to_nodes
+label: 'Migrate Evidence Report JSON to Nodes'
+migration_group: json
+
+source:
+  plugin: url
+  track_changes: true
+  cache_counts: true
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  include_raw_data: true
+  urls: 'modules/custom/americorps_migrate/data/evidence_report.json'
+  item_selector: 0
+  fields:
+    - name: nid_to_update
+      label: 'Node ID to Update'
+      selector: nodeId
+    - name: title
+      label: Title
+      selector: title
+    - name: url
+      label: URL
+      selector: name
+    - name: body
+      label: Body
+      selector: body
+    - name: summary
+      label: Summary
+      selector: gpt_summary
+    - name: description
+      label: Description
+      selector: description
+    - name: field_age_s_studied
+      label: Ages Studied
+      selector: field_age_s_studied
+    - name: field_americorps_focus_areas_s_
+      label: Focus Areas
+      selector: field_americorps_focus_areas_s_
+    - name: field_americorps_program_s_
+      label: Programs
+      selector: field_americorps_program_s_
+    - name: field_date_posted
+      label: Date Posted
+      selector: field_date_posted
+    - name: field_focus_population_s_communi
+      label: Population Communities
+      selector: field_focus_population_s_communi
+    - name: field_full_report
+      label: Full Report
+      selector: field_full_report
+    - name: field_fy_nbr
+      label: FY NBR
+      selector: field_fy_nbr
+    - name: field_implementing_organization
+      label: Implementing Organization
+      selector: field_implementing_organization
+    - name: field_intermediary_s_
+      label: Intermediaries
+      selector: field_intermediary_s_
+    - name: field_level_of_evidence
+      label: Level of Evidence
+      selector: field_level_of_evidence
+    - name: field_link
+      label: Link
+      selector: field_link
+    - name: field_outcome_category
+      label: Outcome Category
+      selector: field_outcome_category
+    - name: field_program_intervention
+      label: Program Intervention
+      selector: field_program_intervention
+    - name: field_report_citation
+      label: Report Citation
+      selector: field_report_citation
+    - name: field_researcher_evaluator
+      label: Researcher Evaluator
+      selector: field_researcher_evaluator
+    - name: field_study_design_s_
+      label: Study Designs
+      selector: field_study_design_s_
+    - name: field_study_site_location_city_c
+      label: Study Site Location City
+      selector: field_study_site_location_city_c
+    - name: field_study_site_location_state_
+      label: Study Site Location State
+      selector: field_study_site_location_state_
+    - name: field_study_type_s_
+      label: Study Types
+      selector: field_study_type_s_
+  ids:
+    nid_to_update:
+      type: integer
+
+process:
+  nid: nid_to_update
+  "body/value": body
+  "body/summary": summary
+  field_age_s_studied:
+    plugin: list_text
+    source: field_age_s_studied
+  field_americorps_focus_areas_s_:
+    plugin: list_text
+    source: field_americorps_focus_areas_s_
+  field_americorps_program_s_:
+    plugin: list_text
+    source: field_americorps_program_s_
+  field_focus_population_s_communi:
+    plugin: list_text
+    source: field_focus_population_s_communi
+  field_full_report: field_full_report
+  field_outcome_category:
+    plugin: entity_lookup
+    source: field_outcome_category
+    entity_type: taxonomy_term
+    bundle: outcome_category
+    bundle_key: vid
+    value_key: tid
+  field_study_design_s_:
+    plugin: list_text
+    source: field_study_design_s_
+  field_study_site_location_city_c:
+    plugin: list_text
+    source: field_study_site_location_city_c
+  field_study_site_location_state_:
+    plugin: entity_lookup
+    source: field_study_site_location_state_
+    entity_type: taxonomy_term
+    bundle: states_operating
+    bundle_key: vid
+    value_key: tid
+  field_study_type_s_:
+    plugin: list_text
+    source: field_study_type_s_
+  field_level_of_evidence:
+    plugin: list_text
+    source: field_level_of_evidence
+
+destination:
+  plugin: entity:node
+  default_bundle: evidence_exchange
+  overwrite_properties:
+    - body
+    - field_age_s_studied
+    - field_americorps_focus_areas_s_
+    - field_americorps_program_s_
+    - field_focus_population_s_communi
+    - field_full_report
+    - field_outcome_category
+    - field_study_design_s_
+    - field_study_site_location_city_c
+    - field_study_site_location_state_
+    - field_study_type_s_
+    - field_level_of_evidence

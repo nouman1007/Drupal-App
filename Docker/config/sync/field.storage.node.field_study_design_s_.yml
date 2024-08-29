@@ -1,0 +1,30 @@
+uuid: 3eb20bfa-074a-45cf-abcd-1e732e36fd80
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_study_design_s_
+field_name: field_study_design_s_
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: experimental_rct
+      label: 'Experimental (RCT)'
+    -
+      value: quasi_experimental_qed
+      label: 'Quasi-experimental (QED)'
+    -
+      value: non_experimental
+      label: Non-experimental
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,349 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+{{ attach_library('drupalx_theme/global') }}
+{{ attach_library('drupalx_theme/bootstrap-js') }}
+{{ attach_library('drupalx_theme/evidence-report') }}
+
+<article{{ attributes.addClass('container evidence-report mb-8') }}>
+
+  {{ title_prefix }}
+  {% if label and not page %}
+    <h3{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h3>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div class="row gap-5">
+
+    <section class="col-md-12 col-xl-7 order-md-1 order-xl-2">
+      <div class="content p-4 mb-4 rounded-4">
+        {% if content.body %}
+          <div class="body">
+            {{ content.body }}
+          </div>
+        {% endif %}
+
+        {# Display the Full Report section below main content only on smaller
+        screen sizes. #}
+        <div class="full-report d-none d-lg-block d-xl-none mb-4 rounded-4">
+          {% if node.field_full_report.0|file_url is not empty %}
+            <hr class="pb-2">
+            <h3 class="mb-3 text-align-center">Report</h3>
+            <a href="{{ node.field_full_report.0|file_url }}"
+              class="rounded-pill bg-primary text-white text-decoration-none d-block text-align-center text-uppercase pt-1 pe-2 pb-1 ps-2" target="_blank">
+              {{ content.field_full_report.0['#title'] }}
+            </a>
+          {% endif %}
+
+          {% if content.field_link|render %}
+            <div class="additional-resources">
+              <h3 class="visually-hidden">Additional Resources</h3>
+              <ul class="list-unstyled">
+                {% for item in content.field_link %}
+                  {% if item['#url'] is not empty and item['#title'] is not empty %}
+                    <li class="mt-3">
+                      <a href="{{ item['#url'] }}"
+                        class="rounded-pill bg-primary text-white text-decoration-none d-block text-align-center text-uppercase pt-1 pe-2 pb-1 ps-2">
+                        {{ item['#title'] }}
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>{# .full-report #}
+      </div>{# .content #}
+    </section>{# .col-md-12 col-xl-7 #}
+
+    <section class="further-info bg-light col-md-12 col-xl-4 p-4 mb-8 order-md-2 order-xl-1 rounded-4">
+      <h2 class="visually-hidden">Further Information</h2>
+
+      {% if content.field_program_intervention|render %}
+        <div class="program-intervention mb-4">
+          <h3>Program/Intervention</h3>
+          {{ content.field_program_intervention }}
+        </div>
+      {% endif %}
+
+      {% if content.field_intermediary_s_|render %}
+        <div class="intermediary-s mb-4">
+          <h3>Intermediary(s)</h3>
+          {{ content.field_intermediary_s_ }}
+        </div>
+      {% endif %}
+
+      {% if content.field_americorps_program_s_|render %}
+        <div class="americorps-program-s mb-4">
+          <h3>AmeriCorps Program(s)</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_americorps_program_s_ %}
+              {% if item['#markup'] is not empty %}
+                <li>{{ item['#markup'] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_age_s_studied|render %}
+        <div class="age-s-studied mb-4">
+          <h3>Age(s) Studied</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_age_s_studied %}
+              {% if item['#markup'] is not empty %}
+                <li>{{ item['#markup'] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_focus_population_s_communi|render %}
+        <div class="focus-population-community mb-4">
+          <h3>Focus Population(s)/Community(s)</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_focus_population_s_communi %}
+              {% if item['#markup'] is not empty %}
+                <li>{{ item['#markup'] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_outcome_category|render %}
+        <div class="outcome-category mb-4">
+          <h3>Outcome Category</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_outcome_category %}
+              {% if item['#title'] is not empty %}
+                <li>{{ item['#title'] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_study_types_s_|render %}
+        <div class="study-types-s mb-4">
+          <h3>Study Type(s)</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_study_types_s_ %}
+              {% if item['#markup'] is not empty %}
+                <li>{{ item['#markup'] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_study_design_s_|render %}
+        <div class="study-design-s mb-4">
+          <h3>Study Design(s)</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_study_design_s_ %}
+              {% if item['#markup'] is not empty %}
+                <li>{{ item['#markup'] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_researcher_evaluator|render %}
+        <div class="researcher-evaluator mb-4">
+          <h3>Researcher/Evaluator</h3>
+          {{ content.field_researcher_evaluator }}
+        </div>
+      {% endif %}
+
+      {% if content.field_fy_nbr|render %}
+        <div class="fy-nbr mb-4">
+          <h3>Published Year</h3>
+          {{ content.field_fy_nbr }}
+        </div>
+      {% endif %}
+
+      {% if content.field_study_site_location_city_c|render %}
+        <div class="study-site-location mb-4">
+          <h3>Study Site Location (City/County)</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_study_site_location_city_c %}
+              {% if item['#context'] is not empty %}
+                <li>{{ item['#context'].value }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_study_site_location_state_|render %}
+        <div class="study-site-location mb-4">
+          <h3>Study Site Location (State)</h3>
+          <ul class="list-unstyled">
+            {% for item in content.field_study_site_location_state_ %}
+              {% if item['#title'] is not empty %}
+                <li>{{ item['#title'] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_date_posted|render %}
+        <div class="date-posted mb-4">
+          <h3>Date Posted</h3>
+          {{ content.field_date_posted }}
+        </div>
+      {% endif %}
+
+      {% if content.field_implementing_organization|render %}
+        <div class="implementing-organization mb-4">
+          <h3>Implementing Organization</h3>
+          {{ content.field_implementing_organization }}
+        </div>
+      {% endif %}
+
+      {% if content.field_americorps_focus_areas_s_|render %}
+        <div class="focus-area mb-4">
+          <h3>AmeriCorps Focus Areas(s)</h3>
+          {{ content.field_americorps_focus_areas_s_ }}
+        </div>
+      {% endif %}
+
+      {% if content.field_level_of_evidence|render %}
+        <div class="level-of-evidence mb-4">
+          <h3>Level of Evidence</h3>
+            <ul class="list-unstyled">
+              {% for item in content.field_level_of_evidence %}
+                {% if item['#markup'] is not empty %}
+                  <li>{{ item['#markup'] }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_report_citation|render %}
+        <div class="report-citation mb-4">
+          <h3>Report Citation</h3>
+          {{ content.field_report_citation }}
+        </div>
+      {% endif %}
+
+      {% if content.field_intended_audience|render %}
+        <div class="intended-audience mb-4">
+          <h3>Intended Audience</h3>
+          {{ content.field_intended_audience }}
+        </div>
+      {% endif %}
+
+      {% if content.field_tags|render %}
+        <div class="tags mb-4">
+          <h3>Tags</h3>
+          {{ content.field_tags }}
+        </div>
+      {% endif %}
+
+      <section class="full-report d-flex justify-content-center bg-light d-none d-lg-none d-xl-block mb-4 rounded-4">
+        {% if node.field_full_report.0|file_url is not empty %}
+          <hr class="pb-2">
+          <h3 class="mb-3 text-align-center">Report</h3>
+          {% for item in node.field_full_report %}
+            <a href="{{ item|file_url }}"
+              class="rounded-pill bg-primary text-white text-decoration-none d-block text-align-center text-uppercase mb-4 pt-1 pe-2 pb-1 ps-2" target="_blank">
+              {{ content.field_full_report['#title'] }}
+            </a>
+          {% endfor %}
+        {% endif %}
+
+        {% if content.field_link|render %}
+          <div class="additional-resources">
+            <h3 class="visually-hidden">Additional Resource Link(s)</h3>
+            <ul class="list-unstyled">
+              {% for item in content.field_link %}
+                {% if item['#url'] is not empty and item['#title'] is not empty %}
+                  <li class="mt-3">
+                    <a href="{{ item['#url'] }}"
+                      class="rounded-pill bg-primary text-white text-decoration-none d-block text-align-center text-uppercase pt-1 pe-2 pb-1 ps-2">
+                      {{ item['#title'] }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </section>{# .full-report #}
+    </section>{# .further-info #}
+  </div>
+</article>

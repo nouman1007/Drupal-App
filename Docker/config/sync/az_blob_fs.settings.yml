@@ -1,0 +1,33 @@
+_core:
+  default_config_hash: MqYS2rOcZ9Ca1gPQWwdRzc79ZsQO5rVpHXPzbAGvtTM
+az_blob_account_name: ''
+az_blob_protocol: https
+az_blob_container_name: ''
+az_blob_cdn_host_name: ''
+az_blob_local_ip: 127.0.0.1
+az_blob_local_port: '10000'
+az_blob_local_emulator: 0
+az_blob_account_key_name: azure_blob_storage
+az_blob_initial_image_styles:
+  hero_l: hero_l
+  hero_l_x2: hero_l_x2
+  hero_m: hero_m
+  hero_m_x2: hero_m_x2
+  hero_s: hero_s
+  hero_s_x2: hero_s_x2
+  media_library: media_library
+  thumbnail: thumbnail
+az_blob_queue_image_styles:
+  16_9_large_2x: 16_9_large_2x
+  16_9_xlarge: 16_9_xlarge
+  1_1_large: 1_1_large
+  1_1_medium: 1_1_medium
+  1_1_small: 1_1_small
+  4_3_large: 4_3_large
+  4_3_large_2x: 4_3_large_2x
+  4_3_medium: 4_3_medium
+  4_3_small: 4_3_small
+  large: large
+  linkit_result_thumbnail: linkit_result_thumbnail
+  medium: medium
+  wide: wide

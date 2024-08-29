@@ -1,0 +1,57 @@
+{% set card_modifier = card.modifier|replace({'_': '-'}) %}
+
+{% if card_modifier == 'flag-card' %}
+  <div class="card {{ card_modifier }} col-12 mb-4 col-lg-6 mb-lg-0">
+{% elseif card_modifier == 'image-card'%}
+  <div class="card {{ card_modifier }} col-12 mb-4 col-lg-4 mb-lg-0">
+{% else %}
+  <div class="card {{ card_modifier }}">
+{% endif %}
+
+  {% block card_media %}
+    {% if card.media %}
+      {{ card.media }}
+    {% endif %}
+  {% endblock %}
+
+  <div class="card-body">
+
+    {%
+      include '@drupalx_theme/heading/heading.twig' with {
+        "heading": card.heading,
+        "modifier": 'card-title',
+        "link": card.link.url
+      } only
+    %}
+
+    {% if card.summary_text %}
+      <p class="card-text">
+        {{ card.summary_text }}
+      </p>
+    {% endif %}
+
+    {% if card.node_count %}
+      <p class="card-node-count">{{ card.node_count }} items</p>
+      {# Use the node_counts variable in your Card component template #}
+      {% for type, count in node_count %}
+        <p>{{ type }}: {{ count }}</p>
+      {% endfor %}
+    {% endif %}
+
+    {% if card.type %}
+      <p class="card-type">Type: {{ card.type }}</p>
+    {% endif %}
+
+    {% if card_modifier == 'flag-card' and card.link.url %}
+      {% include '@drupalx_theme/button/button.twig' with {
+        "button": {
+          "url": card.link.url,
+          "text": card.link.text,
+          "icon": '',
+          "modifier": 'btn-outline-light text-uppercase mt-5 ms-8'
+        }
+      } only %}
+    {% endif %}
+
+  </div>
+</div>

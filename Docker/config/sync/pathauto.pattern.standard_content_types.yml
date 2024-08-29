@@ -1,0 +1,27 @@
+uuid: d4ee49d1-4669-415e-a386-1f37566aefbe
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: standard_content_types
+label: 'Standard Content Types'
+type: 'canonical_entities:node'
+pattern: '[node:content-type]/[node:title]'
+selection_criteria:
+  616753b7-d2b6-4ce6-acbc-0dde60685917:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 616753b7-d2b6-4ce6-acbc-0dde60685917
+    context_mapping:
+      node: node
+    bundles:
+      evidence_report: evidence_report
+      faq: faq
+      national_service_reports: national_service_reports
+      stories: stories
+      user_guide: user_guide
+      webinar: webinar
+selection_logic: and
+weight: -5
+relationships: {  }

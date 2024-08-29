@@ -1,0 +1,21 @@
+uuid: a478498a-403b-45dc-90f2-ffe5e15cdb0a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_study_design_s_
+    - node.type.evidence_report
+  module:
+    - options
+id: node.evidence_report.field_study_design_s_
+field_name: field_study_design_s_
+entity_type: node
+bundle: evidence_report
+label: 'Study Design(s) '
+description: 'Multi-select list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

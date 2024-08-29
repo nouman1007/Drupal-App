@@ -1,0 +1,17 @@
+{{ attach_library('drupalx_theme/header-menu') }}
+
+<div class="header-menu flex-row {{ modifier }}">
+  <a href="/" class="align-items-start">
+    <img src="./images/logo.svg" alt="AmeriCorps logo">
+  </a>
+  <ul class="nav flex-lg-row align-items-center">
+    {% for item in menu_items %}
+      <li class="nav-item"></li>
+        <a href="{{ item.url }}" class="nav-link  {{ item_modifier }}">
+          {{ item.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  <span class="search align-items-end"></span>
+</div>

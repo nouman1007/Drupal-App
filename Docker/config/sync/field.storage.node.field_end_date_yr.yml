@@ -1,0 +1,19 @@
+uuid: a2557c81-5e6b-4d5c-99b1-3f9f395e94dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - yearonly
+id: node.field_end_date_yr
+field_name: field_end_date_yr
+entity_type: node
+type: yearonly
+settings: {  }
+module: yearonly
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,33 @@
+uuid: 9ef57d4f-ee7f-489e-b821-4af9c6604cdb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_level_of_evidence
+field_name: field_level_of_evidence
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: no_evidence
+      label: 'No evidence'
+    -
+      value: preliminary
+      label: Preliminary
+    -
+      value: moderate
+      label: Moderate
+    -
+      value: strong
+      label: Strong
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

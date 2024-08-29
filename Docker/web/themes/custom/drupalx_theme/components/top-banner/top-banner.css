@@ -1,0 +1,98 @@
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+.usa-banner {
+  background-color: #1b1b1b;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 5px 0;
+}
+.usa-banner .usa-banner-flag {
+  border-radius: 0;
+  margin-right: 5px;
+  transform: translateY(-2px);
+}
+.usa-banner .banner-button {
+  background: none;
+  border: none;
+  color: #fff;
+  display: inline-block;
+  font-size: 13px;
+  text-decoration: underline;
+}
+.usa-banner .banner-button:hover {
+  text-decoration: none;
+}
+@media (max-width: 767.98px) {
+  .usa-banner .banner-button {
+    display: block;
+    margin-left: 18px;
+  }
+}
+@media (max-width: 416px) {
+  .usa-banner .banner-button {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+.usa-banner .visit {
+  margin-left: 8px;
+}
+@media (max-width: 416px) {
+  .usa-banner .visit {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+.usa-banner a {
+  color: #fff;
+  text-decoration: underline;
+}
+.usa-banner a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.usa-banner .banner-button[aria-expanded=true] .button-text::after {
+  transform: scaleY(-1);
+}
+.usa-banner .banner-button .button-text::after {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjgiIGhlaWdodD0iNjgiIHZpZXdCb3g9IjAgMCA2OCA2OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzMuODk5MSIgY3k9IjMzLjg5OTEiIHI9IjMzLjg5OTEiIGZpbGw9IiMxNTUwRUQiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC41ODU4IDI2LjU4NThDMTkuMzY2OCAyNS44MDQ3IDIwLjYzMzIgMjUuODA0NyAyMS40MTQyIDI2LjU4NThMMzQgMzkuMTcxNkw0Ni41ODU4IDI2LjU4NThDNDcuMzY2OCAyNS44MDQ3IDQ4LjYzMzIgMjUuODA0NyA0OS40MTQyIDI2LjU4NThDNTAuMTk1MyAyNy4zNjY4IDUwLjE5NTMgMjguNjMzMiA0OS40MTQyIDI5LjQxNDJMMzUuNDE0MiA0My40MTQyQzM0LjYzMzIgNDQuMTk1MyAzMy4zNjY4IDQ0LjE5NTMgMzIuNTg1OCA0My40MTQyTDE4LjU4NTggMjkuNDE0MkMxNy44MDQ3IDI4LjYzMzIgMTcuODA0NyAyNy4zNjY4IDE4LjU4NTggMjYuNTg1OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=");
+  background-repeat: no-repeat;
+  background-size: 15px;
+  content: "";
+  cursor: pointer;
+  display: inline-block;
+  height: 15px;
+  left: 6px;
+  margin-left: 8px;
+  position: relative;
+  top: 4px;
+  width: 15px;
+}
+.usa-banner .usa-banner-guidance {
+  align-items: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.usa-banner .usa-banner-icon {
+  margin-right: 20px;
+}
+.usa-banner .usa-banner-text {
+  display: inline-block;
+  font-size: 13px;
+  font-size: 14px;
+  line-height: 25px;
+  margin-bottom: 0;
+}
+.usa-banner .usa-banner-body p {
+  margin-bottom: 0;
+}
+.usa-banner .usa-banner__lock-image {
+  height: 10px;
+  width: 10px;
+}

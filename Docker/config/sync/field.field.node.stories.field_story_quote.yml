@@ -1,0 +1,19 @@
+uuid: 73036d84-b549-4ce4-887b-c96313534096
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_story_quote
+    - node.type.stories
+id: node.stories.field_story_quote
+field_name: field_story_quote
+entity_type: node
+bundle: stories
+label: 'Story Quote'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

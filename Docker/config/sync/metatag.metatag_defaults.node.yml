@@ -1,0 +1,16 @@
+uuid: 5bd08cd1-35e8-4dbe-b873-92dc318d8a95
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: rpwvgyEURXLz_JjgMCrkS1rUv-0k3L79BpO-ReN7fDI
+id: node
+label: Content
+tags:
+  canonical_url: '[node:url]'
+  description: '[node:summary]'
+  og_description: '[node:body]'
+  og_image: /sites/default/files/2024/08/08/AC-Logo_Navy-stacked-1200x630_opengraph.png
+  og_site_name: AmeriCorps
+  og_title: '[node:title]'
+  title: '[node:title] | [site:name]'

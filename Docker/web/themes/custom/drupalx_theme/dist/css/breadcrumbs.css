@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* Style the list */
+ol.breadcrumbs {
+  padding: 10px 16px 10px 0;
+  list-style: none;
+}
+
+/* Display list items side by side */
+ol.breadcrumbs li {
+  display: inline;
+  font-size: 18px;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ol.breadcrumbs li + li::before {
+  padding: 8px;
+  color: #212529;
+  content: "/ ";
+}
+
+/* Add a color to all links inside the list */
+ol.breadcrumbs li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ol.breadcrumbs li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}

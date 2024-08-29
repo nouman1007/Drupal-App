@@ -1,0 +1,58 @@
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+.header-search-contianer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 15px;
+}
+.header-search-contianer form[role=search] {
+  position: relative;
+}
+.header-search-contianer form[role=search] .form-control {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #ccc;
+  font-size: 1.5rem;
+  line-height: 1;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.header-search-contianer form[role=search] .form-control::placeholder {
+  color: #ccc;
+  font-weight: 400;
+}
+.header-search-contianer form[role=search] .form-control:focus {
+  border-color: #000;
+  outline: none;
+}
+.header-search-contianer form[role=search] button {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-indent: -9999px;
+}
+.header-search-contianer form[role=search] button .search-icon {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzQiIGhlaWdodD0iMzQiIHZpZXdCb3g9IjAgMCAzNCAzNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYuOTQ5NiIgY3k9IjE2Ljk0OTYiIHI9IjE1Ljk0OTYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI2IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTIwIDIwLjYyNUwyNCAyNS42MjUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K") !important;
+  background-color: #112542;
+  background-position: 0 28px;
+  background-repeat: no-repeat;
+  background-size: 33px;
+  display: inline-block;
+  height: 85px;
+  margin-right: 2rem;
+  text-indent: -9999px;
+  width: 33px;
+}

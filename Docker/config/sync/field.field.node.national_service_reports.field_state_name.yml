@@ -1,0 +1,29 @@
+uuid: 752d516c-0e9a-4cbc-b8c9-226ef4a785f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_state_name
+    - node.type.national_service_reports
+    - taxonomy.vocabulary.states_operating
+id: node.national_service_reports.field_state_name
+field_name: field_state_name
+entity_type: node
+bundle: national_service_reports
+label: State
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      states_operating: states_operating
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

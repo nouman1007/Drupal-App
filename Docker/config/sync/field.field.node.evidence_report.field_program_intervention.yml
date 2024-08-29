@@ -1,0 +1,19 @@
+uuid: 0180caa5-b98c-46d7-aa3d-313bc387ab4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_program_intervention
+    - node.type.evidence_report
+id: node.evidence_report.field_program_intervention
+field_name: field_program_intervention
+entity_type: node
+bundle: evidence_report
+label: 'Program/Intervention '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

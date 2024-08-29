@@ -1,0 +1,33 @@
+{{ attach_library('drupalx_theme/search-box') }}
+
+{% do attributes.setAttribute('id', 'collapseExample') %}
+{% do attributes.addClass([
+  'header-search-contianer',
+  'text-center',
+  'pt-8',
+  'collapse',
+]) %}
+{% if is_front or view_id == 'search' %}
+  {% do attributes.addClass('show') %}
+{% endif %}
+
+<div {{ attributes }}>
+  {% if view_id != 'search' %}
+    <h2>Search for a topic or course</h2>
+    <p class="mb-4">Use the advanced search below to search for any relevant information.</p>
+  {% endif %}
+
+  <form class="d-flex header-bottom-search" role="search">
+    <input class="form-control rounded-pill p-6" type="search" placeholder="What topic would you like to learn?" aria-label="Search">
+    <button class="btn btn-primary" type="submit">
+      Search
+      <svg xmlns="http://www.w3.org/2000/svg" width="66.406" height="66.406" viewBox="0 0 66.406 66.406">
+        <g id="search" transform="translate(1 1)">
+          <circle id="Ellipse_2" data-name="Ellipse 2" cx="32.203" cy="32.203" r="32.203" transform="translate(0 0)" fill="#1450ed" stroke="#fff" stroke-width="2"/>
+          <circle id="Ellipse_3" data-name="Ellipse 3" cx="11.759" cy="11.759" r="11.759" transform="translate(18.479 18.479)" fill="#1450ed" stroke="#fff" stroke-width="2"/>
+          <path id="Path_13" data-name="Path 13" d="M20,20.625l8.076,10.1" transform="translate(18.362 18.999)" fill="#1450ed" stroke="#fff" stroke-width="2"/>
+        </g>
+      </svg>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,822 @@
+uuid: 7d46a7fe-d294-4e5c-9738-1fa8d6fdb752
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.evidence_report.body
+    - field.field.node.evidence_report.field_date_posted
+    - field.field.node.evidence_report.field_full_report
+    - field.field.node.evidence_report.field_fy_nbr
+    - field.field.node.evidence_report.field_implementing_organization
+    - field.field.node.evidence_report.field_intermediary_s_
+    - field.field.node.evidence_report.field_outcome_category
+    - field.field.node.evidence_report.field_program_intervention
+    - field.field.node.evidence_report.field_report_citation
+    - field.field.node.evidence_report.field_researcher_evaluator
+    - field.field.node.evidence_report.field_study_site_location_city_c
+    - field.field.node.evidence_report.field_study_site_location_state_
+    - node.type.evidence_report
+  module:
+    - feeds_log
+    - feeds_tamper
+    - node
+    - yearonly
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers:
+      e7ce30c6-5944-48af-84fe-eb8384c93df3:
+        separator: ','
+        limit: null
+        uuid: e7ce30c6-5944-48af-84fe-eb8384c93df3
+        plugin: explode
+        source: field_outcome_category
+        weight: 0
+        label: Explode
+      d002e99a-bbd3-46c8-b7b5-a9e8d34ff321:
+        separator: ','
+        limit: null
+        uuid: d002e99a-bbd3-46c8-b7b5-a9e8d34ff321
+        plugin: explode
+        source: field_full_report
+        weight: 0
+        label: Explode
+label: 'Evidence Exchange Content Importer'
+id: evidence_exchange_content_import
+description: ''
+help: 'The content type "Evidence Exchange" has been changed to "Evidence Report".'
+import_period: 3600
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'public://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: evidence_report
+  langcode: en
+  insert_new: 1
+  update_existing: 1
+  update_non_existent: _delete
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: true
+  owner_id: 0
+custom_sources:
+  nid_0_value:
+    value: nid/0/value
+    label: nid/0/value
+    machine_name: nid_0_value
+    type: csv
+  vid_0_value:
+    value: vid/0/value
+    label: vid/0/value
+    machine_name: vid_0_value
+    type: csv
+  langcode_0_value:
+    value: langcode/0/value
+    label: langcode/0/value
+    machine_name: langcode_0_value
+    type: csv
+  revision_uid_0_target_id:
+    value: revision_uid/0/target_id
+    label: revision_uid/0/target_id
+    machine_name: revision_uid_0_target_id
+    type: csv
+  uid_0_target_id:
+    value: uid/0/target_id
+    label: uid/0/target_id
+    machine_name: uid_0_target_id
+    type: csv
+  title_0_value:
+    value: title/0/value
+    label: title/0/value
+    machine_name: title_0_value
+    type: csv
+  created_0_value:
+    value: created/0/value
+    label: created/0/value
+    machine_name: created_0_value
+    type: csv
+  promote_0_value:
+    value: promote/0/value
+    label: promote/0/value
+    machine_name: promote_0_value
+    type: csv
+  sticky_0_value:
+    value: sticky/0/value
+    label: sticky/0/value
+    machine_name: sticky_0_value
+    type: csv
+  default_langcode_0_value:
+    value: default_langcode/0/value
+    label: default_langcode/0/value
+    machine_name: default_langcode_0_value
+    type: csv
+  revision_default_0_value:
+    value: revision_default/0/value
+    label: revision_default/0/value
+    machine_name: revision_default_0_value
+    type: csv
+  revision_translation_affected_0_value:
+    value: revision_translation_affected/0/value
+    label: revision_translation_affected/0/value
+    machine_name: revision_translation_affected_0_value
+    type: csv
+  moderation_state_0_value:
+    value: moderation_state/0/value
+    label: moderation_state/0/value
+    machine_name: moderation_state_0_value
+    type: csv
+  path_0_alias:
+    value: path/0/alias
+    label: path/0/alias
+    machine_name: path_0_alias
+    type: csv
+  path_0_pid:
+    value: path/0/pid
+    label: path/0/pid
+    machine_name: path_0_pid
+    type: csv
+  body_0_value:
+    value: body/0/value
+    label: body/0/value
+    machine_name: body_0_value
+    type: csv
+  body_0_summary:
+    value: body/0/summary
+    label: body/0/summary
+    machine_name: body_0_summary
+    type: csv
+  field_americorps_program_s__0_value:
+    value: field_americorps_program_s_/0/value
+    label: field_americorps_program_s_/0/value
+    machine_name: field_americorps_program_s__0_value
+    type: csv
+  field_date_posted_0_value:
+    value: field_date_posted/0/value
+    label: field_date_posted/0/value
+    machine_name: field_date_posted_0_value
+    type: csv
+  field_full_report_0_target_id:
+    value: field_full_report/0/target_id
+    label: field_full_report/0/target_id
+    machine_name: field_full_report_0_target_id
+    type: csv
+  field_full_report_1_target_id:
+    value: field_full_report/1/target_id
+    label: field_full_report/1/target_id
+    machine_name: field_full_report_1_target_id
+    type: csv
+  field_full_report_2_target_id:
+    value: field_full_report/2/target_id
+    label: field_full_report/2/target_id
+    machine_name: field_full_report_2_target_id
+    type: csv
+  field_fy_nbr_0_value:
+    value: field_fy_nbr/0/value
+    label: field_fy_nbr/0/value
+    machine_name: field_fy_nbr_0_value
+    type: csv
+  field_implementing_organization_0_value:
+    value: field_implementing_organization/0/value
+    label: field_implementing_organization/0/value
+    machine_name: field_implementing_organization_0_value
+    type: csv
+  field_intermediary_s__0_value:
+    value: field_intermediary_s_/0/value
+    label: field_intermediary_s_/0/value
+    machine_name: field_intermediary_s__0_value
+    type: csv
+  field_level_of_evidence_0_value:
+    value: field_level_of_evidence/0/value
+    label: field_level_of_evidence/0/value
+    machine_name: field_level_of_evidence_0_value
+    type: csv
+  field_outcome_category_0_target_id:
+    value: field_outcome_category/0/target_id
+    label: field_outcome_category/0/target_id
+    machine_name: field_outcome_category_0_target_id
+    type: csv
+  field_program_intervention_0_value:
+    value: field_program_intervention/0/value
+    label: field_program_intervention/0/value
+    machine_name: field_program_intervention_0_value
+    type: csv
+  field_report_citation_0_value:
+    value: field_report_citation/0/value
+    label: field_report_citation/0/value
+    machine_name: field_report_citation_0_value
+    type: csv
+  field_researcher_evaluator_0_value:
+    value: field_researcher_evaluator/0/value
+    label: field_researcher_evaluator/0/value
+    machine_name: field_researcher_evaluator_0_value
+    type: csv
+  field_study_type_s__0_value:
+    value: field_study_type_s_/0/value
+    label: field_study_type_s_/0/value
+    machine_name: field_study_type_s__0_value
+    type: csv
+  field_age_s_studied_0_value:
+    value: field_age_s_studied/0/value
+    label: field_age_s_studied/0/value
+    machine_name: field_age_s_studied_0_value
+    type: csv
+  field_age_s_studied_1_value:
+    value: field_age_s_studied/1/value
+    label: field_age_s_studied/1/value
+    machine_name: field_age_s_studied_1_value
+    type: csv
+  field_focus_population_s_communi_0_value:
+    value: field_focus_population_s_communi/0/value
+    label: field_focus_population_s_communi/0/value
+    machine_name: field_focus_population_s_communi_0_value
+    type: csv
+  field_study_design_s__0_value:
+    value: field_study_design_s_/0/value
+    label: field_study_design_s_/0/value
+    machine_name: field_study_design_s__0_value
+    type: csv
+  field_study_type_s__1_value:
+    value: field_study_type_s_/1/value
+    label: field_study_type_s_/1/value
+    machine_name: field_study_type_s__1_value
+    type: csv
+  field_study_type_s__2_value:
+    value: field_study_type_s_/2/value
+    label: field_study_type_s_/2/value
+    machine_name: field_study_type_s__2_value
+    type: csv
+  field_study_design_s__1_value:
+    value: field_study_design_s_/1/value
+    label: field_study_design_s_/1/value
+    machine_name: field_study_design_s__1_value
+    type: csv
+  field_study_type_s__3_value:
+    value: field_study_type_s_/3/value
+    label: field_study_type_s_/3/value
+    machine_name: field_study_type_s__3_value
+    type: csv
+  field_americorps_program_s__1_value:
+    value: field_americorps_program_s_/1/value
+    label: field_americorps_program_s_/1/value
+    machine_name: field_americorps_program_s__1_value
+    type: csv
+  field_age_s_studied_2_value:
+    value: field_age_s_studied/2/value
+    label: field_age_s_studied/2/value
+    machine_name: field_age_s_studied_2_value
+    type: csv
+  field_age_s_studied_3_value:
+    value: field_age_s_studied/3/value
+    label: field_age_s_studied/3/value
+    machine_name: field_age_s_studied_3_value
+    type: csv
+  field_age_s_studied_4_value:
+    value: field_age_s_studied/4/value
+    label: field_age_s_studied/4/value
+    machine_name: field_age_s_studied_4_value
+    type: csv
+  field_age_s_studied_5_value:
+    value: field_age_s_studied/5/value
+    label: field_age_s_studied/5/value
+    machine_name: field_age_s_studied_5_value
+    type: csv
+  field_americorps_program_s__2_value:
+    value: field_americorps_program_s_/2/value
+    label: field_americorps_program_s_/2/value
+    machine_name: field_americorps_program_s__2_value
+    type: csv
+  field_americorps_program_s__3_value:
+    value: field_americorps_program_s_/3/value
+    label: field_americorps_program_s_/3/value
+    machine_name: field_americorps_program_s__3_value
+    type: csv
+  field_full_report_3_target_id:
+    value: field_full_report/3/target_id
+    label: field_full_report/3/target_id
+    machine_name: field_full_report_3_target_id
+    type: csv
+  field_full_report_4_target_id:
+    value: field_full_report/4/target_id
+    label: field_full_report/4/target_id
+    machine_name: field_full_report_4_target_id
+    type: csv
+  field_full_report_5_target_id:
+    value: field_full_report/5/target_id
+    label: field_full_report/5/target_id
+    machine_name: field_full_report_5_target_id
+    type: csv
+  field_outcome_category_1_target_id:
+    value: field_outcome_category/1/target_id
+    label: field_outcome_category/1/target_id
+    machine_name: field_outcome_category_1_target_id
+    type: csv
+  field_focus_population_s_communi_1_value:
+    value: field_focus_population_s_communi/1/value
+    label: field_focus_population_s_communi/1/value
+    machine_name: field_focus_population_s_communi_1_value
+    type: csv
+  field_focus_population_s_communi_2_value:
+    value: field_focus_population_s_communi/2/value
+    label: field_focus_population_s_communi/2/value
+    machine_name: field_focus_population_s_communi_2_value
+    type: csv
+  field_focus_population_s_communi_3_value:
+    value: field_focus_population_s_communi/3/value
+    label: field_focus_population_s_communi/3/value
+    machine_name: field_focus_population_s_communi_3_value
+    type: csv
+  field_outcome_category_2_target_id:
+    value: field_outcome_category/2/target_id
+    label: field_outcome_category/2/target_id
+    machine_name: field_outcome_category_2_target_id
+    type: csv
+  field_outcome_category_3_target_id:
+    value: field_outcome_category/3/target_id
+    label: field_outcome_category/3/target_id
+    machine_name: field_outcome_category_3_target_id
+    type: csv
+  field_outcome_category_4_target_id:
+    value: field_outcome_category/4/target_id
+    label: field_outcome_category/4/target_id
+    machine_name: field_outcome_category_4_target_id
+    type: csv
+  field_study_site_location_state__0_target_id:
+    value: field_study_site_location_state_/0/target_id
+    label: field_study_site_location_state_/0/target_id
+    machine_name: field_study_site_location_state__0_target_id
+    type: csv
+  field_focus_population_s_communi_4_value:
+    value: field_focus_population_s_communi/4/value
+    label: field_focus_population_s_communi/4/value
+    machine_name: field_focus_population_s_communi_4_value
+    type: csv
+  field_focus_population_s_communi_5_value:
+    value: field_focus_population_s_communi/5/value
+    label: field_focus_population_s_communi/5/value
+    machine_name: field_focus_population_s_communi_5_value
+    type: csv
+  field_outcome_category_5_target_id:
+    value: field_outcome_category/5/target_id
+    label: field_outcome_category/5/target_id
+    machine_name: field_outcome_category_5_target_id
+    type: csv
+  field_outcome_category_6_target_id:
+    value: field_outcome_category/6/target_id
+    label: field_outcome_category/6/target_id
+    machine_name: field_outcome_category_6_target_id
+    type: csv
+  field_outcome_category_7_target_id:
+    value: field_outcome_category/7/target_id
+    label: field_outcome_category/7/target_id
+    machine_name: field_outcome_category_7_target_id
+    type: csv
+  field_outcome_category_8_target_id:
+    value: field_outcome_category/8/target_id
+    label: field_outcome_category/8/target_id
+    machine_name: field_outcome_category_8_target_id
+    type: csv
+  field_americorps_program_s__4_value:
+    value: field_americorps_program_s_/4/value
+    label: field_americorps_program_s_/4/value
+    machine_name: field_americorps_program_s__4_value
+    type: csv
+  field_americorps_program_s__5_value:
+    value: field_americorps_program_s_/5/value
+    label: field_americorps_program_s_/5/value
+    machine_name: field_americorps_program_s__5_value
+    type: csv
+  field_outcome_category_9_target_id:
+    value: field_outcome_category/9/target_id
+    label: field_outcome_category/9/target_id
+    machine_name: field_outcome_category_9_target_id
+    type: csv
+  field_outcome_category_10_target_id:
+    value: field_outcome_category/10/target_id
+    label: field_outcome_category/10/target_id
+    machine_name: field_outcome_category_10_target_id
+    type: csv
+  field_outcome_category_11_target_id:
+    value: field_outcome_category/11/target_id
+    label: field_outcome_category/11/target_id
+    machine_name: field_outcome_category_11_target_id
+    type: csv
+  field_outcome_category_12_target_id:
+    value: field_outcome_category/12/target_id
+    label: field_outcome_category/12/target_id
+    machine_name: field_outcome_category_12_target_id
+    type: csv
+  field_focus_population_s_communi_6_value:
+    value: field_focus_population_s_communi/6/value
+    label: field_focus_population_s_communi/6/value
+    machine_name: field_focus_population_s_communi_6_value
+    type: csv
+  field_focus_population_s_communi_7_value:
+    value: field_focus_population_s_communi/7/value
+    label: field_focus_population_s_communi/7/value
+    machine_name: field_focus_population_s_communi_7_value
+    type: csv
+  field_focus_population_s_communi_8_value:
+    value: field_focus_population_s_communi/8/value
+    label: field_focus_population_s_communi/8/value
+    machine_name: field_focus_population_s_communi_8_value
+    type: csv
+  field_outcome_category_13_target_id:
+    value: field_outcome_category/13/target_id
+    label: field_outcome_category/13/target_id
+    machine_name: field_outcome_category_13_target_id
+    type: csv
+  field_outcome_category_14_target_id:
+    value: field_outcome_category/14/target_id
+    label: field_outcome_category/14/target_id
+    machine_name: field_outcome_category_14_target_id
+    type: csv
+  field_study_site_location_city_c_0_value:
+    value: field_study_site_location_city_c/0/value
+    label: field_study_site_location_city_c/0/value
+    machine_name: field_study_site_location_city_c_0_value
+    type: csv
+  field_study_site_location_city_c_1_value:
+    value: field_study_site_location_city_c/1/value
+    label: field_study_site_location_city_c/1/value
+    machine_name: field_study_site_location_city_c_1_value
+    type: csv
+  field_study_site_location_city_c_2_value:
+    value: field_study_site_location_city_c/2/value
+    label: field_study_site_location_city_c/2/value
+    machine_name: field_study_site_location_city_c_2_value
+    type: csv
+  field_study_site_location_city_c_3_value:
+    value: field_study_site_location_city_c/3/value
+    label: field_study_site_location_city_c/3/value
+    machine_name: field_study_site_location_city_c_3_value
+    type: csv
+  field_study_site_location_city_c_4_value:
+    value: field_study_site_location_city_c/4/value
+    label: field_study_site_location_city_c/4/value
+    machine_name: field_study_site_location_city_c_4_value
+    type: csv
+  field_study_site_location_city_c_5_value:
+    value: field_study_site_location_city_c/5/value
+    label: field_study_site_location_city_c/5/value
+    machine_name: field_study_site_location_city_c_5_value
+    type: csv
+  field_study_site_location_city_c_6_value:
+    value: field_study_site_location_city_c/6/value
+    label: field_study_site_location_city_c/6/value
+    machine_name: field_study_site_location_city_c_6_value
+    type: csv
+  field_full_report_6_target_id:
+    value: field_full_report/6/target_id
+    label: field_full_report/6/target_id
+    machine_name: field_full_report_6_target_id
+    type: csv
+  field_full_report_7_target_id:
+    value: field_full_report/7/target_id
+    label: field_full_report/7/target_id
+    machine_name: field_full_report_7_target_id
+    type: csv
+  field_outcome_category_15_target_id:
+    value: field_outcome_category/15/target_id
+    label: field_outcome_category/15/target_id
+    machine_name: field_outcome_category_15_target_id
+    type: csv
+  field_outcome_category_16_target_id:
+    value: field_outcome_category/16/target_id
+    label: field_outcome_category/16/target_id
+    machine_name: field_outcome_category_16_target_id
+    type: csv
+  field_outcome_category_17_target_id:
+    value: field_outcome_category/17/target_id
+    label: field_outcome_category/17/target_id
+    machine_name: field_outcome_category_17_target_id
+    type: csv
+  field_outcome_category_18_target_id:
+    value: field_outcome_category/18/target_id
+    label: field_outcome_category/18/target_id
+    machine_name: field_outcome_category_18_target_id
+    type: csv
+  field_study_site_location_state__1_target_id:
+    value: field_study_site_location_state_/1/target_id
+    label: field_study_site_location_state_/1/target_id
+    machine_name: field_study_site_location_state__1_target_id
+    type: csv
+  field_study_site_location_state__2_target_id:
+    value: field_study_site_location_state_/2/target_id
+    label: field_study_site_location_state_/2/target_id
+    machine_name: field_study_site_location_state__2_target_id
+    type: csv
+  field_study_site_location_state__3_target_id:
+    value: field_study_site_location_state_/3/target_id
+    label: field_study_site_location_state_/3/target_id
+    machine_name: field_study_site_location_state__3_target_id
+    type: csv
+  field_study_site_location_state__4_target_id:
+    value: field_study_site_location_state_/4/target_id
+    label: field_study_site_location_state_/4/target_id
+    machine_name: field_study_site_location_state__4_target_id
+    type: csv
+  field_study_site_location_state__5_target_id:
+    value: field_study_site_location_state_/5/target_id
+    label: field_study_site_location_state_/5/target_id
+    machine_name: field_study_site_location_state__5_target_id
+    type: csv
+  field_study_site_location_state__6_target_id:
+    value: field_study_site_location_state_/6/target_id
+    label: field_study_site_location_state_/6/target_id
+    machine_name: field_study_site_location_state__6_target_id
+    type: csv
+  field_study_site_location_state__7_target_id:
+    value: field_study_site_location_state_/7/target_id
+    label: field_study_site_location_state_/7/target_id
+    machine_name: field_study_site_location_state__7_target_id
+    type: csv
+  field_study_site_location_state__8_target_id:
+    value: field_study_site_location_state_/8/target_id
+    label: field_study_site_location_state_/8/target_id
+    machine_name: field_study_site_location_state__8_target_id
+    type: csv
+  field_study_site_location_state__9_target_id:
+    value: field_study_site_location_state_/9/target_id
+    label: field_study_site_location_state_/9/target_id
+    machine_name: field_study_site_location_state__9_target_id
+    type: csv
+  field_americorps_program_s:
+    value: field_americorps_program_s_
+    label: field_americorps_program_s_
+    machine_name: field_americorps_program_s
+    type: csv
+  field_study_types_s:
+    value: field_study_types_s_
+    label: field_study_types_s_
+    machine_name: field_study_types_s
+    type: csv
+  field_age_s_studied:
+    value: field_age_s_studied
+    label: field_age_s_studied
+    machine_name: field_age_s_studied
+    type: csv
+  field_focus_population_s_communi:
+    value: field_focus_population_s_communi
+    label: field_focus_population_s_communi
+    machine_name: field_focus_population_s_communi
+    type: csv
+  field_outcome_category:
+    value: field_outcome_category
+    label: field_outcome_category
+    machine_name: field_outcome_category
+    type: csv
+  field_study_site_location_state:
+    value: field_study_site_location_state_
+    label: field_study_site_location_state_
+    machine_name: field_study_site_location_state
+    type: csv
+  field_study_site_location_city_c:
+    value: field_study_site_location_city_c
+    label: field_study_site_location_city_c
+    machine_name: field_study_site_location_city_c
+    type: csv
+  field_full_report:
+    value: field_full_report
+    label: field_full_report
+    machine_name: field_full_report
+    type: csv
+  field_study_design_s:
+    value: field_study_design_s_
+    label: field_study_design_s_
+    machine_name: field_study_design_s
+    type: csv
+  field_full_report_0:
+    value: field_full_report_0
+    label: field_full_report_0
+    machine_name: field_full_report_0
+    type: csv
+  field_full_report_1:
+    value: field_full_report_1
+    label: field_full_report_1
+    machine_name: field_full_report_1
+    type: csv
+  field_full_report_2:
+    value: field_full_report_2
+    label: field_full_report_2
+    machine_name: field_full_report_2
+    type: csv
+  field_full_report_3:
+    value: field_full_report_3
+    label: field_full_report_3
+    machine_name: field_full_report_3
+    type: csv
+  field_full_report_4:
+    value: field_full_report_4
+    label: field_full_report_4
+    machine_name: field_full_report_4
+    type: csv
+  field_full_report_5:
+    value: field_full_report_5
+    label: field_full_report_5
+    machine_name: field_full_report_5
+    type: csv
+  field_full_report_6:
+    value: field_full_report_6
+    label: field_full_report_6
+    machine_name: field_full_report_6
+    type: csv
+  field_full_report_7:
+    value: field_full_report_7
+    label: field_full_report_7
+    machine_name: field_full_report_7
+    type: csv
+  field_age_s_studied_0:
+    value: field_age_s_studied_0
+    label: field_age_s_studied_0
+    machine_name: field_age_s_studied_0
+    type: csv
+  field_age_s_studied_1:
+    value: field_age_s_studied_1
+    label: field_age_s_studied_1
+    machine_name: field_age_s_studied_1
+    type: csv
+  field_age_s_studied_2:
+    value: field_age_s_studied_2
+    label: field_age_s_studied_2
+    machine_name: field_age_s_studied_2
+    type: csv
+  field_age_s_studied_3:
+    value: field_age_s_studied_3
+    label: field_age_s_studied_3
+    machine_name: field_age_s_studied_3
+    type: csv
+  field_age_s_studied_4:
+    value: field_age_s_studied_4
+    label: field_age_s_studied_4
+    machine_name: field_age_s_studied_4
+    type: csv
+  field_age_s_studied_5:
+    value: field_age_s_studied_5
+    label: field_age_s_studied_5
+    machine_name: field_age_s_studied_5
+    type: csv
+mappings:
+  -
+    target: nid
+    map:
+      value: nid_0_value
+    settings: {  }
+    unique:
+      value: 1
+  -
+    target: vid
+    map:
+      value: vid_0_value
+    settings: {  }
+    unique: {  }
+  -
+    target: langcode
+    map:
+      value: langcode_0_value
+    settings:
+      language: null
+  -
+    target: title
+    map:
+      value: title_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: created
+    map:
+      value: created_0_value
+    settings:
+      language: ''
+      timezone: America/New_York
+  -
+    target: moderation_state
+    map:
+      value: moderation_state_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: path
+    map:
+      alias: path_0_alias
+      pathauto: path_0_pid
+    settings:
+      language: null
+  -
+    target: body
+    map:
+      value: body_0_value
+      summary: body_0_summary
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: field_date_posted
+    map:
+      value: field_date_posted_0_value
+    settings:
+      language: ''
+      timezone: UTC
+  -
+    target: field_fy_nbr
+    map:
+      value: field_fy_nbr_0_value
+    settings:
+      language: null
+  -
+    target: field_implementing_organization
+    map:
+      value: field_implementing_organization_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_intermediary_s_
+    map:
+      value: field_intermediary_s__0_value
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: field_program_intervention
+    map:
+      value: field_program_intervention_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_report_citation
+    map:
+      value: field_report_citation_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_researcher_evaluator
+    map:
+      value: field_researcher_evaluator_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_outcome_category
+    map:
+      target_id: field_outcome_category
+    settings:
+      language: ''
+      reference_by: tid
+      autocreate: 0
+      autocreate_bundle: outcome_category
+  -
+    target: field_study_site_location_state_
+    map:
+      target_id: field_study_site_location_state
+    settings:
+      language: ''
+      reference_by: tid
+      autocreate: 0
+      autocreate_bundle: states_operating
+  -
+    target: field_study_site_location_city_c
+    map:
+      value: field_study_site_location_city_c
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_full_report
+    map:
+      target_id: field_full_report
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: document

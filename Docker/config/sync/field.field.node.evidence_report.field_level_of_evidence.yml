@@ -1,0 +1,21 @@
+uuid: 842b5b39-1797-4a97-8b98-298ae2ff7613
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_level_of_evidence
+    - node.type.evidence_report
+  module:
+    - options
+id: node.evidence_report.field_level_of_evidence
+field_name: field_level_of_evidence
+entity_type: node
+bundle: evidence_report
+label: 'Level of Evidence '
+description: 'Multi-select list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,22 @@
+uuid: 3a094417-734d-4933-a86c-f74f4ef875e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.user_guide
+id: node.user_guide.status
+field_name: status
+entity_type: node
+bundle: user_guide
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

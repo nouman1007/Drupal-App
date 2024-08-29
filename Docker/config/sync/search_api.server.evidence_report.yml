@@ -1,0 +1,16 @@
+uuid: 99a31069-fec3-4849-ab9d-ef46798b8e02
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_aais_decorations
+id: evidence_report
+name: 'Evidence Report'
+description: ''
+backend: search_api_aais
+backend_config:
+  connector: standard
+  connector_config:
+    url: ''
+    api_version: 2020-06-30-Preview
+    api_key: ''

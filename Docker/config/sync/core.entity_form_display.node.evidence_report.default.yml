@@ -1,0 +1,336 @@
+uuid: af66f101-f6c3-4878-b603-1e8b07821f6f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.evidence_report.body
+    - field.field.node.evidence_report.feeds_item
+    - field.field.node.evidence_report.field_age_s_studied
+    - field.field.node.evidence_report.field_americorps_program_s_
+    - field.field.node.evidence_report.field_date_posted
+    - field.field.node.evidence_report.field_focus_population_s_communi
+    - field.field.node.evidence_report.field_full_report
+    - field.field.node.evidence_report.field_fy_nbr
+    - field.field.node.evidence_report.field_implementing_organization
+    - field.field.node.evidence_report.field_intended_audience
+    - field.field.node.evidence_report.field_intermediary_s_
+    - field.field.node.evidence_report.field_level_of_evidence
+    - field.field.node.evidence_report.field_link
+    - field.field.node.evidence_report.field_outcome_category
+    - field.field.node.evidence_report.field_program_intervention
+    - field.field.node.evidence_report.field_report_citation
+    - field.field.node.evidence_report.field_researcher_evaluator
+    - field.field.node.evidence_report.field_study_design_s_
+    - field.field.node.evidence_report.field_study_site_location_city_c
+    - field.field.node.evidence_report.field_study_site_location_state_
+    - field.field.node.evidence_report.field_study_types_s_
+    - field.field.node.evidence_report.field_tags
+    - node.type.evidence_report
+    - workflows.workflow.moderation_states
+  module:
+    - content_moderation
+    - cshs
+    - datetime
+    - field_group
+    - linkit
+    - path
+    - scheduler
+    - text
+    - yearonly
+third_party_settings:
+  field_group:
+    group_main_content:
+      children:
+        - body
+      label: 'Main Content'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+    group_further_information:
+      children:
+        - field_program_intervention
+        - field_implementing_organization
+        - field_intermediary_s_
+        - field_americorps_program_s_
+        - field_age_s_studied
+        - field_focus_population_s_communi
+        - field_outcome_category
+        - field_study_types_s_
+        - field_study_design_s_
+        - field_level_of_evidence
+        - field_researcher_evaluator
+        - field_intended_audience
+        - field_fy_nbr
+        - field_report_citation
+        - field_study_site_location_city_c
+        - field_study_site_location_state_
+        - field_date_posted
+        - field_tags
+        - field_full_report
+        - field_link
+      label: 'Further information'
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: 'This content will appear in the left rail of the detail page.'
+        required_fields: true
+        formatter: closed
+        direction: vertical
+        width_breakpoint: 640
+id: node.evidence_report.default
+targetEntityType: node
+bundle: evidence_report
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_age_s_studied:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_americorps_program_s_:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_date_posted:
+    type: datetime_default
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_focus_population_s_communi:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_full_report:
+    type: entity_reference_autocomplete
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_fy_nbr:
+    type: yearonly_default
+    weight: 15
+    region: content
+    settings:
+      sort_order: asc
+    third_party_settings: {  }
+  field_implementing_organization:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_intended_audience:
+    type: options_select
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_intermediary_s_:
+    type: text_textarea
+    weight: 5
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_level_of_evidence:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_link:
+    type: linkit
+    weight: 22
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_outcome_category:
+    type: cshs
+    weight: 9
+    region: content
+    settings:
+      save_lineage: false
+      force_deepest: false
+      parent: null
+      level_labels: ''
+      hierarchy_depth: 0
+      required_depth: 0
+      none_label: '- Please select -'
+    third_party_settings: {  }
+  field_program_intervention:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_report_citation:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_researcher_evaluator:
+    type: string_textfield
+    weight: 13
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_study_design_s_:
+    type: options_select
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_study_site_location_city_c:
+    type: string_textfield
+    weight: 17
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_study_site_location_state_:
+    type: options_select
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_study_types_s_:
+    type: options_select
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_tags:
+    type: options_select
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  feeds_item: true
+  promote: true
+  sticky: true

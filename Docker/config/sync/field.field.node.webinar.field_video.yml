@@ -1,0 +1,29 @@
+uuid: 490bf9cf-dab7-4800-bbb0-a73036c8f7d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video
+    - media.type.video
+    - node.type.webinar
+id: node.webinar.field_video
+field_name: field_video
+entity_type: node
+bundle: webinar
+label: Video
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      video: video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

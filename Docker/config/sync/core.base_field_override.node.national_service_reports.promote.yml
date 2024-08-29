@@ -1,0 +1,22 @@
+uuid: e2099e9a-25d7-4e22-b2bf-0558db90dfb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.national_service_reports
+id: node.national_service_reports.promote
+field_name: promote
+entity_type: node
+bundle: national_service_reports
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

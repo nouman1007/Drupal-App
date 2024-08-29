@@ -1,0 +1,20 @@
+uuid: fe1e4c7d-730a-4e52-9d8b-f9d2b0363ea9
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+id: node.field_full_report
+field_name: field_full_report
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

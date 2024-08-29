@@ -1,0 +1,21 @@
+uuid: dc99bf80-63bf-44a2-abe5-840264d169bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_posted
+    - node.type.evidence_report
+  module:
+    - datetime
+id: node.evidence_report.field_date_posted
+field_name: field_date_posted
+entity_type: node
+bundle: evidence_report
+label: 'Date Posted Online'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

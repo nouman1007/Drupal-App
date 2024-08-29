@@ -1,0 +1,11 @@
+uuid: 674735c6-079f-4ab4-9b35-0a7bca9e3e19
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.evidence_report
+id: node.evidence_report
+target_entity_type_id: node
+target_bundle: evidence_report
+default_langcode: site_default
+language_alterable: false

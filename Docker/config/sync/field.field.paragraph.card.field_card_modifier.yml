@@ -1,0 +1,23 @@
+uuid: 9fb2b1ec-1cac-4c21-a09c-35b19e074b22
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_modifier
+    - paragraphs.paragraphs_type.card
+  module:
+    - options
+id: paragraph.card.field_card_modifier
+field_name: field_card_modifier
+entity_type: paragraph
+bundle: card
+label: 'Card Modifier'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: flag_card
+default_value_callback: ''
+settings: {  }
+field_type: list_string

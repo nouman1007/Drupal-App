@@ -1,0 +1,11 @@
+uuid: c25a69e9-4a01-4d5d-b844-88351f0a8ff5
+langcode: en
+status: true
+dependencies: {  }
+machine: sandbox
+description: null
+name: Sandbox
+weight: 10
+url: 'https://learning-campus-lms.ddev.site'
+fg_color: '#01bc01'
+bg_color: '#005400'

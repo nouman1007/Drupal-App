@@ -1,0 +1,19 @@
+uuid: 4e4f5348-3498-46e2-a552-9f4c2b5e8e56
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_study_site_location_city_c
+    - node.type.evidence_report
+id: node.evidence_report.field_study_site_location_city_c
+field_name: field_study_site_location_city_c
+entity_type: node
+bundle: evidence_report
+label: 'Study Site Location (City/County) '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,22 @@
+uuid: a6c3bae5-dd76-4866-825f-4078a3832f70
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: basic_and_tertiary_pages
+label: 'Basic and Tertiary Pages'
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parents:join-path]/[node:title]'
+selection_criteria:
+  5f826107-afea-42dc-b95f-58a02d03ee3b:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 5f826107-afea-42dc-b95f-58a02d03ee3b
+    context_mapping:
+      node: node
+    bundles:
+      page: page
+selection_logic: and
+weight: -5
+relationships: {  }

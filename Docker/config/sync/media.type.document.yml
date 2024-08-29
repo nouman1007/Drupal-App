@@ -1,0 +1,13 @@
+uuid: 0ab3ffa6-439c-418e-b309-b6be7d953acb
+langcode: en
+status: true
+dependencies: {  }
+id: document
+label: Document
+description: ''
+source: file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_file
+field_map: {  }

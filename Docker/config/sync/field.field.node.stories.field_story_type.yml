@@ -1,0 +1,29 @@
+uuid: f83754c4-a890-46df-b372-2433d9325dbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_story_type
+    - node.type.stories
+    - taxonomy.vocabulary.story_type
+id: node.stories.field_story_type
+field_name: field_story_type
+entity_type: node
+bundle: stories
+label: 'Story Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      story_type: story_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

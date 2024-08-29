@@ -1,0 +1,21 @@
+uuid: 6fc694de-7a31-4d25-b6ef-128e72f92de4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured
+    - node.type.faq
+id: node.faq.field_featured
+field_name: field_featured
+entity_type: node
+bundle: faq
+label: Featured
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

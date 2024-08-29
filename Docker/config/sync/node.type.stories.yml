@@ -1,0 +1,36 @@
+uuid: 630f8d38-accc-4ae1-89b0-d7d02fc83d3b
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  node_revision_delete:
+    amount:
+      status: false
+      settings:
+        amount: 0
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+name: Stories
+type: stories
+description: null
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,36 @@
+uuid: 2d525867-85da-4c01-bf72-63efe2d84aac
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  node_revision_delete:
+    amount:
+      status: false
+      settings:
+        amount: 0
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+name: Homepage
+type: homepage
+description: 'This is only for the Homepage and should not be used elsewhere.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

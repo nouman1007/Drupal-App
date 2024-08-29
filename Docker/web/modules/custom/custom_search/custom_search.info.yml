@@ -1,0 +1,8 @@
+name: Custom Search
+type: module
+description: Custom module to integrate Azure AI Search with Drupal.
+core_version_requirement: ^9 || ^10 || ^11
+package: Custom
+dependencies:
+  - search_api:search_api
+  - drupal:views

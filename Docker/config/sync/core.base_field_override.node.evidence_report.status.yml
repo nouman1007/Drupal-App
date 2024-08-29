@@ -1,0 +1,22 @@
+uuid: 024a0826-9eda-4adf-ad0f-684ffc45b28a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.evidence_report
+id: node.evidence_report.status
+field_name: status
+entity_type: node
+bundle: evidence_report
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

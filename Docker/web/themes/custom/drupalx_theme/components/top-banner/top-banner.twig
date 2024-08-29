@@ -1,0 +1,55 @@
+{{ attach_library('drupalx_theme/top-banner') }}
+{{ attach_library('drupalx_theme/bootstrap-js') }}
+
+<div class="region region-top-banner">
+  <section class="usa-banner" aria-label="Official government website">
+    <div class="container-fluid">
+      <div class="row d-flex align-items-center justify-content-between">
+        <div class="col-auto">
+          <img class="usa-banner-flag" src="./images/us_flag_small.png" alt="U.S. flag" />
+          <p class="usa-banner-text">{{ endorsement }}</p>
+          <button class="banner-button" data-bs-toggle="collapse" data-bs-target="#usaBannerInfo" aria-expanded="false" aria-controls="usaBannerInfo">
+            <span class="button-text">{{ button_link.text }}</span>
+          </button>
+        </div>
+        <div class="col-auto">
+          {% if links %}
+            <ul class="nav">
+              {% for item in links %}
+                <li class="nav-item">
+                  <a href="{{ item.url }}" class="nav-link">{{ item.text }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+      <div class="usa-banner-info collapse" id="usaBannerInfo">
+        <div class="row">
+          <div class="usa-banner-guidance col-md-6">
+            <img class="usa-banner-icon" src="./images/icon-dot-gov.svg" role="img" alt="Goverment symbol">
+            <div class="usa-banner-body">
+              <p><strong>Official websites use .gov</strong></p>
+              <p>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+            </div>
+          </div>
+          <div class="usa-banner-guidance col-md-6">
+            <img class="usa-banner-icon" src="./images/icon-https.svg" role="img" alt="Lock symbol">
+            <div class="usa-banner-body">
+              <p><strong>Secure .gov websites use HTTPS</strong></p>
+              <p>A lock (
+                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-title banner-lock-description">
+                    <title id="banner-lock-title">Lock</title>
+                    <desc id="banner-lock-description">A locked padlock</desc>
+                    <path fill="#ffffff" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path>
+                  </svg>
+                  ) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive
+                information only on official, secure websites.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,93 @@
+uuid: f9fb42d1-9370-46f7-b3f3-ef92c51d53d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.webinar.body
+    - field.field.node.webinar.feeds_item
+    - field.field.node.webinar.field_audio
+    - field.field.node.webinar.field_files
+    - field.field.node.webinar.field_program_department
+    - field.field.node.webinar.field_slides
+    - field.field.node.webinar.field_video
+    - field.field.node.webinar.field_webinar_date
+    - node.type.webinar
+  module:
+    - datetime
+    - text
+    - user
+id: node.webinar.default
+targetEntityType: node
+bundle: webinar
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_audio:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_files:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_program_department:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_slides:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_video:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_webinar_date:
+    type: datetime_custom
+    label: hidden
+    settings:
+      timezone_override: UTC
+      date_format: 'F j, Y - g:i A'
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  feeds_item: true
+  langcode: true
+  search_api_excerpt: true

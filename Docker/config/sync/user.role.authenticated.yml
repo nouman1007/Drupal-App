@@ -1,0 +1,22 @@
+uuid: 9da73b9c-0f4b-4f45-95c1-9d7186e76285
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.webform_default
+  module:
+    - filter
+    - media
+    - statistics
+    - system
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'use text format webform_default'
+  - 'view media'
+  - 'view post access counter'

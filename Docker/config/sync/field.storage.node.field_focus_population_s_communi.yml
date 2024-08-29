@@ -1,0 +1,48 @@
+uuid: fb7f7ae7-144b-48d3-8ec8-3074c7a1bcb6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_focus_population_s_communi
+field_name: field_focus_population_s_communi
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: opportunity_youth
+      label: 'Opportunity Youth'
+    -
+      value: schools
+      label: Schools
+    -
+      value: nonprofits
+      label: Nonprofits
+    -
+      value: tribes
+      label: Tribes
+    -
+      value: veterans_and_military_families
+      label: 'Veterans and Military Families'
+    -
+      value: rural
+      label: Rural
+    -
+      value: suburban
+      label: Suburban
+    -
+      value: urban
+      label: Urban
+    -
+      value: low_income
+      label: Low-income
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

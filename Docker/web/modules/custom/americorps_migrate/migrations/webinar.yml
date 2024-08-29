@@ -1,0 +1,38 @@
+id: migrate_webinar_to_nodes
+label: 'Migrate Webinar JSON to Nodes'
+migration_group: json
+
+source:
+  plugin: url
+  track_changes: true
+  cache_counts: true
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  include_raw_data: true
+  urls: 'modules/custom/americorps_migrate/data/webinar.json'
+  item_selector: 0
+  fields:
+    - name: nid_to_update
+      label: 'Node ID to Update'
+      selector: nodeId
+    - name: body
+      label: Body
+      selector: body
+    - name: summary
+      label: Summary
+      selector: gpt_summary
+
+  ids:
+    nid_to_update:
+      type: integer
+
+process:
+  nid: nid_to_update
+  "body/value": body
+  "body/summary": summary
+
+destination:
+  plugin: entity:node
+  default_bundle: webinar
+  overwrite_properties:
+    - body

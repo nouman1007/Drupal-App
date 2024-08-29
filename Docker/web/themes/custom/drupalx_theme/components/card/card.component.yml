@@ -1,0 +1,90 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Card
+description: 'Card component, displays a card with an image, heading, text, and links.'
+props:
+  type: object
+  properties:
+    modifier:
+      type: string
+      title: Modifier
+      description: CSS class modifiers for the card.
+      default: 'col-6'
+    media:
+      type: string
+      title: Media
+      description: HTML for the media content of the card.
+      default: ""
+    heading:
+      type: object
+      title: Heading
+      description: Heading of the card.
+      properties:
+        title:
+          type: string
+          title: Title
+          description: The title text for the heading.
+          default: 'Phasellus auctor, turpis'
+        heading_level:
+          type: string
+          title: Heading Level
+          description: HTML tag for the heading.
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'
+          default: '2'
+        url:
+          type: string
+          title: URL
+          description: The link for the heading.
+          default: '#'
+        modifier:
+          type: string
+          title: Modifier
+          description: CSS class modifiers for the heading.
+          default: 'card-title mb-3'
+    layout:
+      type: string
+      title: Layout
+      description: Layout modifiers for the card.
+      default: ''
+    summary_text:
+      type: string
+      title: Summary Text
+      description: Optional summary text for the card.
+      default: 'This copy is optional, if nothing is entered nothing will display. Facit nulla in vulputate vulputate aliquam. Commodo esse habent tation nam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed orci lacus.'
+    tags:
+      type: array
+      title: Type
+      description: Tags associated with the card.
+      items:
+        type: string
+      default: ['Training']
+    button:
+      type: object
+      title: Button
+      description: Button for the card.
+      properties:
+        text:
+          type: string
+          title: Text
+          description: The text for the button.
+          default: 'Read More'
+        url:
+          type: string
+          title: URL
+          description: The link for the button.
+          default: '#'
+        modifier:
+          type: string
+          title: Modifier
+          description: CSS class modifiers for the button.
+          default: 'btn-primary'
+
+libraryOverrides:
+  dependencies:
+    - drupalx_theme/button
+    - drupalx_theme/heading

@@ -1,0 +1,114 @@
+// Include variables.
+@import './src/scss/_variables.scss';
+
+.path-search {
+
+  main {
+    background-color: $grey;
+    border-top: 1px $border-color solid;
+
+    .layout-content {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 12px;
+      padding-right: 12px;
+      max-width: 1320px;
+    }
+
+    aside {
+      margin: 1em 3em 0 0;
+      min-width: 250px;
+
+      form {
+
+        h2 {
+          font-size: 1.1em;
+          font-weight: bold;
+          margin-bottom: 1em;
+        }
+
+        h3 {
+          font-size: 1em;
+          font-weight: bold;
+        }
+
+        > div {
+          border-bottom: 1px $border-color solid;
+          font-size: 0.8em;
+          margin-bottom: 1em;
+          padding-bottom: 1em;
+        }
+
+        > div:last-child {
+          border: none;
+        }
+
+        .hidden {
+          display: none;
+        }
+
+        a {
+          color: $link-color;
+          display: inline-block;
+          margin-top: 0.5em;
+        }
+      }
+    }
+
+    .view-id-search {
+
+      .view-header {
+        font-weight: bold;
+        margin: 1em 0 1em 0;
+      }
+
+      .views-field-title {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .views-field-title a {
+        color: $black;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+        }
+      }
+
+      .views-field-body {
+        padding-bottom: 1em;
+      }
+    }
+
+    .mb-8 {
+      margin-bottom: 0 !important;
+    }
+
+    .views-row {
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+
+      &:not(:last-child) {
+        border-bottom: 1px $border-color solid;
+      }
+
+      .views-field-type,
+      .views-field-field-date-posted,
+      .views-field-publish-on {
+        display: inline-block;
+        margin-right: 1em;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .views-label {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block content.
+ *
+ * @see template_preprocess_block_content_template()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{{ attach_library('drupalx_theme/card') }}
+{{ attach_library('drupalx_theme/card-group') }}
+
+{# Set classes for the block content #}
+{%
+  set classes = [
+    'block-content',
+    'block-content--type-' ~ bundle|clean_class,
+    'block-content--' ~ id,
+    'block-content--view-mode-' ~ view_mode|clean_class,
+    'mb-2 mb-lg-11 mt-6 mt-lg-15',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% block content %}
+    {% embed 'drupalx_theme:card-group' with {
+      section_title: content.field_title|render,
+      section_subtitle: content.field_sub_title|render,
+      background_color: content.field_background_color[0]['#markup']|lower,
+      content: content
+      } only %}
+      {% block card_items %}
+        {% set card_modifier = content.field_card[0]['#paragraph'].field_card_modifier.value|replace({'_': '-'}) %}
+        {% for i in content.field_card['#items'] %}
+          {{ content.field_card[loop.index0] }}
+        {% endfor %}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+</div>

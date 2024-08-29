@@ -1,0 +1,19 @@
+uuid: 2a66d64c-63bc-4e81-92a3-bb955c034747
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_state_abbriviation
+    - node.type.national_service_reports
+id: node.national_service_reports.field_state_abbriviation
+field_name: field_state_abbriviation
+entity_type: node
+bundle: national_service_reports
+label: 'State Abbreviation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

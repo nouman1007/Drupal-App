@@ -1,0 +1,35 @@
+uuid: 393487fc-22cc-4d8a-9e5b-e0237bd22dec
+langcode: en
+status: true
+dependencies:
+  module:
+    - scheduler
+third_party_settings:
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+_core:
+  default_config_hash: yvneg2emyGAig_P4bKVzcG3rcJDBCTc-o2FbSamYek4
+id: video
+label: Video
+description: 'Upload remote video media.'
+source: 'oembed:video'
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_source
+  thumbnails_directory: 'public://oembed_thumbnails/[date:custom:Y-m]'
+  providers:
+    - YouTube
+    - Vimeo
+field_map: {  }

@@ -1,0 +1,11 @@
+uuid: 6b8bd960-ce37-4c28-9b9d-fa7d9a13958b
+langcode: en
+status: true
+dependencies: {  }
+machine: uat
+description: null
+name: UAT
+weight: 2
+url: 'https://uat1americorpswebapp.azurewebsites.net/'
+fg_color: '#eb9d02'
+bg_color: '#694600'

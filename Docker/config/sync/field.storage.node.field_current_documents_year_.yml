@@ -1,0 +1,19 @@
+uuid: df18b0b7-9db6-43e6-bd75-dce05ab9e949
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - yearonly
+id: node.field_current_documents_year_
+field_name: field_current_documents_year_
+entity_type: node
+type: yearonly
+settings: {  }
+module: yearonly
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

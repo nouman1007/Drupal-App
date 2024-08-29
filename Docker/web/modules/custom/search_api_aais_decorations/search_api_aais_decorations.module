@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter() to disable specific fields.
+ */
+function search_api_aais_decorations_form_search_api_server_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id !== 'search_api_server_edit_form') {
+    return;
+  }
+
+  // Disable the URL field.
+  if (isset($form['backend_config']['connector_config']['url'])) {
+    $form['backend_config']['connector_config']['url']['#required'] = FALSE;
+    $form['backend_config']['connector_config']['url']['#disabled'] = TRUE;
+    $form['backend_config']['connector_config']['url']['#description'] .= ' See the site README for how to set this value.';
+  }
+
+  // Disable the API key field.
+  if (isset($form['backend_config']['connector_config']['api_key'])) {
+    $form['backend_config']['connector_config']['api_key']['#required'] = FALSE;
+    $form['backend_config']['connector_config']['api_key']['#disabled'] = TRUE;
+    $form['backend_config']['connector_config']['api_key']['#description'] .= ' See the site README for how to set this value.';
+  }
+}

@@ -1,46 +1,50 @@
 <?php
 
 $databases = [];
-$settings['hash_salt'] = '7ztAEHLuq0o9fN0u7SALe6BVVUVxbKsXRZej4pbye6xQNTwJkrXiF955K3DggUAk6YWgtkPt3A';
-$settings['update_free_access'] = FALSE;
-$settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
-$settings['file_scan_ignore_directories'] = [
-  'node_modules',
-  'bower_components',
-];
-$settings['entity_update_batch_size'] = 50;
-$settings['entity_update_backup'] = TRUE;
-$settings['migrate_node_migrate_type_classic'] = FALSE;
-
-$databases['default']['default'] = array (
-  'database' => getenv('DB_DATABASE'),
-  'username' => getenv('DB_USER'),
-  'password' => getenv('DB_PASSWORD'),
+$databases['default']['default'] = [
+  'database' => getenv('DRUPAL_DATABASE_NAME'),
+  'username' => getenv('DRUPAL_DATABASE_USER'),
+  'password' => getenv('DRUPAL_DATABASE_PASSWORD'),
   'prefix' => '',
-  'host' => getenv('DB_HOST'),
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'host' => getenv('DRUPAL_DATABASE_HOST'),
+  'port' => getenv('DB_PORT') ?: '3306',
+  'namespace' => 'Drupal\Core\Database\Driver\mysql',
   'driver' => 'mysql',
-);
+  'pdo' => array(
+    PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/DigiCertGlobalRootCA.crt.pem', // Path to SSL CA certificate
+    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true, // Optional: Disables server certificate verification if needed
+  ),
+];
 
-// SSL configuration for PDO
-// $options = array(
-//     PDO::MYSQL_ATTR_SSL_CA => getenv('SSL_CA_CERT_PATH')
-// );
+$settings['hash_salt'] = getenv('hash_salt');
 
-$options = array(
-  PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/bin/DigiCertGlobalRootCA.pem'
-);
+// Recommended setting for Drupal 10 only
+$settings['state_cache'] = TRUE;
 
-try {
-    $pdo = new PDO(
-        'mysql:host=' . getenv('DB_HOST') . ';port=3306;dbname=' . getenv('DB_DATABASE'),
-        getenv('DB_USER'),
-        getenv('DB_PASSWORD'),
-        $options
-    );
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
+// This will prevent Drupal from setting read-only permissions on sites/default.
+$settings['skip_permissions_hardening'] = TRUE;
+
+// This will ensure the site can only be accessed through the intended host names.
+$settings['trusted_host_patterns'] = ['.*'];
+
+// Don't use Symfony's APCLoader. ddev includes APCu; Composer's APCu loader has better performance.
+$settings['class_loader_auto_detect'] = FALSE;
+
+// Set $settings['config_sync_directory'] if not set in settings.php.
+if (empty($settings['config_sync_directory'])) {
+  $settings['config_sync_directory'] = '../config/sync';
 }
-?>
+
+// Override drupal/symfony_mailer default config to use Mailpit.
+$config['symfony_mailer.settings']['default_transport'] = 'sendmail';
+$config['symfony_mailer.mailer_transport.sendmail']['plugin'] = 'smtp';
+$config['symfony_mailer.mailer_transport.sendmail']['configuration']['user'] = '';
+$config['symfony_mailer.mailer_transport.sendmail']['configuration']['pass'] = '';
+$config['symfony_mailer.mailer_transport.sendmail']['configuration']['host'] = 'localhost';
+$config['symfony_mailer.mailer_transport.sendmail']['configuration']['port'] = '1025';
+
+// Enable verbose logging for errors.
+// https://www.drupal.org/forum/support/post-installation/2018-07-18/enable-drupal-8-backend-errorlogdebugging-mode
+$config['system.logging']['error_level'] = 'verbose';
+$config['search_api.server.evidence_report']['backend_config']['connector_config']['url'] = getenv('KEYSTORE_URL');
+$config['search_api.server.evidence_report']['backend_config']['connector_config']['api_key'] = getenv('KEYSTORE_API_KEY');

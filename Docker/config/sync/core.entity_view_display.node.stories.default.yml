@@ -1,0 +1,107 @@
+uuid: 9ca1d987-e8b9-4227-b9e7-236ca1aded03
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.stories.body
+    - field.field.node.stories.field_add_paragraph_block
+    - field.field.node.stories.field_end_date_yr
+    - field.field.node.stories.field_featured
+    - field.field.node.stories.field_media_image
+    - field.field.node.stories.field_present_check
+    - field.field.node.stories.field_start_date_yr
+    - field.field.node.stories.field_story_quote
+    - field.field.node.stories.field_story_type
+    - node.type.stories
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+    - yearonly
+id: node.stories.default
+targetEntityType: node
+bundle: stories
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_add_paragraph_block:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_end_date_yr:
+    type: yearonly_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_featured:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_media_image:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_present_check:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_start_date_yr:
+    type: yearonly_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_story_quote:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_story_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,194 @@
+{
+  "name": "drupalninja/drupalx-project",
+  "description": "Enterprise developer template for Drupal projects with composer",
+  "license": "GPL-2.0-or-later",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Jay Callicott",
+      "role": "Project Lead"
+    }
+  ],
+  "require": {
+    "composer/installers": "^2.1",
+    "cweagans/composer-patches": "^1.7",
+    "drupal/admin_toolbar": "^3.4",
+    "drupal/admin_toolbar_tools": "^3.4",
+    "drupal/allowed_formats": "^3.0",
+    "drupal/asset_injector": "^2.21",
+    "drupal/auto_entitylabel": "^3.0",
+    "drupal/az_blob_fs": "^2.3",
+    "drupal/block_content_template": "^1.5",
+    "drupal/claro_media_library_theme": "^1.0@alpha",
+    "drupal/coi": "^4.0",
+    "drupal/components": "^3.0@beta",
+    "drupal/core-composer-scaffold": "^10.3",
+    "drupal/core-recommended": "^10.3",
+    "drupal/cshs": "^4.0",
+    "drupal/easy_breadcrumb": "^2.0",
+    "drupal/entity_type_clone": "^4.0",
+    "drupal/environment_indicator": "^4.0",
+    "drupal/facets": "^2.0",
+    "drupal/features": "^3.14",
+    "drupal/feeds": "^3.0@beta",
+    "drupal/feeds_ex": "^1.0@beta",
+    "drupal/feeds_tamper": "^2.0@beta",
+    "drupal/field_group": "^3.4",
+    "drupal/focal_point": "^2.1",
+    "drupal/gin": "^3.0@RC",
+    "drupal/gin_lb": "^1.0@RC",
+    "drupal/gin_login": "^2.0",
+    "drupal/guardr_core": "^2.1",
+    "drupal/inline_block_title_automatic": "^1.1",
+    "drupal/layout_builder_browser": "^1.6",
+    "drupal/layout_builder_modal": "^1.2",
+    "drupal/layout_builder_restrictions": "^3.0",
+    "drupal/linkit": "^6.1",
+    "drupal/material_icons": "^2.0",
+    "drupal/metatag": "^2.0",
+    "drupal/migrate_plus": "^6.0",
+    "drupal/migrate_source_csv": "^3.6",
+    "drupal/migrate_tools": "^6.0",
+    "drupal/node_export": "^1.1",
+    "drupal/node_revision_delete": "^2.0@RC",
+    "drupal/nodeviewcount": "^1.0@alpha",
+    "drupal/paragraphs": "^1.17",
+    "drupal/paragraphs_features": "^2.0",
+    "drupal/path_redirect_import": "^2.0",
+    "drupal/pathauto": "^1.12",
+    "drupal/redirect": "^1.9",
+    "drupal/scheduler": "^2.0",
+    "drupal/search_api": "^1.35",
+    "drupal/search_api_aais": "^1.0@alpha",
+    "drupal/simple_sitemap": "^4.1",
+    "drupal/statistics": "^1.0",
+    "drupal/svg_image_responsive": "^3.0",
+    "drupal/taxonomy_access_fix": "^4.0",
+    "drupal/twig_field_value": "^2.0",
+    "drupal/twig_tweak": "^3.3",
+    "drupal/viewsreference": "^2.0@beta",
+    "drupal/webform": "^6.2",
+    "drupal/webform_ui": "^6.2",
+    "drupal/webp": "^1.0@RC",
+    "drupal/yearonly": "^9.1",
+    "drupalninja/drupalx_bootswatch": "^1.0",
+    "drupalninja/drupalx_gin": "^1.0",
+    "drush/drush": "^12.5",
+    "oomphinc/composer-installers-extender": "^2.0",
+    "vlucas/phpdotenv": "^5.1",
+    "webflo/drupal-finder": "^1.2"
+  },
+  "require-dev": {
+    "drupal/core-dev": "^10.2.0",
+    "drupal/devel": "^5.3",
+    "ergebnis/composer-normalize": "^2.42"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "classmap": [
+      "scripts/composer/ScriptHandler.php"
+    ],
+    "files": [
+      "load.environment.php"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "drupal/core-composer-scaffold": true,
+      "ergebnis/composer-normalize": true,
+      "oomphinc/composer-installers-extender": true,
+      "php-http/discovery": true,
+      "phpstan/extension-installer": true
+    },
+    "discard-changes": true,
+    "sort-packages": true
+  },
+  "extra": {
+    "composer-exit-on-patch-failure": true,
+    "drupal-scaffold": {
+      "file-mapping": {
+        "[web-root]/sites/development.services.yml": false
+      },
+      "locations": {
+        "web-root": "web/"
+      }
+    },
+    "installer-paths": {
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/Commands/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
+    },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "patches": {
+      "drupal/core": {
+        "Fix Log error + visual warning for missing or broken block": "https://www.drupal.org/files/issues/2024-06-26/3049332_d10.3.0.patch"
+      },
+      "drupal/feeds_tamper": {
+        "Catch TamperException to prevent import from crashing": "https://www.drupal.org/files/issues/2023-06-05/feeds_tamper-tamper-exception-catching-2983197-22.patch"
+      },
+      "drupal/tamper": {
+        "Fixes Allow numeric to be tampered in FindReplace & sprintf functions": "https://www.drupal.org/files/issues/2024-02-21/tamper-3170553-12.patch"
+      },
+      "drupal/az_blob_fs": {
+        "Just a stopgap patch to avoid RuntimeException while $required_derivative_scheme can be fully implemented.": "https://www.drupal.org/files/issues/2024-07-10/3457065-fatal-error-stopgap.patch",
+        "Access file system without configuring the Key": "https://www.drupal.org/files/issues/2023-11-06/3399496-2.patch",
+        "PHP 8.2 Deprecated function: Creation of dynamic property": "https://www.drupal.org/files/issues/2023-11-21/3360409-5.patch",
+        "Image style streaming doesn't work with D10.1": "https://www.drupal.org/files/issues/2023-11-09/az_blob_fs-image-style-streaming-doesnt-work-with-core-10-1-8--3400503-1.patch"
+      }
+    }
+  },
+  "scripts": {
+    "pre-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "pre-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ]
+  }
+}

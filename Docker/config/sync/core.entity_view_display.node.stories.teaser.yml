@@ -1,0 +1,48 @@
+uuid: b85f1457-2a6a-4a0d-a25a-b127b0e744b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.stories.body
+    - field.field.node.stories.field_add_paragraph_block
+    - field.field.node.stories.field_end_date_yr
+    - field.field.node.stories.field_featured
+    - field.field.node.stories.field_media_image
+    - field.field.node.stories.field_present_check
+    - field.field.node.stories.field_start_date_yr
+    - field.field.node.stories.field_story_quote
+    - field.field.node.stories.field_story_type
+    - node.type.stories
+  module:
+    - text
+    - user
+id: node.stories.teaser
+targetEntityType: node
+bundle: stories
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_add_paragraph_block: true
+  field_end_date_yr: true
+  field_featured: true
+  field_media_image: true
+  field_present_check: true
+  field_start_date_yr: true
+  field_story_quote: true
+  field_story_type: true
+  langcode: true
+  search_api_excerpt: true

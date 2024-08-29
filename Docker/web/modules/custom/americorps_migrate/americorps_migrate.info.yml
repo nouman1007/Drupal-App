@@ -1,0 +1,8 @@
+name: 'Americorps Migration'
+type: module
+description: 'Migrate JSON data into existing nodes.'
+core_version_requirement: ^9 || ^10
+package: Custom
+dependencies:
+  - drupal:migrate
+  - drupal:migrate_plus

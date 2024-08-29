@@ -1,0 +1,9 @@
+uuid: 40b8749f-11af-4b0b-95e1-8ade9d7ba4fd
+langcode: en
+status: true
+dependencies: {  }
+name: 'Story Type'
+vid: story_type
+description: null
+weight: 0
+new_revision: false

@@ -1,0 +1,8 @@
+name: 'Environment Indicator Decorations'
+type: module
+description: 'Custom module to enhance environment indicator functionality.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - environment_indicator:environment_indicator
+  - automated_cron:automated_cron

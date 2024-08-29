@@ -1,0 +1,11 @@
+uuid: a6958605-b57f-4d18-b78d-46ea066c1ef8
+langcode: en
+status: true
+dependencies: {  }
+machine: dev
+description: null
+name: Dev
+weight: 5
+url: 'https://devdrupal10-3-1-defea3dwgaa8ceaf.eastus-01.azurewebsites.net'
+fg_color: '#ebeb02'
+bg_color: '#696900'

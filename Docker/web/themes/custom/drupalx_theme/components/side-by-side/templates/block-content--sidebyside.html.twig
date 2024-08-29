@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block content.
+ *
+ * @see template_preprocess_block_content_template()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'block-content',
+    'block-content--type-' ~ bundle|clean_class,
+    'block-content--' ~ id,
+    'block-content--view-mode-' ~ view_mode|clean_class,
+    'my-6 my-lg-15',
+  ]
+%}
+
+{%
+  set link = {
+    url: content.field_link[0]['#url']|render,
+    text: content.field_link[0]['#title']|render,
+    icon: 'arrow_right_alt',
+    modifier: 'btn-primary',
+  }
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% block content %}
+    {%
+      include 'drupalx_theme:side-by-side' with {
+        eyebrow: content.field_eyebrow|render,
+        title: content.field_title|render,
+        body: content.field_summary,
+        media: content.field_media,
+        layout: content.field_sidebyside_layout['#items'].getString() ?? 'left',
+        link: link,
+        modifier: '',
+      } only
+    %}
+  {% endblock %}
+</div>

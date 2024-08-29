@@ -1,0 +1,25 @@
+uuid: bb4767ac-c860-48b2-90d1-b3d1f579da8e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fy_nbr
+    - node.type.evidence_report
+  module:
+    - yearonly
+id: node.evidence_report.field_fy_nbr
+field_name: field_fy_nbr
+entity_type: node
+bundle: evidence_report
+label: 'Published Year '
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '2024'
+default_value_callback: ''
+settings:
+  yearonly_from: '1900'
+  yearonly_to: now
+field_type: yearonly

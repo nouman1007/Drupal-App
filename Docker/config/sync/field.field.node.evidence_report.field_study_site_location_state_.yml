@@ -1,0 +1,29 @@
+uuid: e44a0968-b76d-4531-929d-9473f6418b03
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_study_site_location_state_
+    - node.type.evidence_report
+    - taxonomy.vocabulary.states_operating
+id: node.evidence_report.field_study_site_location_state_
+field_name: field_study_site_location_state_
+entity_type: node
+bundle: evidence_report
+label: 'Study Site Location (State) '
+description: 'Multi-select list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      states_operating: states_operating
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

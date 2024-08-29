@@ -1,0 +1,50 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+// Include card styles.
+@import '../card/card';
+
+// Include stat styles.
+@import '../stat/stat';
+
+.card-group-wrapper {
+  position: relative;
+
+  &.grey {
+    background-color: $grey;
+  }
+
+  &.blue {
+    background-color: $blue-tertiary;
+  }
+
+
+  &.flag-card::before {
+    background-color: $blue-secondary;
+    border-top-right-radius: 100px;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 40%;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+  }
+
+  .image-card {
+
+    img {
+      border-top-left-radius: 50px !important;
+      border-top-right-radius: 50px !important;
+    }
+  }
+
+  .card-group-heading.blue {
+    color: $blue-secondary;
+  }
+
+  .row > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,38 @@
+uuid: a2657524-b984-4fc2-928f-e91dbaeabb09
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_add_paragraph_block
+    - node.type.stories
+  module:
+    - entity_reference_revisions
+id: node.stories.field_add_paragraph_block
+field_name: field_add_paragraph_block
+entity_type: node
+bundle: stories
+label: 'Add Paragraph Block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles: null
+    negate: 0
+    target_bundles_drag_drop:
+      accordion_item:
+        weight: 5
+        enabled: false
+      card:
+        weight: 6
+        enabled: false
+      carousel_item:
+        weight: 7
+        enabled: false
+      stats_item:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

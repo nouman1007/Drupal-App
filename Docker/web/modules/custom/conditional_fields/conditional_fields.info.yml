@@ -1,0 +1,8 @@
+name: 'Conditional Fields'
+type: module
+description: 'Custom module to hide media field based on modifier field value.'
+core_version_requirement: ^9 || ^10 || ^11
+package: Custom
+dependencies:
+  - drupal:field
+  - drupal:paragraphs

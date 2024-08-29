@@ -1,0 +1,20 @@
+uuid: 1a017e16-7f7f-41e2-b4b6-75d166603ca6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_intended_audience
+field_name: field_intended_audience
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

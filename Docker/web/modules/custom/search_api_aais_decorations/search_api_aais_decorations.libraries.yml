@@ -1,0 +1,7 @@
+facets_block:
+  js:
+    js/facets_block.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once

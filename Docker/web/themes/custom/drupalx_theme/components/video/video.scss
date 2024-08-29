@@ -1,0 +1,38 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+:root {
+  --video-width: 100vw;
+  --video-height: 100vh;
+}
+
+@media (min-aspect-ratio: 16/9) {
+
+  :root {
+    --video-height: 56.25vw;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+
+  :root {
+    --video-width: 177.78vh;
+  }
+}
+
+.media {
+
+  &.media--type-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+
+    > iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

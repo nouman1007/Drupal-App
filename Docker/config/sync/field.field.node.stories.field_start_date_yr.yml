@@ -1,0 +1,23 @@
+uuid: 9c241e12-0ef5-45ec-aa1b-e96da7e1b6ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_start_date_yr
+    - node.type.stories
+  module:
+    - yearonly
+id: node.stories.field_start_date_yr
+field_name: field_start_date_yr
+entity_type: node
+bundle: stories
+label: 'Start Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  yearonly_from: '1990'
+  yearonly_to: '2030'
+field_type: yearonly

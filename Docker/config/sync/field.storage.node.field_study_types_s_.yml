@@ -1,0 +1,57 @@
+uuid: ea9afc12-7d3d-4c24-84ae-9c6aaa111f9e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_study_types_s_
+field_name: field_study_types_s_
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: case_study_or_descriptive
+      label: 'Case Study or Descriptive'
+    -
+      value: cost_benefit_or_cost_effectiveness_study
+      label: 'Cost-benefit or Cost Effectiveness Study'
+    -
+      value: feasibility
+      label: Feasibility
+    -
+      value: outcomes
+      label: Outcomes
+    -
+      value: impact
+      label: Impact
+    -
+      value: review_or_meta_analysis
+      label: 'Review or Meta-analysis'
+    -
+      value: industry_publication
+      label: 'Industry Publication'
+    -
+      value: summary_briefs
+      label: 'Summary Briefs'
+    -
+      value: published_articles
+      label: 'Published Articles'
+    -
+      value: general_research
+      label: 'General Research'
+    -
+      value: implementation
+      label: Implementation
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

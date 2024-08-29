@@ -1,0 +1,154 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+// Include variables.
+@import './src/scss/_variables.scss';
+
+// Include button styles.
+@import '../button/button';
+
+.card {
+  background-color: $blue-primary;
+  border: none;
+  position: relative;
+
+  .card-body {
+    color: $white;
+  }
+
+  &.flag-card {
+    border-radius: 16px;
+
+    .card-title {
+      align-items: center;
+      background: $blue-secondary;
+      display: flex;
+      font-weight: 900;
+      margin: 0;
+      max-width: calc(100% - 20px);
+      min-height: 85px;
+      padding: 0 10px 0 73px;
+      position: relative;
+      text-overflow: clip;
+      transform: translateX(-14px);
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    .card-title::after,
+    .card-title::before {
+      content: '';
+      display: block;
+    }
+
+    .card-title::before {
+      background: url("data:image/svg+xml;charset=utf-8,%3Csvg width='14' height='15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 0H0l14 14.5V0Z' fill='%23849324'/%3E%3C/svg%3E") transparent no-repeat 100% 0;
+      bottom: 0;
+      height: 14px;
+      left: 0;
+      position: absolute;
+      transform: translateY(14px);
+      width: 14px;
+    }
+
+    .card-title::after {
+      background: transparent url("data:image/svg+xml;charset=utf-8,%3Csvg width='41' height='84' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M.14 0H41L.14 84V0Z' fill='%231550ED'/%3E%3C/svg%3E") no-repeat 0;
+      background-size: cover;
+      height: 85px;
+      transform: translateX(49px);
+      width: 40px;
+    }
+
+    .card-body {
+      padding: 48px 64px 72px 0;
+
+      .card-text {
+        padding-left: 64px;
+      }
+    }
+  }
+
+  &.image-card {
+    border-radius: 50px;
+
+    /* Make img 100% width. */
+    img {
+      width: 100%;
+      border-top-left-radius: 50px !important;
+      border-top-right-radius: 50px !important;
+    }
+
+    .card-title {
+      font-size: 1.75rem;
+
+      a {
+        color: $white;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          color: $white;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .card-text {
+      padding-bottom: 72px;
+    }
+
+    .card-body {
+      padding: 32px;
+    }
+
+    .card-type {
+      position: absolute;
+      bottom: 15px;
+    }
+  }
+
+  &.node-count-card {
+    background-color: $white;
+    color: $text-color;
+    border-radius: 16px;
+
+    img {
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      width: 30%;
+    }
+
+    .card-title {
+      color: $blue-secondary;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 0 0 8px calc(30% + 24px);
+
+      a {
+        color: $text-color;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          color: $text-color;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .card-body {
+      padding: 12px;
+
+      .card-node-count {
+        color: $text-color;
+        font-size: 1rem;
+        margin-bottom: 0;
+        padding-left: calc(30% + 24px);
+      }
+    }
+  }
+}

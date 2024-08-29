@@ -1,0 +1,9 @@
+uuid: 1e40e489-15ce-4657-aca8-62a862ce3670
+langcode: en
+status: true
+dependencies: {  }
+name: 'States Operating'
+vid: states_operating
+description: null
+weight: 0
+new_revision: false

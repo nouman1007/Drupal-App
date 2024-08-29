@@ -1,0 +1,48 @@
+uuid: 2600bb7e-0b1b-4912-9d10-b45ed16f981b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.national_service_reports.body
+    - field.field.node.national_service_reports.field_current_documents_year_
+    - field.field.node.national_service_reports.field_file
+    - field.field.node.national_service_reports.field_media_image
+    - field.field.node.national_service_reports.field_state_abbriviation
+    - field.field.node.national_service_reports.field_state_block_link
+    - field.field.node.national_service_reports.field_state_impact_document
+    - field.field.node.national_service_reports.field_state_name
+    - field.field.node.national_service_reports.field_year_span
+    - node.type.national_service_reports
+  module:
+    - text
+    - user
+id: node.national_service_reports.teaser
+targetEntityType: node
+bundle: national_service_reports
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_current_documents_year_: true
+  field_file: true
+  field_media_image: true
+  field_state_abbriviation: true
+  field_state_block_link: true
+  field_state_impact_document: true
+  field_state_name: true
+  field_year_span: true
+  langcode: true
+  search_api_excerpt: true

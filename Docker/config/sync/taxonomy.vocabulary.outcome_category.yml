@@ -1,0 +1,9 @@
+uuid: 260012cf-4c83-4c50-b06e-7834b81bab2c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Outcome Category'
+vid: outcome_category
+description: null
+weight: 0
+new_revision: false

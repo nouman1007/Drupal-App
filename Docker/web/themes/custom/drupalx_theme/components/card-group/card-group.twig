@@ -1,0 +1,50 @@
+{{ attach_library('drupalx_theme/card') }}
+{{ attach_library('drupalx_theme/card-group') }}
+
+{% if attributes %}
+  {% set bg_color = content.field_background_color[0]['#markup']|lower %}
+{% else %}
+  {% set bg_color = background_color %}
+{% endif %}
+
+<section class="card-group-wrapper {{ bg_color }} pt-6 pb-8">
+  <div class="card-group container">
+    {% if section_title %}
+      {%
+        include '@drupalx_theme/heading/heading.twig' with {
+          "heading": {
+            "title": section_title,
+            "heading_level": 2,
+            "modifier": "card-group-heading text-center"
+          }
+        } only
+      %}
+    {% endif %}
+    {% if section_subtitle %}
+      <p class="card-group-subtitle text-center mb-4 mb-lg-6"><small>{{ section_subtitle }}</small></p>
+    {% endif %}
+    <div class="row justify-content-center mt-4 mt-lg-6">
+      <div class="d-lg-flex gap-4">
+      {% block card_items %}
+        {% for item in card_items %}
+          {% if item.card %}
+            {%
+              include '@drupalx_theme/card/card.twig' with {
+                "card": item.card
+              } only
+            %}
+          {% else %}
+            {% include '@drupalx_theme/stat/stat.twig' with {
+                modifier: item.modifier,
+                media: item.media,
+                heading: item.heading,
+                body: item.body,
+              } only
+            %}
+          {% endif %}
+        {% endfor %}
+      {% endblock %}
+      </div>{# .d-grid #}
+    </div>{# .row #}
+  </div>{# .container #}
+</div>

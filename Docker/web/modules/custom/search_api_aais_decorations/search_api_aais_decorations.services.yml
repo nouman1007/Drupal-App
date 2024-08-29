@@ -1,0 +1,11 @@
+services:
+  search_api_aais_decorations.query_param_builder:
+    class: 'Drupal\search_api_aais_decorations\QueryParamBuilderDecorator'
+    decorates: 'search_api_aais.query_param_builder'
+    arguments:
+      - '@search_api_aais.query_filter_builder'
+      - '@search_api_aais.query_sort_builder'
+      - '@search_api.fields_helper'
+      - '@language_manager'
+      - '@request_stack'
+      - '@entity_field.manager'

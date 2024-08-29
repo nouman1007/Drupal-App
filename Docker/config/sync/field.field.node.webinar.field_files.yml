@@ -1,0 +1,29 @@
+uuid: 3165cbac-6db4-46a5-8f69-3f2c6e78a232
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_files
+    - media.type.document
+    - node.type.webinar
+id: node.webinar.field_files
+field_name: field_files
+entity_type: node
+bundle: webinar
+label: Files
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

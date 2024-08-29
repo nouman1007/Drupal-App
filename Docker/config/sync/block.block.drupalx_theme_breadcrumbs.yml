@@ -1,0 +1,24 @@
+uuid: dfd3f5d5-2ad0-4351-8907-b9beae026de4
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupalx_theme
+id: drupalx_theme_breadcrumbs
+theme: drupalx_theme
+region: highlighted
+weight: -1
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'

@@ -1,0 +1,29 @@
+uuid: 7c1d2a57-782c-46ef-b88f-305334cc2821
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intended_audience
+    - node.type.evidence_report
+    - taxonomy.vocabulary.intended_audience
+id: node.evidence_report.field_intended_audience
+field_name: field_intended_audience
+entity_type: node
+bundle: evidence_report
+label: 'Intended Audience'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      intended_audience: intended_audience
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

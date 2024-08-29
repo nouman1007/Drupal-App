@@ -1,0 +1,23 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+.social-icons {
+  margin-bottom: 0;
+
+  .list-inline-item {
+
+    a {
+
+      &.social-icon-dark {
+
+        svg {
+          fill: $white;
+
+          path {
+            fill: $white;
+          }
+        }
+      }
+    }
+  }
+}

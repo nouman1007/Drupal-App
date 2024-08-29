@@ -1,0 +1,34 @@
+uuid: 373bc4be-9eee-4ba5-a606-e49aab69f7b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.user_guide.body
+    - field.field.node.user_guide.field_paragraphs
+    - node.type.user_guide
+  module:
+    - text
+    - user
+id: node.user_guide.teaser
+targetEntityType: node
+bundle: user_guide
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_paragraphs: true
+  langcode: true
+  search_api_excerpt: true

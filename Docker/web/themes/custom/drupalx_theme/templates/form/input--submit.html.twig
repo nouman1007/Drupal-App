@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+
+{% if attributes.value == 'Search' %}
+  <button{{attributes.removeClass('button').addClass('btn btn-primary py-2')}}>{{ attributes.value }} <svg xmlns="http://www.w3.org/2000/svg" width="66.406" height="66.406" viewBox="0 0 66.406 66.406"><g id="search" transform="translate(1 1)"><circle id="Ellipse_2" data-name="Ellipse 2" cx="32.203" cy="32.203" r="32.203" transform="translate(0 0)" fill="#1450ed" stroke="#fff" stroke-width="2"></circle><circle id="Ellipse_3" data-name="Ellipse 3" cx="11.759" cy="11.759" r="11.759" transform="translate(18.479 18.479)" fill="#1450ed" stroke="#fff" stroke-width="2"></circle><path id="Path_13" data-name="Path 13" d="M20,20.625l8.076,10.1" transform="translate(18.362 18.999)" fill="#1450ed" stroke="#fff" stroke-width="2"></path></g></svg></button>
+{% else %}
+  <button{{attributes.removeClass('button').addClass('btn btn-primary px-4 py-2')}}>{{ attributes.value }}</button>
+{% endif %}
+{{ children }}

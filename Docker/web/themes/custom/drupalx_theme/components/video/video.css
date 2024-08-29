@@ -1,0 +1,32 @@
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+:root {
+  --video-width: 100vw;
+  --video-height: 100vh;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  :root {
+    --video-height: 56.25vw;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  :root {
+    --video-width: 177.78vh;
+  }
+}
+.media.media--type-video {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.media.media--type-video > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

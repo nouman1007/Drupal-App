@@ -1,0 +1,23 @@
+{{ attach_library('drupalx_theme/bootstrap-js') }}
+{{ attach_library('drupalx_theme/main-menu') }}
+
+<header role="banner" class="">
+
+  {% include '@drupalx_theme/top-banner/top-banner.twig' %}
+
+  {% include '@drupalx_theme/main-menu/main-menu.twig' %}
+
+  <div class="header-bottom">
+    <div class="row">
+      <div class="col-xxl-5">
+        <div class="header-bottom-inner">
+          <h1 class="header-title">{{ title }}</h1>
+          <p class="header-description">{{ body_text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include '@drupalx_theme/search-box/search-box.twig' %}
+
+</header>

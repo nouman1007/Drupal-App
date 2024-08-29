@@ -1,0 +1,19 @@
+uuid: 743dce5e-967c-4c79-9faa-7ac0dcd730ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_implementing_organization
+    - node.type.evidence_report
+id: node.evidence_report.field_implementing_organization
+field_name: field_implementing_organization
+entity_type: node
+bundle: evidence_report
+label: 'Implementing Organization '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

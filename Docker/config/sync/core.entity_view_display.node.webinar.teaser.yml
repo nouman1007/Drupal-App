@@ -1,0 +1,51 @@
+uuid: 770d51d3-effa-421e-a52d-1dad1a739244
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.webinar.body
+    - field.field.node.webinar.feeds_item
+    - field.field.node.webinar.field_audio
+    - field.field.node.webinar.field_files
+    - field.field.node.webinar.field_program_department
+    - field.field.node.webinar.field_slides
+    - field.field.node.webinar.field_video
+    - field.field.node.webinar.field_webinar_date
+    - node.type.webinar
+  module:
+    - text
+    - user
+id: node.webinar.teaser
+targetEntityType: node
+bundle: webinar
+mode: teaser
+content:
+  body:
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 180
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  feeds_item: true
+  field_audio: true
+  field_files: true
+  field_program_department: true
+  field_slides: true
+  field_video: true
+  field_webinar_date: true
+  langcode: true
+  search_api_excerpt: true

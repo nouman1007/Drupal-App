@@ -1,0 +1,50 @@
+uuid: 3aa950a4-d265-41ac-8a2c-7167459a6fd6
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - scheduler
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  node_revision_delete:
+    amount:
+      status: false
+      settings:
+        amount: 0
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: false
+name: 'Evidence Report'
+type: evidence_report
+description: 'Use this content type to publish and display Evidence Reports.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,40 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+// Include Nav styles.
+@import './node_modules/bootstrap/scss/nav';
+
+.header-menu {
+  background-color: #112542;
+
+  .nav {
+
+    li {
+
+      &.nav-item:not(:last-child) {
+        margin-right: 5rem;
+      }
+    }
+
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+        text-decoration: underline !important;
+      }
+    }
+  }
+
+  .search {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzQiIGhlaWdodD0iMzQiIHZpZXdCb3g9IjAgMCAzNCAzNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYuOTQ5NiIgY3k9IjE2Ljk0OTYiIHI9IjE1Ljk0OTYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI2IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTIwIDIwLjYyNUwyNCAyNS42MjUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K') !important;
+    background-position: 0 28px;
+    background-repeat: no-repeat;
+    background-size: 33px;
+    display: inline-block;
+    height: 85px;
+    margin-right: 2rem;
+    text-indent: -9999px;
+    width: 33px;
+  }
+}

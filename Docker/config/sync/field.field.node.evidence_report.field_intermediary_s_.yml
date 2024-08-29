@@ -1,0 +1,22 @@
+uuid: c4f7a8aa-f932-4601-ab8a-d5c1ed11bee5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intermediary_s_
+    - node.type.evidence_report
+  module:
+    - text
+id: node.evidence_report.field_intermediary_s_
+field_name: field_intermediary_s_
+entity_type: node
+bundle: evidence_report
+label: 'Intermediary(s) '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

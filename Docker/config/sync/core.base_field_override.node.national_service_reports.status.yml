@@ -1,0 +1,22 @@
+uuid: ef4f5a27-6b7e-4aa2-b629-ee29be12a3a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.national_service_reports
+id: node.national_service_reports.status
+field_name: status
+entity_type: node
+bundle: national_service_reports
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

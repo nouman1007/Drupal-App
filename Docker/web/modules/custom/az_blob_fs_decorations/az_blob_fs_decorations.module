@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter() to disable specific fields.
+ */
+function az_blob_fs_decorations_form_settings_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if (isset($form['az_blob_account_name'])) {
+    foreach ([
+      'az_blob_account_name',
+      'az_blob_container_name',
+      'az_blob_protocol',
+      'az_blob_cdn_host_name',
+    ] as $overriddenField) {
+      $form[$overriddenField]['#required'] = FALSE;
+      $form[$overriddenField]['#disabled'] = TRUE;
+      $more = 'See the site README for how to set this value.';
+      if (isset($form[$overriddenField]['#description'])) {
+        $form[$overriddenField]['#description'] .= ' ' . $more;
+      }
+      else {
+        $form[$overriddenField]['#description'] = $more;
+      }
+    }
+
+    if (isset($form['keys']['az_blob_account_key_name'])) {
+      $form['keys']['az_blob_account_key_name']['#required'] = FALSE;
+      $form['keys']['az_blob_account_key_name']['#disabled'] = TRUE;
+    }
+  }
+}

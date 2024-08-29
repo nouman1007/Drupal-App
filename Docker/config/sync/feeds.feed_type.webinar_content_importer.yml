@@ -1,0 +1,415 @@
+uuid: 7905728c-43ae-458a-85bb-1346714057af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.webinar.body
+    - field.field.node.webinar.field_audio
+    - field.field.node.webinar.field_files
+    - field.field.node.webinar.field_program_department
+    - field.field.node.webinar.field_slides
+    - field.field.node.webinar.field_webinar_date
+    - node.type.webinar
+  module:
+    - feeds_log
+    - feeds_tamper
+    - node
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers: {  }
+label: 'Webinar Content Importer'
+id: webinar_content_importer
+description: ''
+help: ''
+import_period: 3600
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'public://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: webinar
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: true
+  owner_id: 0
+custom_sources:
+  field_audio:
+    value: field_audio
+    label: field_audio
+    machine_name: field_audio
+    type: csv
+  body:
+    value: body
+    label: body
+    machine_name: body
+    type: csv
+  summary:
+    value: summary
+    label: summary
+    machine_name: summary
+    type: csv
+  field_files:
+    value: field_files
+    label: field_files
+    machine_name: field_files
+    type: csv
+  nid:
+    value: nid
+    label: nid
+    machine_name: nid
+    type: csv
+  moderation_state:
+    value: moderation_state
+    label: moderation_state
+    machine_name: moderation_state
+    type: csv
+  field_slides:
+    value: field_slides
+    label: field_slides
+    machine_name: field_slides
+    type: csv
+  title:
+    value: title
+    label: title
+    machine_name: title
+    type: csv
+  path:
+    value: path
+    label: path
+    machine_name: path
+    type: csv
+  pid:
+    value: pid
+    label: pid
+    machine_name: pid
+    type: csv
+  field_video:
+    value: field_video
+    label: field_video
+    machine_name: field_video
+    type: csv
+  field_webinar_date:
+    value: field_webinar_date
+    label: field_webinar_date
+    machine_name: field_webinar_date
+    type: csv
+  nid_0_value:
+    value: nid/0/value
+    label: nid/0/value
+    machine_name: nid_0_value
+    type: csv
+  vid_0_value:
+    value: vid/0/value
+    label: vid/0/value
+    machine_name: vid_0_value
+    type: csv
+  langcode_0_value:
+    value: langcode/0/value
+    label: langcode/0/value
+    machine_name: langcode_0_value
+    type: csv
+  revision_timestamp_0_value:
+    value: revision_timestamp/0/value
+    label: revision_timestamp/0/value
+    machine_name: revision_timestamp_0_value
+    type: csv
+  title_0_value:
+    value: title/0/value
+    label: title/0/value
+    machine_name: title_0_value
+    type: csv
+  created_0_value:
+    value: created/0/value
+    label: created/0/value
+    machine_name: created_0_value
+    type: csv
+  promote_0_value:
+    value: promote/0/value
+    label: promote/0/value
+    machine_name: promote_0_value
+    type: csv
+  sticky_0_value:
+    value: sticky/0/value
+    label: sticky/0/value
+    machine_name: sticky_0_value
+    type: csv
+  default_langcode_0_value:
+    value: default_langcode/0/value
+    label: default_langcode/0/value
+    machine_name: default_langcode_0_value
+    type: csv
+  revision_translation_affected_0_value:
+    value: revision_translation_affected/0/value
+    label: revision_translation_affected/0/value
+    machine_name: revision_translation_affected_0_value
+    type: csv
+  moderation_state_0_value:
+    value: moderation_state/0/value
+    label: moderation_state/0/value
+    machine_name: moderation_state_0_value
+    type: csv
+  path_0_alias:
+    value: path/0/alias
+    label: path/0/alias
+    machine_name: path_0_alias
+    type: csv
+  path_0_pid:
+    value: path/0/pid
+    label: path/0/pid
+    machine_name: path_0_pid
+    type: csv
+  body_0_value:
+    value: body/0/value
+    label: body/0/value
+    machine_name: body_0_value
+    type: csv
+  body_0_summary:
+    value: body/0/summary
+    label: body/0/summary
+    machine_name: body_0_summary
+    type: csv
+  field_program_department_0_target_id:
+    value: field_program_department/0/target_id
+    label: field_program_department/0/target_id
+    machine_name: field_program_department_0_target_id
+    type: csv
+  field_webinar_date_0_value:
+    value: field_webinar_date/0/value
+    label: field_webinar_date/0/value
+    machine_name: field_webinar_date_0_value
+    type: csv
+  field_audio_0_target_id:
+    value: field_audio/0/target_id
+    label: field_audio/0/target_id
+    machine_name: field_audio_0_target_id
+    type: csv
+  field_audio_1_target_id:
+    value: field_audio/1/target_id
+    label: field_audio/1/target_id
+    machine_name: field_audio_1_target_id
+    type: csv
+  field_audio_2_target_id:
+    value: field_audio/2/target_id
+    label: field_audio/2/target_id
+    machine_name: field_audio_2_target_id
+    type: csv
+  field_slides_0_target_id:
+    value: field_slides/0/target_id
+    label: field_slides/0/target_id
+    machine_name: field_slides_0_target_id
+    type: csv
+  field_slides_1_target_id:
+    value: field_slides/1/target_id
+    label: field_slides/1/target_id
+    machine_name: field_slides_1_target_id
+    type: csv
+  field_slides_2_target_id:
+    value: field_slides/2/target_id
+    label: field_slides/2/target_id
+    machine_name: field_slides_2_target_id
+    type: csv
+  field_slides_3_target_id:
+    value: field_slides/3/target_id
+    label: field_slides/3/target_id
+    machine_name: field_slides_3_target_id
+    type: csv
+  field_files_0_target_id:
+    value: field_files/0/target_id
+    label: field_files/0/target_id
+    machine_name: field_files_0_target_id
+    type: csv
+  field_files_1_target_id:
+    value: field_files/1/target_id
+    label: field_files/1/target_id
+    machine_name: field_files_1_target_id
+    type: csv
+mappings:
+  -
+    target: nid
+    map:
+      value: nid_0_value
+    settings: {  }
+    unique:
+      value: 1
+  -
+    target: vid
+    map:
+      value: vid_0_value
+    settings: {  }
+    unique: {  }
+  -
+    target: langcode
+    map:
+      value: langcode_0_value
+    settings:
+      language: null
+  -
+    target: revision_timestamp
+    map:
+      value: revision_timestamp_0_value
+    settings:
+      timezone: UTC
+  -
+    target: title
+    map:
+      value: title_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: created
+    map:
+      value: created_0_value
+    settings:
+      language: ''
+      timezone: UTC
+  -
+    target: moderation_state
+    map:
+      value: moderation_state_0_value
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: path
+    map:
+      alias: path_0_alias
+      pathauto: path_0_pid
+    settings:
+      language: null
+  -
+    target: body
+    map:
+      value: body_0_value
+      summary: body_0_summary
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: field_program_department
+    map:
+      target_id: field_program_department_0_target_id
+    settings:
+      language: ''
+      reference_by: tid
+      autocreate: 0
+      autocreate_bundle: program_department
+  -
+    target: field_webinar_date
+    map:
+      value: field_webinar_date_0_value
+    settings:
+      language: ''
+      timezone: UTC
+  -
+    target: field_audio
+    map:
+      target_id: field_audio_0_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: audio
+  -
+    target: field_audio
+    map:
+      target_id: field_audio_1_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: audio
+  -
+    target: field_audio
+    map:
+      target_id: field_audio_2_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: audio
+  -
+    target: field_slides
+    map:
+      target_id: field_slides_0_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: document
+  -
+    target: field_slides
+    map:
+      target_id: field_slides_1_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: document
+  -
+    target: field_slides
+    map:
+      target_id: field_slides_2_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: document
+  -
+    target: field_slides
+    map:
+      target_id: field_slides_3_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: document
+  -
+    target: field_files
+    map:
+      target_id: field_files_0_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: document
+  -
+    target: field_files
+    map:
+      target_id: field_files_1_target_id
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: document

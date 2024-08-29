@@ -1,0 +1,30 @@
+uuid: 10b2ebb9-56d6-4b34-baba-71acc92f2144
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_card_modifier
+field_name: field_card_modifier
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: flag_card
+      label: 'Flag Card'
+    -
+      value: image_card
+      label: 'Image Card'
+    -
+      value: node_count_card
+      label: 'Node Count Card'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

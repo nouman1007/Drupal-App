@@ -1,0 +1,86 @@
+.path-search main {
+  background-color: #f2f2f3;
+  border-top: 1px #ddd solid;
+}
+.path-search main .layout-content {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12px;
+  padding-right: 12px;
+  max-width: 1320px;
+}
+.path-search main aside {
+  margin: 1em 3em 0 0;
+  min-width: 250px;
+}
+.path-search main aside form h2 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+.path-search main aside form h3 {
+  font-size: 1em;
+  font-weight: bold;
+}
+.path-search main aside form > div {
+  border-bottom: 1px #ddd solid;
+  font-size: 0.8em;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+}
+.path-search main aside form > div:last-child {
+  border: none;
+}
+.path-search main aside form .hidden {
+  display: none;
+}
+.path-search main aside form a {
+  color: #555;
+  display: inline-block;
+  margin-top: 0.5em;
+}
+.path-search main .view-id-search .view-header {
+  font-weight: bold;
+  margin: 1em 0 1em 0;
+}
+.path-search main .view-id-search .views-field-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.path-search main .view-id-search .views-field-title a {
+  color: #000;
+  text-decoration: none;
+}
+.path-search main .view-id-search .views-field-title a:hover, .path-search main .view-id-search .views-field-title a:focus {
+  text-decoration: underline;
+}
+.path-search main .view-id-search .views-field-body {
+  padding-bottom: 1em;
+}
+.path-search main .mb-8 {
+  margin-bottom: 0 !important;
+}
+.path-search main .views-row {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+}
+.path-search main .views-row:not(:last-child) {
+  border-bottom: 1px #ddd solid;
+}
+.path-search main .views-row .views-field-type,
+.path-search main .views-row .views-field-field-date-posted,
+.path-search main .views-row .views-field-publish-on {
+  display: inline-block;
+  margin-right: 1em;
+}
+.path-search main .views-row .views-field-type:last-child,
+.path-search main .views-row .views-field-field-date-posted:last-child,
+.path-search main .views-row .views-field-publish-on:last-child {
+  margin-right: 0;
+}
+.path-search main .views-row .views-field-type .views-label,
+.path-search main .views-row .views-field-field-date-posted .views-label,
+.path-search main .views-row .views-field-publish-on .views-label {
+  font-weight: 700;
+}

@@ -1,0 +1,19 @@
+uuid: 72f92aa3-cf55-4d1d-a445-221173531403
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - yearonly
+id: node.field_fy_nbr
+field_name: field_fy_nbr
+entity_type: node
+type: yearonly
+settings: {  }
+module: yearonly
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

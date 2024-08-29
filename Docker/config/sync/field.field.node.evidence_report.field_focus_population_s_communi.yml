@@ -1,0 +1,21 @@
+uuid: 9312fe6e-65c5-4b0f-b8da-2b89f92c9fd6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_focus_population_s_communi
+    - node.type.evidence_report
+  module:
+    - options
+id: node.evidence_report.field_focus_population_s_communi
+field_name: field_focus_population_s_communi
+entity_type: node
+bundle: evidence_report
+label: 'Focus Population(s)/Community(s) '
+description: 'Multi-select field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,149 @@
+uuid: 6ea8a50e-871c-496f-90fc-b8e70d405249
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_age_s_studied
+    - field.storage.node.field_americorps_program_s_
+    - field.storage.node.field_focus_population_s_communi
+    - field.storage.node.body
+    - search_api.server.evidence_report
+  module:
+    - search_api_aais
+    - node
+    - search_api
+third_party_settings:
+  search_api_aais:
+    index_name: evidence-report
+    skip_remote_index_actions: 0
+    delete_remote_index: 0
+    synonym_map: 0
+    semantic_configuration: ''
+    captions: 0
+    highlight_tag: em
+id: evidence_report
+name: 'Evidence Report'
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 1
+      facetable: 0
+      retrievable: 1
+      suggester: 1
+      analyzer: en.microsoft
+    dependencies:
+      config:
+        - field.storage.node.body
+  field_age_s_studied:
+    label: 'Age(s) Studied '
+    datasource_id: 'entity:node'
+    property_path: field_age_s_studied
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_age_s_studied
+  field_americorps_program_s_:
+    label: 'AmeriCorps Program(s) '
+    datasource_id: 'entity:node'
+    property_path: field_americorps_program_s_
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_americorps_program_s_
+  field_focus_population_s_communi:
+    label: 'Focus Population(s)/Community(s) '
+    datasource_id: 'entity:node'
+    property_path: field_focus_population_s_communi
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_focus_population_s_communi
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 1
+      facetable: 0
+      retrievable: 1
+      suggester: 1
+      analyzer: en.microsoft
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Resource type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 1
+      facetable: 1
+      retrievable: 1
+      suggester: 1
+      analyzer: en.microsoft
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - evidence_report
+        - webinar
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  custom_value: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
+server: evidence_report

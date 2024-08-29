@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+
+{% if attributes.name == "keywords" %}
+  {# Apply input "pill" classes #}
+  {% do attributes.addClass("rounded-pill") %}
+  {% do attributes.addClass("p-6") %}
+
+  {# Set placeholder text #}
+  {% do attributes.setAttribute("placeholder", "What topic would you like to learn?") %}
+{% endif %}
+
+<input{{ attributes.addClass("form-control") }} />{{ children }}

@@ -1,0 +1,71 @@
+uuid: 643fd94e-3ba5-4231-927a-cb39bbac840b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.carousel
+    - field.field.node.evidence_report.body
+    - field.field.node.evidence_report.feeds_item
+    - field.field.node.evidence_report.field_age_s_studied
+    - field.field.node.evidence_report.field_americorps_program_s_
+    - field.field.node.evidence_report.field_date_posted
+    - field.field.node.evidence_report.field_focus_population_s_communi
+    - field.field.node.evidence_report.field_full_report
+    - field.field.node.evidence_report.field_fy_nbr
+    - field.field.node.evidence_report.field_implementing_organization
+    - field.field.node.evidence_report.field_intended_audience
+    - field.field.node.evidence_report.field_intermediary_s_
+    - field.field.node.evidence_report.field_level_of_evidence
+    - field.field.node.evidence_report.field_link
+    - field.field.node.evidence_report.field_outcome_category
+    - field.field.node.evidence_report.field_program_intervention
+    - field.field.node.evidence_report.field_report_citation
+    - field.field.node.evidence_report.field_researcher_evaluator
+    - field.field.node.evidence_report.field_study_design_s_
+    - field.field.node.evidence_report.field_study_site_location_city_c
+    - field.field.node.evidence_report.field_study_site_location_state_
+    - field.field.node.evidence_report.field_study_types_s_
+    - field.field.node.evidence_report.field_tags
+    - node.type.evidence_report
+  module:
+    - user
+id: node.evidence_report.carousel
+targetEntityType: node
+bundle: evidence_report
+mode: carousel
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  body: true
+  feeds_item: true
+  field_age_s_studied: true
+  field_americorps_program_s_: true
+  field_date_posted: true
+  field_focus_population_s_communi: true
+  field_full_report: true
+  field_fy_nbr: true
+  field_implementing_organization: true
+  field_intended_audience: true
+  field_intermediary_s_: true
+  field_level_of_evidence: true
+  field_link: true
+  field_outcome_category: true
+  field_program_intervention: true
+  field_report_citation: true
+  field_researcher_evaluator: true
+  field_study_design_s_: true
+  field_study_site_location_city_c: true
+  field_study_site_location_state_: true
+  field_study_types_s_: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
