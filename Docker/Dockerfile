@@ -81,6 +81,7 @@ COPY sshd_config /etc/ssh/
 EXPOSE 80
 EXPOSE 2222
 EXPOSE 8000
+EXPOSE 22
 
 COPY init_container.sh /opt/startup/
 RUN chmod 775 /opt/startup/init_container.sh
