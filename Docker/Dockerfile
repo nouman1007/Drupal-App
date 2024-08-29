@@ -78,7 +78,9 @@ RUN apt-get update \
 
 COPY sshd_config /etc/ssh/
 
-EXPOSE 8000 2222 80
+EXPOSE 80
+EXPOSE 2222
+EXPOSE 8000
 
 COPY init_container.sh /opt/startup/
 RUN chmod 775 /opt/startup/init_container.sh
