@@ -7,7 +7,7 @@ on:
       - ssh-coonection-issue  # Trigger the workflow on push to the main branch
 
 env:
-  IMAGE_NAME: drupal-app  # Name for the Docker image
+  IMAGE_NAME: ssh-connection-test  # Name for the Docker image
 
 jobs:
   build:
@@ -25,6 +25,10 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Determine Image Version
+      id: image_version
+      run: echo "VERSION=$(date +%Y%m%d%H%M)-${{ github.sha }}" >> $GITHUB_ENV
+
     - name: Print Secret Value
       run:  |
         echo "Secret Value: ${{ secrets.AZURE_CREDENTIALS }}"
@@ -39,10 +43,15 @@ jobs:
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
 
+    # - name: Build and Push Docker Image
+    #   run: |
+    #     docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} ./Docker
+    #     docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} ./Docker
-        docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.VERSION }} ./Docker
+        docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -72,16 +81,23 @@ jobs:
     #     # Run a simple query to verify data import
     #     echo "SHOW TABLES;" | mysql --ssl-mode=REQUIRED --host=${{ secrets.DB_HOST }} --user=${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }}
       
-    - name: Log in to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    # - name: Log in to Azure
+    #   uses: azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy to Azure App Service
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name: ${{ secrets.APP_NAME }}
-        # slot-name: production
-        images: |
-          ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    # - name: Deploy to Azure App Service
+    #   uses: azure/webapps-deploy@v3
+    #   with:
+    #     app-name: ${{ secrets.APP_NAME }}
+    #     # slot-name: production
+    #     images: |
+    #       ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
+    # - name: Deploy to Azure App Service
+    #   uses: azure/webapps-deploy@v3
+    #   with:
+    #     app-name: ${{ secrets.APP_NAME }}
+    #     images: |
+    #       ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+    
