@@ -1,78 +1,57 @@
-    FROM ubuntu:22.04
+FROM ubuntu:22.04
 
-    # Set environment variables for non-interactive apt installs
-    ENV DEBIAN_FRONTEND=noninteractive
-    
-    # Add repository for PHP 8.3
-    RUN apt-get update && apt-get install -y software-properties-common \
-        && add-apt-repository ppa:ondrej/php \
-        && apt-get update
-    
-    
-    # Install Apache, PHP 8.3, and other necessary dependencies
-    RUN apt-get update && apt-get install -y \
-        apache2 \
-        php8.3 \
-        libapache2-mod-php8.3 \
-        php8.3-mysql \
-        php8.3-pgsql \
-        php8.3-gd \
-        php8.3-zip \
-        php8.3-opcache \
-        php8.3-mbstring \
-        php8.3-xml \
-        php8.3-curl \
-        php8.3-bcmath \
-        php8.3-intl \
-        php8.3-soap \
-        php8.3-readline \
-        php8.3-ldap \
-        php8.3-imagick \
-        libfreetype6-dev \
-        libjpeg-dev \
-        libpng-dev \
-        libpq-dev \
-        libwebp-dev \
-        libzip-dev \
-        dos2unix \
-        unzip \
-        curl \
-        wget \
-        git \
-        openssh-server \
-        && apt-get clean
-    
-    # Install Composer
-    RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-    
-    # Install Drush globally
-    RUN composer global require drush/drush
-    
-    ENV PATH="$PATH:/root/.composer/vendor/bin"
-    # RUN composer global require drush/drush \
-    #     && ln -s /root/.composer/vendor/bin/drush /usr/local/bin/drush
-    # Environment variables
-    ENV DRUPAL_VERSION=10.3.1 \
-        COMPOSER_ALLOW_SUPERUSER=1
-    
-    # Set recommended PHP.ini settings
-    RUN mkdir -p /etc/php/8.3/apache2/conf.d \
-        && { \
-            echo 'opcache.enable=1'; \
-            echo 'opcache.memory_consumption=256'; \
-            echo 'opcache.interned_strings_buffer=8'; \
-            echo 'opcache.max_accelerated_files=10000'; \
-            echo 'opcache.revalidate_freq=60'; \
-            echo 'opcache.validate_timestamps=0'; \
-            echo 'opcache.save_comments=1'; \
-            echo 'opcache.enable_cli=0'; \
-        } > /etc/php/8.3/apache2/conf.d/opcache-recommended.ini
-    
-# # Install PHP extensions
-# RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-#     && docker-php-ext-install gd \
-#     && docker-php-ext-install mysqli pdo pdo_mysql \
-#     && docker-php-ext-install opcache
+# Set environment variables for non-interactive apt installs
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Add repository for PHP 8.3
+RUN apt-get update && apt-get install -y software-properties-common \
+    && add-apt-repository ppa:ondrej/php \
+    && apt-get update
+
+# Install Apache, PHP 8.3, SSH, and necessary dependencies
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    php8.3 \
+    libapache2-mod-php8.3 \
+    php8.3-mysql \
+    php8.3-pgsql \
+    php8.3-gd \
+    php8.3-zip \
+    php8.3-opcache \
+    php8.3-mbstring \
+    php8.3-xml \
+    php8.3-curl \
+    php8.3-bcmath \
+    php8.3-intl \
+    php8.3-soap \
+    php8.3-readline \
+    php8.3-ldap \
+    php8.3-imagick \
+    unzip \
+    curl \
+    wget \
+    git \
+    openssh-server \
+    && apt-get clean
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install Drush globally
+RUN composer global require drush/drush
+
+# Set recommended PHP.ini settings
+RUN mkdir -p /etc/php/8.3/apache2/conf.d \
+    && { \
+        echo 'opcache.enable=1'; \
+        echo 'opcache.memory_consumption=256'; \
+        echo 'opcache.interned_strings_buffer=8'; \
+        echo 'opcache.max_accelerated_files=10000'; \
+        echo 'opcache.revalidate_freq=60'; \
+        echo 'opcache.validate_timestamps=0'; \
+        echo 'opcache.save_comments=1'; \
+        echo 'opcache.enable_cli=0'; \
+    } > /etc/php/8.3/apache2/conf.d/opcache-recommended.ini
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -87,21 +66,14 @@ RUN wget https://www.drupal.org/download-latest/zip -O drupal.zip \
     && rm drupal.zip \
     && rm -rf drupal-*
 
-# Copy settings and .htaccess
-COPY settings.php sites/default/settings.php
-COPY .htaccess /var/www/html/.htaccess
-
 # Set permissions
-RUN chmod 664 sites/default/settings.php \
-    && chown www-data:www-data sites/default/settings.php \
-    && chmod 775 sites/default \
-    && chown www-data:www-data sites/default \
+RUN chmod 775 sites/default \
     && chown -R www-data:www-data /var/www/html
 
 # Start and enable SSH
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends dialog \
-    && apt-get install -y --no-install-recommends openssh-server \
+    # && apt-get install -y --no-install-recommends dialog \
+    # && apt-get install -y --no-install-recommends openssh-server \
     && echo "root:Docker!" | chpasswd
 
 COPY sshd_config /etc/ssh/
@@ -110,4 +82,5 @@ EXPOSE 8000 2222 80
 
 COPY init_container.sh /opt/startup/
 RUN chmod 775 /opt/startup/init_container.sh
+
 ENTRYPOINT ["/opt/startup/init_container.sh"]
