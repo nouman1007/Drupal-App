@@ -7,7 +7,7 @@ on:
       - ssh-coonection-issue  # Trigger the workflow on push to the main branch
 
 env:
-  IMAGE_NAME: ssh-connection-test  # Name for the Docker image
+  IMAGE_NAME: ssh-connectivity-test  # Name for the Docker image
 
 jobs:
   build:
