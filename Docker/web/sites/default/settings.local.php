@@ -44,6 +44,8 @@ $config['az_blob_fs.settings']['az_blob_account_name'] = 'americorpevidencestore
 $config['az_blob_fs.settings']['az_blob_container_name'] = 'default';
 $config['key.key.azure_blob_storage']['key_provider_settings']['key_value'] = 'arvoBvsu8ZznXmU7RUduyPX/szQvlJVXz0gch/wb9sMVqzQ6fR5cOsNd5pGzDGLIKQCmorISSVZt+ASt7M8JhQ==';
 
+print '<pre>';print_r($config);exit;
+
 // Azure AI Search configuration.
 $config['search_api.server.{{ search_api_server }}']['backend_config']['connector_config']['url'] = 'https://evidence.search.windows.net';
 $config['search_api.server.{{ search_api_server }}']['backend_config']['connector_config']['api_key'] = '8bUuT01BXPuakdO9U8oDrhTtIvBek1gY8hbgOaSPZ8AzSeC8clXP';
