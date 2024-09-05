@@ -25,9 +25,11 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     wget \
-    openssh-server \
     && apt-get clean
 
+RUN apt-get update && apt-get install -y openssh-server
+
+# RUN echo "root:Docker!" | chpasswd
 RUN echo "root:Docker!" | chpasswd
 
 # Enable Apache mod_rewrite
@@ -50,7 +52,6 @@ RUN chmod 775 sites/default \
 # # Expose Apache HTTP port
 # EXPOSE 80
 
-# RUN echo "root:Docker!" | chpasswd
 RUN ssh-keygen -A
 COPY ./sshd_config /etc/ssh/.
 EXPOSE 2222 80
