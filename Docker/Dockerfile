@@ -25,9 +25,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     wget \
+    openssh-server \
     && apt-get clean
 
-RUN apt-get update && apt-get install -y openssh-server
+# RUN apt-get update && apt-get install -y openssh-server
 
 # RUN echo "root:Docker!" | chpasswd
 RUN echo "root:Docker!" | chpasswd
