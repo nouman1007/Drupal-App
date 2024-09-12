@@ -66,10 +66,10 @@ jobs:
         images: |
           ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-    - name: Fetch App Service logs
-      run: |
-        az webapp log tail --name ${{ env.APP_NAME }} \
-        --resource-group ${{ env.RESOURCE_GROUP_NAME }} > app_service_logs.txt
+    # - name: Fetch App Service logs
+    #   run: |
+    #     az webapp log tail --name ${{ env.APP_NAME }} \
+    #     --resource-group ${{ env.RESOURCE_GROUP_NAME }} > app_service_logs.txt
 
     # Send email with logs using Gmail SMTP
     - name: Send email to developer with logs
@@ -90,7 +90,7 @@ jobs:
 
           Regards,
           DevOps Team
-        attachments: app_service_logs.txt
+        # attachments: app_service_logs.txt
   
   # deploy:
   #   runs-on: ubuntu-latest
