@@ -1,0 +1,51 @@
+uuid: b8306c3b-5d3e-4ac4-bbab-0c40c212afc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.scaler_step_item.field_link
+    - field.field.paragraph.scaler_step_item.field_step_number
+    - field.field.paragraph.scaler_step_item.field_summary
+    - field.field.paragraph.scaler_step_item.field_title
+    - paragraphs.paragraphs_type.scaler_step_item
+  module:
+    - link
+id: paragraph.scaler_step_item.default
+targetEntityType: paragraph
+bundle: scaler_step_item
+mode: default
+content:
+  field_link:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_step_number:
+    type: number
+    weight: 0
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_summary:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

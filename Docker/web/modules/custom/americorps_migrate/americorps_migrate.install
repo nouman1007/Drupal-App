@@ -14,6 +14,84 @@ function americorps_migrate_update_10002() {
   ]);
 }
 
+function americorps_migrate_update_10003() {
+  // already ran
+}
+
+function americorps_migrate_update_10004() {
+  // already ran
+}
+
+function americorps_migrate_update_10005() {
+  // already ran
+}
+
+/**
+ * Makes absolute americorps.gov links in certain node fields relative. Preserve format.
+ */
+function americorps_migrate_update_10006() {
+  $channel = \Drupal::logger('americorps_migrate');
+  $channel->debug(__FUNCTION__ . ' start');
+  $nids = \Drupal::entityQuery('node')->accessCheck(FALSE)->execute();
+  $channel->debug(count($nids) . ' node ids found');
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $batch_size = 50;
+  $batch = array_chunk($nids, $batch_size);
+
+  foreach ($batch as $nids_chunk) {
+    $nodes = $storage->loadMultiple($nids_chunk);
+    foreach ($nodes as $node) {
+      $is_field_updated = FALSE;
+
+      // Process 'body' field
+      if ($node->hasField('body')) {
+        $body_field = $node->get('body');
+        $body_value = $body_field->value;
+        if (!empty($body_value)) {
+          $updated_body_value = americorps_get_relative_body($body_value);
+          if ($updated_body_value !== $body_value) {
+            $node->body->value = $updated_body_value;
+            $node->body->format = 'full_html';
+            $channel->debug(__FUNCTION__ . ' updating body on node ' . $node->id());
+            $is_field_updated = TRUE;
+          }
+        }
+      }
+
+      // Process 'field_links' field
+      if ($node->hasField('field_link')) {
+        $field_link = $node->get('field_link')->getValue();
+        $updated_links_count = 0;
+        foreach ($field_link as &$link) {
+          $channel->debug($link['uri']);
+          if (isset($link['uri']) && is_string($link['uri'])) {
+            $updated_uri = americorps_get_relative_document_uri($link['uri']);
+            $channel->debug($updated_uri);
+            if ($updated_uri !== $link['uri']) {
+              $link['uri'] = $updated_uri;
+              $link['options']['href'] = str_replace('internal:', '', $updated_uri);
+              $updated_links_count++;
+            }
+          }
+        }
+        if ($updated_links_count) {
+          $node->set('field_link', $field_link);
+          $channel->debug(__FUNCTION__ . ' updating field_link on node ' . $node->id());
+          $is_field_updated = TRUE;
+        }
+      }
+
+      if ($is_field_updated) {
+        $node->save();
+        $channel->debug(__FUNCTION__ . ' updated node ' . $node->id());
+      }
+    }
+  }
+
+  \Drupal::messenger()->addMessage('All absolute links in body and field_links have been made relative.');
+  $channel->debug(__FUNCTION__ . ' finish');
+}
+
 function americorps_migrate_run_migrations(array $migration_ids) {
   /** @var LoggerInterface $logger */
   $logger = \Drupal::logger('americorps_migrate');
@@ -25,4 +103,34 @@ function americorps_migrate_run_migrations(array $migration_ids) {
     $executable->import();
     $logger->info('Ran ' . $migration_id . ' migration.');
   }
+}
+
+function americorps_get_relative_body(string $body) {
+  // Replace americorps.gov document links with relative versions.
+  $body = preg_replace(
+    '/href="https?:\/\/(www\.)?americorps\.gov\/[^"]+\/([^"]+\.(pdf|ppt|pptx|doc|docx))"/i',
+    'href="/sites/default/files/document/$2"',
+    $body,
+  );
+  // Replace americorps.gov links with relative versions.
+  $body = preg_replace(
+    '/href="https?:\/\/(www\.)?americorps\.gov(\/[^"]+)"/i',
+    'href="$2"',
+    $body,
+  );
+  // Prepend / to sites/default/files if necessary.
+  $body = preg_replace(
+    '/href="sites\/default\/files([^"]*)"/i',
+    'href="/sites/default/files$1"',
+    $body,
+  );
+  return $body;
+}
+
+function americorps_get_relative_document_uri(string $url) {
+  return preg_replace(
+    '/https?:\/\/(www\.)?americorps\.gov\/[^"]+\/([^"]+\.(pdf|ppt|pptx|doc|docx))/i',
+    'internal:/sites/default/files/document/$2',
+    $url,
+  );
 }

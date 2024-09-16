@@ -1,0 +1,23 @@
+uuid: f192ed86-7834-49b3-816f-0d25744a07e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scaler_steps
+    - field.storage.block_content.field_bottom_link
+  module:
+    - link
+id: block_content.scaler_steps.field_bottom_link
+field_name: field_bottom_link
+entity_type: block_content
+bundle: scaler_steps
+label: 'Bottom Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

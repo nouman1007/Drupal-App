@@ -1,0 +1,26 @@
+<div class="step {{ step.modifier }}" id="scaler-step-{{ step.number }}">
+  <p class="step-number">{{ step.number }}</p>
+  <div class="step-body">
+    {%
+      include '@drupalx_theme/heading/heading.twig' with {
+        "heading": step.heading,
+        "modifier": 'step-title',
+      } only %}
+
+    {% if step.summary %}
+      <p class="step-text">
+        {{ step.summary }}
+      </p>
+    {% endif %}
+
+    <button
+      class="btn rounded-pill bg-light text-uppercase px-4 py-2"
+      data-bs-target="{{ step.modal_link.url }}"
+      data-bs-toggle="modal"
+      type="button">
+      {{- step.modal_link.text -}}
+    </button>
+
+    {{ step.modal }}
+  </div>
+</div>

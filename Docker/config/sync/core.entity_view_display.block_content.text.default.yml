@@ -5,6 +5,7 @@ dependencies:
   config:
     - block_content.type.text
     - field.field.block_content.text.body
+    - field.field.block_content.text.field_add_grey
     - field.field.block_content.text.field_link
     - field.field.block_content.text.field_title
   module:
@@ -22,6 +23,16 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
+  field_add_grey:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
     weight: 0
     region: content
   field_link:
@@ -34,7 +45,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_title:
     type: string

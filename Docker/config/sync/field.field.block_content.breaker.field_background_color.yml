@@ -1,0 +1,23 @@
+uuid: db673114-980b-412b-8a70-fb11f6491587
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.breaker
+    - field.storage.block_content.field_background_color
+  module:
+    - options
+id: block_content.breaker.field_background_color
+field_name: field_background_color
+entity_type: block_content
+bundle: breaker
+label: 'Background Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: white
+default_value_callback: ''
+settings: {  }
+field_type: list_string

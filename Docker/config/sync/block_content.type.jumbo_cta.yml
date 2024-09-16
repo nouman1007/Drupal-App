@@ -1,0 +1,8 @@
+uuid: 8b57ac86-04cf-4708-aacf-5b75e1f7fd6d
+langcode: en
+status: true
+dependencies: {  }
+id: jumbo_cta
+label: 'Jumbo CTA'
+revision: false
+description: 'A Jumbo CTA provides a large-format Call-to-Action to highlight featured content. This layout typically features an image on one side and a heading and brief text summary or call-to-action on the other, creating a balanced and attractive presentation.'

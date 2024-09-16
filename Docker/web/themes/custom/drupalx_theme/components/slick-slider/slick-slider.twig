@@ -1,0 +1,17 @@
+{{ attach_library('drupalx_theme/slick-slider') }}
+
+<section class="slider shadow">
+  <div class="slider__items shadow">
+    {% for item in items %}
+      <div class="slider__item">
+        {% if item.image %}
+          <div class="silder__image">{{ item.image }}</div>
+        {% endif %}
+        <div class="slider__content">
+          <h2 class="slider__title">{{ item.title }}</h2>
+          <p class="slider__body">{{ item.body }}</p>
+        </div>{# .slider__content #}
+      </div>{# .slider__item #}
+    {% endfor %}
+  </div>{# .slider__items #}
+</section>

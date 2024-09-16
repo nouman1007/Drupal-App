@@ -1,19 +1,19 @@
 
 {# Defaults to h2 (heading level 2) if no heading level is supplied. #}
 {% if heading.title %}
-  <h{{ heading.heading_level|default('2')}} class="heading{{ heading.modifier ? ' ' ~ heading.modifier }}">
+  <h{{ heading.heading_level|default('2')}} id="{{ heading.html_id }}" class="heading{{ heading.modifier ? ' ' ~ heading.modifier }}">
     {% if heading.icon %}
       {{ heading.icon }}
     {% endif %}
     {% if heading.url %}
-      <a href="{{ heading.url }}">{{ heading.title }}</a>
+      <a href="{{ heading.url }}">{{- heading.title -}}</a>
     {% else %}
-      {{ heading.title }}
-      {% if heading.subtitle %}
-        <h{{ heading.heading_level|default('3')}} class="subtitle">
-        {{ heading.subtitle }}
-        </h{{ heading.heading_level|default('3')}}>
-      {% endif %}
+      {{- heading.title -}}
+    {% endif %}
+    {% if heading.subtitle %}
+      <h{{ heading.heading_level|default('3')}} class="subtitle">
+      {{- heading.subtitle -}}
+      </h{{ heading.heading_level|default('3')}}>
     {% endif %}
   </h{{ heading.heading_level|default('2')}}>
 {% endif %}

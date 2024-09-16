@@ -1,5 +1,13 @@
+{{ attach_library('drupalx_theme/accordion') }}
 
-<div class="mb-4 {{ modifier }}">
+<section class="mb-4 mt-4 px-0 {{ modifier }}">
+  {% if heading %}
+    <h2 class="text-dark mb-4">{{ heading }}</h2>
+  {% endif %}
+
+  {% if summary %}
+    <div class="mb-4">{{ summary }}</div>
+  {% endif %}
 
   <div class="accordion">
     {% block accordion_items %}
@@ -10,4 +18,4 @@
       {% endfor %}
     {% endblock %}
   </div>
-</div>
+</section>

@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block content.
+ *
+ * @see template_preprocess_block_content_template()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('drupalx_theme/jump-links') }}
+
+{# Add classes to the block content #}
+{%
+  set classes = [
+    'block-content',
+    'block-content--type-' ~ bundle|clean_class,
+    'block-content--' ~ id,
+    'block-content--view-mode-' ~ view_mode|clean_class,
+    'jump-links-container container-fluid py-3',
+
+  ]
+%}
+
+<section{{ attributes.addClass(classes) }} aria-label="Jump Links">
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div class="block-content__content d-flex justify-content-start">
+    <div class="container">
+      <h2 class="heading">Jump to Section</h2>
+      <p class="sr-only">Skip to content in other sections of this page.</p>
+      <div class="row align-items-center">
+        {% if content.field_jump_link[0] %}
+          {% for item in content.field_jump_link %}
+            {% if item['#url_title'] is not empty %}
+              <a class="jump-link" href="{{ item['#url_title'] }}" aria-label="Skip to the {{ item['#title'] }} section">{{ item['#title'] }}</a>
+              {% if item['#url_title'] is not empty and not loop.last %}
+                &nbsp;<span class="material-icons">trending_flat</span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.webinar.body
-    - field.field.node.webinar.feeds_item
     - field.field.node.webinar.field_audio
     - field.field.node.webinar.field_files
     - field.field.node.webinar.field_program_department
@@ -88,6 +87,5 @@ content:
     weight: 0
     region: content
 hidden:
-  feeds_item: true
   langcode: true
   search_api_excerpt: true

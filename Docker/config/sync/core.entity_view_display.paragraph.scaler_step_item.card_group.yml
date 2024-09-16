@@ -1,0 +1,28 @@
+uuid: 39568b20-f356-427b-a597-7938851f61ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.card_group
+    - field.field.paragraph.scaler_step_item.field_link
+    - field.field.paragraph.scaler_step_item.field_step_number
+    - field.field.paragraph.scaler_step_item.field_summary
+    - field.field.paragraph.scaler_step_item.field_title
+    - paragraphs.paragraphs_type.scaler_step_item
+id: paragraph.scaler_step_item.card_group
+targetEntityType: paragraph
+bundle: scaler_step_item
+mode: card_group
+content:
+  field_summary:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  field_link: true
+  field_step_number: true
+  field_title: true
+  search_api_excerpt: true

@@ -1,0 +1,23 @@
+uuid: 006e52d9-3242-488d-a72f-2062f1385ff8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.scaler_steps_modal_content.field_modal_content
+    - paragraphs.paragraphs_type.scaler_steps_modal_content
+  module:
+    - text
+id: paragraph.scaler_steps_modal_content.default
+targetEntityType: paragraph
+bundle: scaler_steps_modal_content
+mode: default
+content:
+  field_modal_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -10,9 +10,12 @@ dependencies:
     - block_content.type.form
     - block_content.type.gallery
     - block_content.type.hero
+    - block_content.type.jump_links
     - block_content.type.library
     - block_content.type.media
+    - block_content.type.newsletter
     - block_content.type.quote
+    - block_content.type.sidebyside
     - block_content.type.text
     - block_content.type.views
     - field.storage.block_content.field_block
@@ -34,17 +37,19 @@ settings:
     target_bundles:
       accordion: accordion
       library: library
-      card: card
       card_group: card_group
       carousel: carousel
       embed: embed
       form: form
       gallery: gallery
       hero: hero
-      views: views
+      jump_links: jump_links
       media: media
+      newsletter: newsletter
       quote: quote
+      sidebyside: sidebyside
       text: text
+      views: views
     sort:
       field: _none
       direction: ASC

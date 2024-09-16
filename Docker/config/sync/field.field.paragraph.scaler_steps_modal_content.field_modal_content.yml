@@ -1,0 +1,24 @@
+uuid: dfeacfea-ce6e-4948-b819-100dd598effd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_content
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.scaler_steps_modal_content
+  module:
+    - text
+id: paragraph.scaler_steps_modal_content.field_modal_content
+field_name: field_modal_content
+entity_type: paragraph
+bundle: scaler_steps_modal_content
+label: 'Modal Content'
+description: 'Use this field to enter the content to be displayed in the SCALER Steps modal window.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

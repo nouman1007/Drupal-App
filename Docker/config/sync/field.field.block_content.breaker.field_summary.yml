@@ -1,0 +1,22 @@
+uuid: ee2fc5c3-8bd3-4690-81cb-3a5f508ddd47
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.breaker
+    - field.storage.block_content.field_summary
+  module:
+    - text
+id: block_content.breaker.field_summary
+field_name: field_summary
+entity_type: block_content
+bundle: breaker
+label: Summary
+description: 'Provide a description for the Accordion component.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

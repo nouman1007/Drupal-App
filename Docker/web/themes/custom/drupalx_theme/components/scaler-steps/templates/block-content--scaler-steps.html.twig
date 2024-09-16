@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display the Hero block.
+ *
+ * @see template_preprocess_block_content_template()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('bootstrap/bootstrap') }}
+{{ attach_library('drupalx_theme/scaler-steps') }}
+
+{%
+  set classes = [
+    'block-content',
+    'block-content--type-' ~ bundle|clean_class,
+    'block-content--' ~ id,
+    'block-content--view-mode-' ~ view_mode|clean_class,
+    'pt-4 mb-8',
+  ]
+%}
+
+<section{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% block content %}
+
+    {% include 'drupalx_theme:scaler-steps' with {
+      section_title: content.field_title[0]['#context'].value,
+      section_subtitle: content.field_sub_title[0]['#context'].value,
+    } only %}
+
+    <div class="row">
+      {% block step_items %}
+        {% for i in content.field_scaler_step['#items'] %}
+          {{ content.field_scaler_step[loop.index0] }}
+        {% endfor %}
+      {% endblock %}
+    </div>
+
+    {% block modal %}
+      {% for i in content.field_modal_content['#items'] %}
+        {{ content.field_modal_content[loop.index0] }}
+      {% endfor %}
+    {% endblock %}
+
+    {% include 'drupalx_theme:scaler-steps-bottom' with {
+      bottom_title: content.field_bottom_title[0]['#context'].value,
+      bottom_text: content.field_bottom_text[0]['#context'].value,
+      bottom_link: {
+      text: content.field_bottom_link[0]['#title']|render,
+      url: content.field_bottom_link[0]['#url']|render,
+      },
+    } only %}
+
+  {% endblock %}
+</section>

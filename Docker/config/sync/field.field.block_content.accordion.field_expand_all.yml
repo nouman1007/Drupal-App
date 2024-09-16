@@ -1,0 +1,23 @@
+uuid: 1ac135e1-96b8-4eb0-9866-0e5a56cae8b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.accordion
+    - field.storage.block_content.field_expand_all
+id: block_content.accordion.field_expand_all
+field_name: field_expand_all
+entity_type: block_content
+bundle: accordion
+label: 'Expand All'
+description: 'Select this to allow a user to open or close all accordion items.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

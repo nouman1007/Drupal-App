@@ -1,0 +1,60 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
+        - emuse\BehatHTMLFormatter\Context\ScreenshotContext:
+            screenshotDir: build/html/behat/assets/screenshots
+      filters:
+        tags: "~@todo"
+  formatters:
+    pretty: ~
+    html:
+      output_path: "%paths.base%/reports/current"
+  extensions:
+    Behat\MinkExtension:
+      base_url: https://learning-campus-lms.ddev.site
+      files_path: 'features/files'
+      default_session: goutte
+      goutte: ~
+      javascript_session: selenium2
+      browser_name: firefox
+      selenium2:
+        wd_host: http://selenium-chrome:4444/wd/hub
+        capabilities:
+          chrome:
+            switches:
+              - "--disable-gpu"
+              - "--headless"
+              - "--no-sandbox"
+              - "--disable-dev-shm-usage"
+    Drupal\DrupalExtension:
+      blackbox: ~
+      text:
+        log_out: "Log out"
+        log_in: "Log in"
+        password_field: "Password"
+        username_field: "Username"
+      api_driver: 'drush'
+      drush:
+        root: '/var/www/html/web'
+      drupal:
+        drupal_root: '/var/www/html/web'
+      region_map:
+        header: "#block-mainnavigation"
+        content: "#block-system-main"
+      selectors:
+        logged_in_selector: "body.logged-in"
+        login_form_selector: "form#user-login"
+        error_message_selector: ".messages--error"
+        success_message_selector: ".messages--status"
+        warning_message_selector: ".messages--warning"
+        message_selector: ".messages"
+    emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+      name: html
+      renderer: Twig,Behat2
+      file_name: index
+      print_args: true
+      print_outp: true
+      loop_break: true

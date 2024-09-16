@@ -1,0 +1,58 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Jumbo-CTA
+description: 'Jumbo-CTA component for displaying media and text content side by side.'
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Title
+      description: Jumbo-CTA title
+      default: ''
+    media:
+      type: string
+      title: Media
+      description: Jumbo-CTA image or video markup
+      default: ''
+    body:
+      type: string
+      title: Body Text
+      description: Jumbo-CTA body text
+      default: ''
+    layout:
+      type: string
+      title: layout
+      description: Controls image left/right placement.
+      enum:
+        - 'left'
+        - 'right'
+      default: 'left'
+    button:
+      type: object
+      title: Button
+      description: Button for the card.
+      properties:
+        text:
+          type: string
+          title: Text
+          description: The text for the button.
+          default: 'Read More'
+        url:
+          type: string
+          title: URL
+          description: The link for the button.
+          default: '#'
+        modifier:
+          type: string
+          title: Modifier
+          description: CSS class modifiers for the button.
+          default: 'btn-primary'
+    modifier:
+      type: string
+      title: Modifier
+      description: Additional classes for styling the component.
+      default: ''
+
+libraryOverrides:
+  dependencies:
+    - drupalx_theme/heading

@@ -1,26 +1,20 @@
 {% set card_modifier = card.modifier|replace({'_': '-'}) %}
 
-{% if card_modifier == 'flag-card' %}
-  <div class="card {{ card_modifier }} col-12 mb-4 col-lg-6 mb-lg-0">
-{% elseif card_modifier == 'image-card'%}
-  <div class="card {{ card_modifier }} col-12 mb-4 col-lg-4 mb-lg-0">
-{% else %}
-  <div class="card {{ card_modifier }}">
-{% endif %}
+<div class="card {{ card.modifier }}">
 
-  {% block card_media %}
-    {% if card.media %}
-      {{ card.media }}
-    {% endif %}
-  {% endblock %}
+  {% if card.media %}
+    {{ card.media }}
+  {% endif %}
 
   <div class="card-body">
-
     {%
       include '@drupalx_theme/heading/heading.twig' with {
         "heading": card.heading,
         "modifier": 'card-title',
-        "link": card.link.url
+        "link": {
+          "url": card.link.url,
+          "text": card.link.text
+        }
       } only
     %}
 
@@ -42,7 +36,7 @@
       <p class="card-type">Type: {{ card.type }}</p>
     {% endif %}
 
-    {% if card_modifier == 'flag-card' and card.link.url %}
+    {% if 'flag-card' in card.modifier %}
       {% include '@drupalx_theme/button/button.twig' with {
         "button": {
           "url": card.link.url,
@@ -52,6 +46,5 @@
         }
       } only %}
     {% endif %}
-
   </div>
 </div>

@@ -1,0 +1,21 @@
+uuid: 34caf17e-b015-4ee3-b5cc-10eebb396a0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.breaker
+    - field.storage.block_content.field_sidebyside_layout
+  module:
+    - options
+id: block_content.breaker.field_sidebyside_layout
+field_name: field_sidebyside_layout
+entity_type: block_content
+bundle: breaker
+label: 'Media Layout'
+description: 'Select the media-left or media-right layout for this component.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

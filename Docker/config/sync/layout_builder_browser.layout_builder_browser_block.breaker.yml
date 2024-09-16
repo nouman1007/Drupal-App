@@ -1,0 +1,11 @@
+uuid: 53b47686-fc39-45c6-a7f2-cd5783192be6
+langcode: en
+status: true
+dependencies: {  }
+id: breaker
+block_id: 'inline_block:breaker'
+category: content
+label: Breaker
+image_path: /profiles/custom/drupalx/images/breaker.png
+image_alt: 'Breaker component example thumbnail'
+weight: null

@@ -1,0 +1,8 @@
+name: 'Americorps Utilities'
+type: module
+description: 'General utility module primarily used to apply general updates when necessary.'
+core_version_requirement: ^9 || ^10
+package: Custom
+dependencies:
+  - drupal:migrate
+  - drupal:migrate_plus

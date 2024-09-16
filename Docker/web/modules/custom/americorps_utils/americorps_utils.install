@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * Already ran.
+ */
+function americorps_utils_update_10001() {}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Deletes all content of type 'Feed' to prepare for removal of `feeds_ex`, etc.
+ */
+function americorps_utils_update_10002() {
+  // Load all nodes of type 'Feed'.
+  $content_type = 'feed';
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(TRUE)
+    ->condition('type', $content_type);
+  $nids = $query->execute();
+  if (!empty($nids)) {
+    // Delete the list of nodes.
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $nodes = $node_storage->loadMultiple($nids);
+    $node_storage->delete($nodes);
+    \Drupal::logger('site_utils')->info('Deleted @count nodes of type @type.', [
+      '@count' => count($nids),
+      '@type' => $content_type,
+    ]);
+  }
+  else {
+    \Drupal::logger('site_utils')->info('No nodes of type @type found.', [
+      '@type' => $content_type,
+    ]);
+  }
+}
+

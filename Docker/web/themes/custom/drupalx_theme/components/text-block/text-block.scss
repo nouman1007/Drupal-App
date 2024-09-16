@@ -1,2 +1,12 @@
 // Import site utilities.
 @import './src/scss/bootstrap-init';
+
+// Include variables.
+@import './src/scss/_variables.scss';
+
+.block-content--type-text {
+
+  &.grey-background {
+    background-color: $grey;
+  }
+}

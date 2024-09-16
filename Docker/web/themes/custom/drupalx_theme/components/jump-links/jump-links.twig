@@ -1,0 +1,16 @@
+
+
+<section class="jump-links-container container-fluid py-2" aria-label="Jump Links">
+  <div class="container">
+    <h2 class="heading">Jump to Section</h2>
+    <p class="sr-only">Skip to content in other sections of this page.</p>
+    <div class="row align-items-center">
+      {% if jump_links %}
+        {% for item in jump_links %}
+          <a class="jump-link" href="#{{ item.url }}" aria-label="{{ item.text }}">{{ item.text }}</a>
+          {% if not loop.last %}&nbsp;{{ item.icon }}{% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>

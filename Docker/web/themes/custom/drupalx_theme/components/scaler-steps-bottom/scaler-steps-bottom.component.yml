@@ -1,0 +1,35 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Hero
+description: 'Scaler Steps Bottom component.'
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Title
+      description: Title text for the header section.
+      default: 'Phasellus <strong>auctor</strong>, turpis'
+    text:
+      type: string
+      title: Text
+      description: Text for the title.
+      default: 'Phasellus <strong>auctor</strong>, turpis'
+    link:
+      type: object
+      title: Link
+      description: Link for the subtitle.
+      properties:
+        text:
+          type: string
+          title: Text
+          description: Text for the link.
+          default: 'Learn more'
+        url:
+          type: string
+          title: URL
+          description: URL for the link.
+          default: '#'
+
+libraryOverrides:
+  dependencies:
+    - drupalx_theme/heading

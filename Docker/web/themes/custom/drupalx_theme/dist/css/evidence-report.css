@@ -17,7 +17,7 @@
 .webinar .body .btn.btn-solid-blue {
   background-color: #1550ed;
   border: 2px solid #1550ed;
-  color: #ffffff;
+  color: #fff;
 }
 
 .evidence-report .intended-audience a:not(:last-child)::after,

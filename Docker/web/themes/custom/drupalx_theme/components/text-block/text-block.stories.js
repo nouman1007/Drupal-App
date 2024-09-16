@@ -4,6 +4,10 @@ import TextBlockTemplate from './text-block.twig';
 export default {
   title: 'Editorial/Text Block',
   argTypes: {
+    grey_background: {
+      description: 'Define the Text Block background color On/Off status.',
+      control: 'boolean'
+    },
     body_text: {
       description: 'Define the Text Block copy.',
       control: 'text'
@@ -23,6 +27,7 @@ export const TextBlock = TextBlockTemplate.bind({});
 
 TextBlock.args = {
   modifier: 'col-10 p-4',
+  grey_background: '',
   heading: {
     title: 'Title Lorem Ipsum Dolor',
     level: '2',

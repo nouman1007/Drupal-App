@@ -1,0 +1,36 @@
+{#
+/**
+* @file
+* Default theme implementation to display a paragraph.
+*
+* @see template_preprocess_paragraph()
+*
+* @ingroup themeable
+*/
+#}
+
+{% set modifier = 'col-4 pt-4 px-6 pb-4' %}
+
+{% block paragraph %}
+  {% block content %}
+    <div class="step {{ modifier }}" id="scaler-step-{{ content.field_step_number[0]['#markup'] }}">
+      <p class="step-number">{{ content.field_step_number[0]['#markup'] }}</p>
+      <div class="step-body">
+        <h3 class="step-title">{{ content.field_title[0]['#context'].value }}</h3>
+
+        {% if content.field_summary %}
+          <p class="step-text">
+            {{ content.field_summary|render }}
+          </p>
+        {% endif %}
+        <button
+          class="btn rounded-pill bg-light text-uppercase px-4 py-2"
+          data-bs-target="{{ content.field_link[0]['#url'] }}"
+          data-bs-toggle="modal"
+          type="button">
+          {{ content.field_link[0]['#title'] }}
+        </button>
+      </div>
+    </div>
+  {% endblock %}
+{% endblock paragraph %}

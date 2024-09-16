@@ -7,12 +7,23 @@ global:
     base:
       dist/css/bootstrap.css: {}
       dist/css/breadcrumbs.css: {}
+      dist/css/global.css: {}
       dist/css/_variables.css: {}
   dependencies:
     - "drupalx_theme/icons"
     - "drupalx_theme/fonts"
 
 # Included to attach the alerts component css file to status messages.
+accordion:
+  css:
+    component:
+      components/accordion/accordion.css: {}
+  js:
+    components/accordion/js/accordion.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
 alerts:
   css:
     component:
@@ -28,6 +39,11 @@ bootstrap-js:
       }
   dependencies:
   - core/jquery
+
+breaker:
+  css:
+    component:
+      components/breaker/breaker.css: {}
 
 card:
   css:
@@ -46,10 +62,10 @@ custom_search:
     - core/jquery
     - core/drupal
 
-evidence-report:
+evaluation-resources:
   css:
     layout:
-      dist/css/evidence-report.css: {}
+      dist/css/evaluation-resources.css: {}
 
 fonts:
   css:
@@ -88,6 +104,26 @@ icons:
           minified: true,
         }
 
+jumbo-cta:
+  css:
+    component:
+      components/jumbo-cta/jumbo-cta.css: {}
+
+jump-links:
+  css:
+    component:
+      components/jump-links/jump-links.css: {}
+  js:
+    components/jump-links/js/jump-links.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+layout-page:
+  css:
+    layout:
+      dist/css/layout-page.css: {}
+
 main-menu:
   css:
     component:
@@ -110,6 +146,16 @@ popover-cdn:
           defer: true
         },
       }
+
+scaler-steps:
+  css:
+    component:
+      components/scaler-steps/scaler-steps.css: {}
+  js:
+    components/scaler-steps/js/scaler-steps.js: {}
+    components/scaler-steps/js/scaler-steps-custom.js: {}
+  dependencies:
+    - core/drupal
 
 search-box:
   css:

@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.card
     - field.field.node.evidence_report.body
-    - field.field.node.evidence_report.feeds_item
     - field.field.node.evidence_report.field_age_s_studied
     - field.field.node.evidence_report.field_americorps_program_s_
     - field.field.node.evidence_report.field_date_posted
@@ -46,7 +45,6 @@ content:
     region: content
 hidden:
   body: true
-  feeds_item: true
   field_age_s_studied: true
   field_americorps_program_s_: true
   field_date_posted: true

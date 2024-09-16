@@ -1,0 +1,21 @@
+uuid: 6bf4d972-9ccc-4860-bc23-dc15a22e35cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jumbo_cta
+    - field.storage.block_content.field_sidebyside_layout
+  module:
+    - options
+id: block_content.jumbo_cta.field_sidebyside_layout
+field_name: field_sidebyside_layout
+entity_type: block_content
+bundle: jumbo_cta
+label: 'Media Layout'
+description: 'Select the media-left or media-right layout for this component.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

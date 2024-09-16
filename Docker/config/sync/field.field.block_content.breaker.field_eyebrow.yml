@@ -1,0 +1,19 @@
+uuid: 5f879405-3577-4eb9-9a69-966f5a3f2eba
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.breaker
+    - field.storage.block_content.field_eyebrow
+id: block_content.breaker.field_eyebrow
+field_name: field_eyebrow
+entity_type: block_content
+bundle: breaker
+label: Eyebrow
+description: 'Provide a short label for this content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

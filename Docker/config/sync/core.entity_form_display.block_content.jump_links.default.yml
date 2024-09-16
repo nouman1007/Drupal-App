@@ -1,0 +1,32 @@
+uuid: 5e7ecadf-a9e9-4ff4-bff3-f12313b77028
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jump_links
+    - field.field.block_content.jump_links.field_jump_link
+  module:
+    - link
+id: block_content.jump_links.default
+targetEntityType: block_content
+bundle: jump_links
+mode: default
+content:
+  field_jump_link:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true

@@ -9,5 +9,5 @@ block_id: 'inline_block:sidebyside'
 category: content
 label: Side-by-side
 image_path: /profiles/custom/drupalx/images/sidebyside.png
-image_alt: ''
-weight: -2
+image_alt: 'Side by Side component example thumbnail'
+weight: -5

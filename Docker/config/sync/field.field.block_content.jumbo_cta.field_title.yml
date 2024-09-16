@@ -1,0 +1,19 @@
+uuid: 90e0d467-5454-4b4d-b69a-dd7a50d44912
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jumbo_cta
+    - field.storage.block_content.field_title
+id: block_content.jumbo_cta.field_title
+field_name: field_title
+entity_type: block_content
+bundle: jumbo_cta
+label: Title
+description: 'Provide the primary heading for the accordion.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

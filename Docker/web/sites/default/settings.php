@@ -97,6 +97,10 @@ $databases['default']['default'] = [
   'port' => getenv('DB_PORT') ?: '3306',
   'namespace' => 'Drupal\Core\Database\Driver\mysql',
   'driver' => 'mysql',
+  'pdo' => [
+    PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/DigiCertGlobalRootCA.crt.pem',
+    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true,
+  ],
 ];
 
 /**
@@ -295,7 +299,7 @@ $settings['config_sync_directory'] = '../config/sync';
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = getenv('HASH_SALT');
+$settings['hash_salt'] = getenv('hash_salt');
 
 /**
  * Deployment identifier.
@@ -781,7 +785,9 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  *
  * @see https://www.drupal.org/docs/installing-drupal/trusted-host-settings
  */
-# $settings['trusted_host_patterns'] = [];
+// This will ensure the site can only be accessed through the intended host names.
+// @todo discuss the security implications of this setting. This should probably rely on an env var.
+$settings['trusted_host_patterns'] = ['.*'];
 
 /**
  * The default list of directories that will be ignored by Drupal's file API.
@@ -873,10 +879,38 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # $settings['migrate_file_public_path'] = '';
 # $settings['migrate_file_private_path'] = '';
 
+// Allow generation of image derivatives insecurely.
+// @todo discuss the security implications of this setting. Likely necessary for Azure Blob Storage.
 $config['image.settings']['allow_insecure_derivatives'] = TRUE;
 
 // Recommended setting for Drupal 10 only
 $settings['state_cache'] = TRUE;
+
+// This will prevent Drupal from setting read-only permissions on sites/default.
+// @todo discuss the security implications of this setting. This should probably be removed, or only used on dev envs.
+$settings['skip_permissions_hardening'] = TRUE;
+
+// Azure Blob Storage configuration.
+$config['az_blob_fs.settings']['az_blob_account_name'] = getenv('AZURE_BLOB_ACCOUNT_NAME');
+$config['az_blob_fs.settings']['az_blob_container_name'] = getenv('AZURE_BLOB_CONTAINER_NAME');
+$config['key.key.azure_blob_storage']['key_provider_settings']['key_value'] = getenv('AZURE_BLOB_ACCOUNT_KEY');
+
+// Azure AI Search configuration.
+$config['search_api.server.evidence_report']['backend_config']['connector_config']['url'] = getenv('KEYSTORE_URL');
+$config['search_api.server.evidence_report']['backend_config']['connector_config']['api_key'] = getenv('KEYSTORE_API_KEY');
+if (isset($_ENV['AZURE_AI_SEARCH_INDEX'])) {
+  $config['search_api.server.evidence_report']['third_party_settings']['search_api_aais']['index_name'] = getenv('AZURE_AI_SEARCH_INDEX');
+}
+
+// Override drupal/symfony_mailer default config to use Mailpit.
+if (isset($_ENV['MAILER_USER'])) {
+  $config['symfony_mailer.settings']['default_transport'] = 'sendmail';
+  $config['symfony_mailer.mailer_transport.sendmail']['plugin'] = 'smtp';
+  $config['symfony_mailer.mailer_transport.sendmail']['configuration']['user'] = getenv('MAILER_USER');
+  $config['symfony_mailer.mailer_transport.sendmail']['configuration']['pass'] = getenv('MAILER_PASS');
+  $config['symfony_mailer.mailer_transport.sendmail']['configuration']['host'] = 'localhost';
+  $config['symfony_mailer.mailer_transport.sendmail']['configuration']['port'] = '1025';
+}
 
 // Automatically generated include for settings managed by ddev.
 $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
@@ -890,12 +924,7 @@ if (is_readable($app_root . '/' . $site_path . '/settings.local.php')) {
 }
 
 // Allow environment-based overrides of settings defined above.
-if (isset($environment_name)) {
-  $environment_name = rtrim($environment_name, '0-9');
-}
-else {
-  $environment_name = 'sandbox';
-}
+$environment_name = isset($_ENV['ENV_NAME']) ? rtrim($_ENV['ENV_NAME'], '0123456789') : 'sandbox';
 if (is_readable($app_root . '/' . $site_path . '/settings.' . $environment_name . '.php')) {
   include $app_root . '/' . $site_path . '/settings.' . $environment_name . '.php';
 }

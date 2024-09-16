@@ -479,6 +479,10 @@ display:
           parse_mode: phrase
           min_length: 3
           fields: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: default
       row:

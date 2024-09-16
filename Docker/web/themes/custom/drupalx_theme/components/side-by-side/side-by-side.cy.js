@@ -13,7 +13,7 @@ describe('Side-by-Side Component', () => {
     cy.get('.badge').contains('Eyebrow');
 
     // Check if media image is present
-    cy.get('.side-by-side .shadow img').should('have.attr', 'src', './images/card.webp');
+    cy.get('.side-by-side img').should('have.attr', 'src', './images/card.webp');
 
     // Check for body text
     cy.contains('Contra legem facit qui id facit quod lex prohibet.');
@@ -34,7 +34,7 @@ describe('Side-by-Side Component', () => {
     cy.get('.badge').contains('Eyebrow');
 
     // Check if media image is present
-    cy.get('.side-by-side .shadow img').should('have.attr', 'src', './images/card.webp');
+    cy.get('.side-by-side img').should('have.attr', 'src', './images/card.webp');
 
     // Check for body text
     cy.contains('Contra legem facit qui id facit quod lex prohibet.');
@@ -56,7 +56,7 @@ describe('Side-by-Side Component', () => {
 
         cy.get('.badge').contains('Eyebrow');
         cy.contains('Lorem ipsum dolor sit amet, elit.').should('be.visible');
-        cy.get('.side-by-side .shadow img')
+        cy.get('.side-by-side img')
           .should('have.attr', 'src', './images/card.webp');
         cy.contains('Contra legem facit qui id facit quod lex prohibet.')
           .should('be.visible');

@@ -1,0 +1,19 @@
+uuid: ef8316ef-c2ac-4a3a-8e98-08f93a3b6923
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_summary
+    - paragraphs.paragraphs_type.scaler_step_item
+id: paragraph.scaler_step_item.field_summary
+field_name: field_summary
+entity_type: paragraph
+bundle: scaler_step_item
+label: Summary
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

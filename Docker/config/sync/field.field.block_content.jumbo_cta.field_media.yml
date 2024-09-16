@@ -1,0 +1,29 @@
+uuid: 7620436a-13f9-435a-88a9-1b7c1492d8ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jumbo_cta
+    - field.storage.block_content.field_media
+    - media.type.image
+id: block_content.jumbo_cta.field_media
+field_name: field_media
+entity_type: block_content
+bundle: jumbo_cta
+label: Media
+description: 'Featured media image.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

@@ -1,0 +1,11 @@
+uuid: e2bc63b2-0184-4b45-8bcc-0d9d468442d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jumbo_cta
+id: block_content.jumbo_cta
+target_entity_type_id: block_content
+target_bundle: jumbo_cta
+default_langcode: site_default
+language_alterable: false

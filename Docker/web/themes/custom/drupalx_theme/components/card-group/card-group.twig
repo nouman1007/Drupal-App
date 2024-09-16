@@ -23,8 +23,12 @@
     {% if section_subtitle %}
       <p class="card-group-subtitle text-center mb-4 mb-lg-6"><small>{{ section_subtitle }}</small></p>
     {% endif %}
-    <div class="row justify-content-center mt-4 mt-lg-6">
-      <div class="d-lg-flex gap-4">
+    <div class="row mt-4 mt-lg-6">
+      {% if 'node-count-card' in card_items[0].card.modifier %}
+        <div class="d-lg-flex flex-wrap justify-content-center gap-4">
+      {% else %}
+        <div class="d-lg-flex justify-content-center gap-4">
+      {% endif %}
       {% block card_items %}
         {% for item in card_items %}
           {% if item.card %}

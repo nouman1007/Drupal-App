@@ -1,0 +1,11 @@
+uuid: 3e5f67fe-654d-4cb5-a987-e742630f91c0
+langcode: en
+status: true
+dependencies: {  }
+id: scaler_steps
+block_id: 'inline_block:scaler_steps'
+category: content
+label: 'SCALER Steps'
+image_path: /profiles/custom/drupalx/images/SCALER-steps.jpg
+image_alt: 'SCALER Steps thumbnail'
+weight: null

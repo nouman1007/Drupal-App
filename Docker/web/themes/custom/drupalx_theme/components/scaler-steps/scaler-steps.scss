@@ -1,0 +1,197 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+// Include button styles.
+@import '../button/button';
+
+// Include heading styles.
+@import '../heading/heading';
+
+// Include variables.
+@import './src/scss/_variables.scss';
+
+.scaler-steps {
+
+  .title,
+  .subtitle {
+    text-align: center;
+  }
+
+  .step {
+    background-color: $blue-secondary;
+    color: $white;
+    position: relative;
+
+    &:not(:last-child) {
+      border-right: 1px solid $white;
+    }
+
+    .step-number {
+      font-size: 2rem;
+      line-height: 1rem;
+      margin-bottom: 0;
+      position: absolute;
+      top: 25px;
+      left: 30px;
+    }
+
+    .step-body {
+      text-align: center;
+
+      .step-title {
+        font-size: 1.75rem;
+        margin-bottom: 2rem !important;
+      }
+
+      .step-text {
+        margin-bottom: 4rem;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn {
+        display: inline-block;
+        font-weight: 700;
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+
+        &:hover,
+        &:focus {
+          background-color: $blue-secondary !important;
+          border: 1px solid $white;
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .bottom {
+    background-color: $blue-primary;
+    border-top: 1px solid $white;
+    border-radius: 0 0 0 100px;
+    color: $white;
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+    min-height: 250px;
+    padding: 80px;
+    position: relative;
+
+    &::before {
+      background-color: rgba(0, 0, 0, 0.35) !important;
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4) 40%, transparent 80%);
+      border-radius: 0 0 0 100px;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: all 0.8s cubic-bezier(0.61, 0.21, 0.49, 0.99);
+      width: 100%;
+      z-index: 0;
+    }
+
+    .inner {
+      position: relative;
+      text-align: center;
+      width: 100%;
+      z-index: 1;
+
+      .title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .description {
+        font-size: 1.5rem;
+        line-height: 1.25;
+        margin-bottom: 1.75rem;
+      }
+
+      .link {
+        color: $white;
+        display: inline-block;
+        text-underline-offset: 0.35rem;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+// Modal Styles
+
+.modal-title {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.modal-header button {
+  background-color: unset;
+  border: none;
+  font-weight: 700;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.modal-body {
+  padding: 1rem 2rem 3rem;
+
+  .modal-step-begin {
+    border-bottom: 1px solid $border-color;
+    padding: 0 10px 20px 0;
+  }
+
+  p,
+  label {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .button {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 1rem 2rem;
+  }
+
+  input {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem 2rem;
+    width: 100%;
+  }
+
+  button.continue-1,
+  button.continue-2,
+  button.continue-3 {
+    margin: 0.5rem 0 0;
+
+    &.btn {
+      color: #343a40;
+      background-color: #fff;
+      border-color: #343a40;
+
+      &:hover {
+        color: #fff;
+        background-color: #343a40;
+        border-color: #343a40;
+      }
+    }
+  }
+
+  .link-input-error,
+  .link-input-error-2,
+  .link-input-error-3 {
+    margin-bottom: 20px;
+    color: $error-message;
+    font-size: 1rem;
+    font-weight: bold;
+}
+}

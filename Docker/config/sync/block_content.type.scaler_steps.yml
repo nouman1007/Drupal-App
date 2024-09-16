@@ -1,0 +1,8 @@
+uuid: bd41ea90-da4d-4b2e-a019-403c7e7f19a2
+langcode: en
+status: true
+dependencies: {  }
+id: scaler_steps
+label: 'SCALER Steps'
+revision: false
+description: 'Use this to display the 3 steps to SCALER'

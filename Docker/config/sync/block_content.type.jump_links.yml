@@ -1,0 +1,8 @@
+uuid: a4ba26c3-4c2e-4b47-b77e-b2e7def07b34
+langcode: en
+status: true
+dependencies: {  }
+id: jump_links
+label: 'Jump Links'
+revision: false
+description: "The Jump Links Component allows you to add anchor links to your web pages. This is ideal for displaying a list of links to \"jump\" to sections within the same page.\t"

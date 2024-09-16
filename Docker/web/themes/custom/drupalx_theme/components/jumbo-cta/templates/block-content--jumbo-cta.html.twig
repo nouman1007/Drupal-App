@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block content.
+ *
+ * @see template_preprocess_block_content_template()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('drupalx_theme/jumbo-cta') }}
+
+{%
+  set classes = [
+    'block-content',
+    'block-content--type-' ~ bundle|clean_class,
+    'block-content--' ~ id,
+    'block-content--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+{%
+  set layout_modifier = 'cta grey px-4 py-8 px-md-12 py-md-8'
+%}
+
+{%
+  set link = {
+    url: content.field_link[0]['#url']|render,
+    text: content.field_link[0]['#title']|render
+  }
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% block content %}
+    {%
+      include 'drupalx_theme:jumbo-cta' with {
+        title: content.field_title|render,
+        summary: content.field_summary,
+        media: content.field_media,
+        media_layout: content.field_sidebyside_layout['#items'].getString() ?? 'left',
+        layout_modifier: layout_modifier,
+        link: link
+      } only
+    %}
+  {% endblock %}
+</div>

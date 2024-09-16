@@ -4,17 +4,44 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 /* Make the image fill the entire teaser. */
+.side-by-side .media.media--type-image {
+  border-radius: 25px !important;
+}
+.side-by-side .media.media--type-video {
+  border-radius: 0 !important;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.side-by-side .media.media--type-video > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .side-by-side picture {
   width: 100%;
   height: 100%;
   display: flex;
 }
 .side-by-side picture img {
+  border-radius: 25px !important;
   object-fit: cover;
   width: 100%;
   height: 100%;
   /* Classes added to all images by .theme function */
 }
 .side-by-side picture img.w-auto {
+  width: 100% !important;
+}
+.side-by-side img {
+  border-radius: 25px !important;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* Classes added to all images by .theme function */
+}
+.side-by-side img.w-auto {
   width: 100% !important;
 }

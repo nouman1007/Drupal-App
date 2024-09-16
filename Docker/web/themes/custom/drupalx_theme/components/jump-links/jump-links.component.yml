@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Jump Links
+description: 'Jump Links component to display a list of page anchor links in a horizontal layout.'
+props:
+  type: object
+  properties:
+    nav_items:
+      type: array
+      title: Items
+      description: An array of anchor links. Each item should include text and url properties.
+      items:
+        type: object
+        properties:
+          text:
+            type: string
+            title: Link Text
+            description: The text for the navigation link.
+            default: ''
+          url:
+            type: string
+            title: URL
+            description: The URL for the navigation link.
+            default: '#'
+          icon:
+            type: string
+            title: Icon
+            description: The icon for the navigation link.
+            default: '<span class="material-icons">trending_flat</span>'

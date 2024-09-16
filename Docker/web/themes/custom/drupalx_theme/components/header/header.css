@@ -131,7 +131,7 @@ header[role=banner] {
 header[role=banner] .header-bottom {
   background-color: #0f203a;
   border-radius: 0 0 0 100px;
-  color: #ffffff;
+  color: #fff;
   min-height: 250px;
   width: 100%;
   align-items: flex-end;
@@ -168,7 +168,7 @@ header[role=banner] .header-bottom .header-bottom-inner .header-description {
   line-height: 1.25;
 }
 header[role=banner] .header-bottom.evidence-report {
-  background-color: #3b2b94 !important;
+  background-color: #392e8e !important;
   background-image: none;
 }
 header[role=banner] .header-bottom.evidence-report::before {

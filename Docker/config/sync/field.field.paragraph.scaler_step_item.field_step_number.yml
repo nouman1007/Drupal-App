@@ -1,0 +1,23 @@
+uuid: 73cfe6a9-1eba-45e5-9ea0-c706b64e3918
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_step_number
+    - paragraphs.paragraphs_type.scaler_step_item
+id: paragraph.scaler_step_item.field_step_number
+field_name: field_step_number
+entity_type: paragraph
+bundle: scaler_step_item
+label: 'Step Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

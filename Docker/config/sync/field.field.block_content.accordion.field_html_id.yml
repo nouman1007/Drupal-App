@@ -1,0 +1,19 @@
+uuid: 627cb9a6-86c4-4539-a475-c4905de076d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.accordion
+    - field.storage.block_content.field_html_id
+id: block_content.accordion.field_html_id
+field_name: field_html_id
+entity_type: block_content
+bundle: accordion
+label: 'HTML ID'
+description: 'Assign an HTML ID attribute to this Accordion Group''s heading to be used as a target for Jump Links. Example (lowercase separated by hyphens): <h2 id="this-field''s-content"> (Optional)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -4,6 +4,14 @@ description: 'Accordion group component for displaying collapsible content secti
 props:
   type: object
   properties:
+    heading:
+      type: string
+      title: Title
+      description: Title of the accordion group.
+    summary:
+      type: string
+      title: Summary
+      description: Summary of the accordion group.
     modifier:
       type: string
       title: Modifier

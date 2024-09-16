@@ -34,7 +34,6 @@
       content: content
       } only %}
       {% block card_items %}
-        {% set card_modifier = content.field_card[0]['#paragraph'].field_card_modifier.value|replace({'_': '-'}) %}
         {% for i in content.field_card['#items'] %}
           {{ content.field_card[loop.index0] }}
         {% endfor %}

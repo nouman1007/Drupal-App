@@ -31,6 +31,10 @@ props:
       title: Modifier Class
       description: Additional modifier class for styling the heading.
       default: 'display-3'
+    html_id:
+      type: string
+      title: HTML ID
+      description: The HTML ID attribute for the heading.
     attributes:
       type: Drupal\Core\Template\Attribute
       title: Attributes

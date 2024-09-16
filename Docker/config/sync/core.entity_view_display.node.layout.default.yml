@@ -27,18 +27,18 @@ third_party_settings:
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories:
-      - 'Chaos Tools'
       - 'Content fields'
       - 'Custom block types'
       - 'Custom blocks'
+      - Devel
       - Forms
-      - Geolocation
-      - Help
       - 'Inline blocks'
       - 'Lists (Views)'
       - Menus
+      - Statistics
       - System
       - User
+      - Views
       - Webform
       - core
     entity_view_mode_restriction:
@@ -46,6 +46,12 @@ third_party_settings:
         - layout_onecol
         - layout_twocol_section
         - layout_threecol_section
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories:
+        - Devel
+        - Statistics
+        - Views
       whitelisted_blocks:
         'Chaos Tools': {  }
         'Content fields': {  }

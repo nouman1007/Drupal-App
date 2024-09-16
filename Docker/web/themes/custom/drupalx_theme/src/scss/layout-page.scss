@@ -1,0 +1,16 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+// Include variables.
+@import './src/scss/_variables.scss';
+
+header[role='banner'] {
+
+  .header-bottom-inner {
+    max-width: 650px;
+
+    .header-title {
+      margin-bottom: 1rem;
+    }
+  }
+}

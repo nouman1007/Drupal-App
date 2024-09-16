@@ -18,8 +18,8 @@ settings:
       value: image_card
       label: 'Image Card'
     -
-      value: node_count_card
-      label: 'Node Count Card'
+      value: cta_card
+      label: 'CTA Card'
   allowed_values_function: ''
 module: options
 locked: false

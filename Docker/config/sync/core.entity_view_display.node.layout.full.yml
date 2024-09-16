@@ -1,0 +1,70 @@
+uuid: 8151b8aa-a8f1-4574-94e8-80e15a0061c3
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.layout.field_hide_page_title
+    - field.field.node.layout.field_meta_tags
+    - field.field.node.layout.field_summary
+    - field.field.node.layout.field_thumbnail
+    - field.field.node.layout.layout_builder__layout
+    - node.type.layout
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_builder_restrictions:
+    allowed_block_categories:
+      - 'Chaos Tools'
+      - 'Content fields'
+      - 'Custom block types'
+      - 'Custom blocks'
+      - Forms
+      - Geolocation
+      - Help
+      - 'Inline blocks'
+      - 'Lists (Views)'
+      - Menus
+      - System
+      - User
+      - Webform
+      - core
+    entity_view_mode_restriction:
+      allowed_layouts:
+        - layout_onecol
+        - layout_twocol_section
+        - layout_threecol_section
+      whitelisted_blocks:
+        'Chaos Tools': {  }
+        'Content fields': {  }
+        Forms: {  }
+        Geolocation: {  }
+        Help: {  }
+        'Lists (Views)': {  }
+        Menus: {  }
+        System: {  }
+        User: {  }
+        Webform: {  }
+        core: {  }
+      blacklisted_blocks: {  }
+_core:
+  default_config_hash: 6FLNEmKDQLu_P4NNcyv3guABnG8nedJFkGIyQG-nNE8
+id: node.layout.full
+targetEntityType: node
+bundle: layout
+mode: full
+content: {  }
+hidden:
+  field_hide_page_title: true
+  field_meta_tags: true
+  field_summary: true
+  field_thumbnail: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true

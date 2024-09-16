@@ -1,0 +1,56 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+
+// Import site variables.
+@import './src/scss/_variables';
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://fonts.gstatic.com/s/materialicons/v142/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2') format('woff2');
+}
+
+.jump-links-container {
+  background-color: $blue-primary;
+  color: $white;
+
+  .heading {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  a {
+    color: $white;
+    line-height: 2;
+    text-underline-offset: 0.25rem;
+    text-decoration-thickness: 1px;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+
+  .material-icons {
+    direction: ltr;
+    display: inline-block;
+    font-family: 'Material Icons', sans-serif;
+    line-height: 1;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+  }
+
+  .row > * {
+    width: auto;
+  }
+}

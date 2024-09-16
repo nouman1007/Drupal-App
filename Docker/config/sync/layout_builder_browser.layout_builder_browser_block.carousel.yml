@@ -10,4 +10,4 @@ category: media
 label: Carousel
 image_path: /profiles/custom/drupalx/images/carousel.png
 image_alt: ''
-weight: -99
+weight: -5

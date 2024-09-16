@@ -13,8 +13,8 @@ id: block_content.sidebyside.field_sidebyside_layout
 field_name: field_sidebyside_layout
 entity_type: block_content
 bundle: sidebyside
-label: Layout
-description: 'Select the display layout for this component.'
+label: 'Media Layout'
+description: 'Select the media-left or media-right layout for this component.'
 required: true
 translatable: false
 default_value: {  }

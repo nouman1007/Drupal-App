@@ -1,0 +1,23 @@
+uuid: 33657fde-498d-40ea-bfe6-67ac18b659e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jump_links
+    - field.storage.block_content.field_jump_link
+  module:
+    - link
+id: block_content.jump_links.field_jump_link
+field_name: field_jump_link
+entity_type: block_content
+bundle: jump_links
+label: 'Jump Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 1
+field_type: link

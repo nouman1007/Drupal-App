@@ -1,15 +1,20 @@
 {
-  "name": "drupalninja/drupalx-project",
-  "description": "Enterprise developer template for Drupal projects with composer",
+  "name": "skytech-americorps/learningcampuslms",
+  "description": "AmeriCorps LMS Drupal site based on DrupalX",
   "license": "GPL-2.0-or-later",
   "type": "project",
   "authors": [
     {
-      "name": "Jay Callicott",
-      "role": "Project Lead"
+      "name": "Quinton Jones",
+      "role": "Developer"
+    },
+    {
+      "name": "Daniel Love",
+      "role": "Developer"
     }
   ],
   "require": {
+    "php": "^8.3",
     "composer/installers": "^2.1",
     "cweagans/composer-patches": "^1.7",
     "drupal/admin_toolbar": "^3.4",
@@ -30,9 +35,7 @@
     "drupal/environment_indicator": "^4.0",
     "drupal/facets": "^2.0",
     "drupal/features": "^3.14",
-    "drupal/feeds": "^3.0@beta",
     "drupal/feeds_ex": "^1.0@beta",
-    "drupal/feeds_tamper": "^2.0@beta",
     "drupal/field_group": "^3.4",
     "drupal/focal_point": "^2.1",
     "drupal/gin": "^3.0@RC",
@@ -63,6 +66,7 @@
     "drupal/simple_sitemap": "^4.1",
     "drupal/statistics": "^1.0",
     "drupal/svg_image_responsive": "^3.0",
+    "drupal/tamper": "^1.0@alpha",
     "drupal/taxonomy_access_fix": "^4.0",
     "drupal/twig_field_value": "^2.0",
     "drupal/twig_tweak": "^3.3",
@@ -75,12 +79,18 @@
     "drupalninja/drupalx_gin": "^1.0",
     "drush/drush": "^12.5",
     "oomphinc/composer-installers-extender": "^2.0",
+    "symfony/console": "^6",
+    "symfony/http-client": "^6",
     "vlucas/phpdotenv": "^5.1",
     "webflo/drupal-finder": "^1.2"
   },
   "require-dev": {
+    "behat/behat": "^3",
+    "behat/mink-goutte-driver": "^2.0",
     "drupal/core-dev": "^10.2.0",
     "drupal/devel": "^5.3",
+    "drupal/drupal-extension": "^5",
+    "emuse/behat-html-formatter": "^2.0",
     "ergebnis/composer-normalize": "^2.42"
   },
   "conflict": {
@@ -96,7 +106,7 @@
       "url": "https://asset-packagist.org"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "alpha",
   "prefer-stable": true,
   "autoload": {
     "classmap": [
@@ -104,7 +114,10 @@
     ],
     "files": [
       "load.environment.php"
-    ]
+    ],
+    "psr-4": {
+        "Console\\": "scripts/console/src/"
+    }
   },
   "config": {
     "allow-plugins": {
@@ -189,6 +202,7 @@
     ],
     "post-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-    ]
+    ],
+    "test": "./scripts/test.sh"
   }
 }

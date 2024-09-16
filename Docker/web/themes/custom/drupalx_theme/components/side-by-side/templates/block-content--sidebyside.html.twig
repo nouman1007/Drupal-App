@@ -14,7 +14,7 @@
     'block-content--type-' ~ bundle|clean_class,
     'block-content--' ~ id,
     'block-content--view-mode-' ~ view_mode|clean_class,
-    'my-6 my-lg-15',
+    'mt-2 mb-6 mb-lg-10',
   ]
 %}
 
@@ -31,6 +31,12 @@
   {{ title_prefix }}
   {{ title_suffix }}
 
+{% if content.field_media[0]['#media'] is defined %}
+  {% set media = content.field_media[0]['#media'] %}
+  {% set media_modifier = media.bundle() == 'image' ? 'image' : 'video' %}
+  {% set media_type = 'media--type-' ~ media_modifier %}
+{% endif %}
+
   {% block content %}
     {%
       include 'drupalx_theme:side-by-side' with {
@@ -38,9 +44,10 @@
         title: content.field_title|render,
         body: content.field_summary,
         media: content.field_media,
-        layout: content.field_sidebyside_layout['#items'].getString() ?? 'left',
+        media_layout: content.field_sidebyside_layout['#items'].getString() ?? 'left',
+        layout_modifier: content.field_layout_modifier[0]['#markup'] ?? '50-50',
         link: link,
-        modifier: '',
+        media_type: media_type,
       } only
     %}
   {% endblock %}

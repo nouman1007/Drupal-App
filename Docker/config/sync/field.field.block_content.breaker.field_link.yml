@@ -1,0 +1,23 @@
+uuid: e8c0d159-0b54-444b-bfa9-cda6a6ecc734
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.breaker
+    - field.storage.block_content.field_link
+  module:
+    - link
+id: block_content.breaker.field_link
+field_name: field_link
+entity_type: block_content
+bundle: breaker
+label: Link
+description: 'Optional call to action link.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

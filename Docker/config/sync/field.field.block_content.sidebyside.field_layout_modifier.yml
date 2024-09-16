@@ -1,0 +1,23 @@
+uuid: bd284c79-343f-42eb-ae1b-f8045925ff3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sidebyside
+    - field.storage.block_content.field_layout_modifier
+  module:
+    - options
+id: block_content.sidebyside.field_layout_modifier
+field_name: field_layout_modifier
+entity_type: block_content
+bundle: sidebyside
+label: 'Layout Modifier'
+description: 'Select the column layout of the component. Reverse the layout by choosing Media Layout right or left.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 50-50
+default_value_callback: ''
+settings: {  }
+field_type: list_string

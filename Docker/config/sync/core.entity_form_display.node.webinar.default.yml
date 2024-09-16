@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.webinar.body
-    - field.field.node.webinar.feeds_item
     - field.field.node.webinar.field_audio
     - field.field.node.webinar.field_files
     - field.field.node.webinar.field_program_department
@@ -153,6 +152,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  feeds_item: true
   promote: true
   sticky: true

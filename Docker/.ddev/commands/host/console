@@ -1,0 +1,29 @@
+#!/bin/bash
+# Description: Forwards console command to the installed Symfony Console app and opens files if successful.
+
+# Run the console command and capture the output and exit status
+output=$(ddev php scripts/console/bin/console "$@")
+exit_status=$?
+
+# Print the output
+echo "$output"
+
+# Only proceed if the command was successful
+if [[ $exit_status -eq 0 ]]; then
+  # Loop through each line of output
+  while IFS= read -r line; do
+    # Check if the line is a file
+    if [[ -f "$line" ]]; then
+      # Open the file based on the platform
+      if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        xdg-open "$line"
+      elif [[ "$OSTYPE" == "darwin"* ]]; then
+        open "$line"
+      elif [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
+        start "$line"
+      fi
+    fi
+  done <<< "$output"
+else
+  echo "Command failed with exit status $exit_status."
+fi

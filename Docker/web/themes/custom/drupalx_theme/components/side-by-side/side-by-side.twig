@@ -1,15 +1,27 @@
 {{ attach_library('drupalx_theme/side-by-side') }}
+{{ attach_library('drupalx_theme/video') }}
 
-{% set layout = layout ?? 'left' %}
-{% set modifier = modifier ?? '' %}
-<div class="side-by-side container {{ layout }} {{ modifier }}">
-  <div class="row flex-column gy-3 {{ ('right' in layout) ? 'flex-lg-row-reverse ' : 'flex-lg-row ' }}justify-content-between align-items-center">
-    <div class="col-lg-6">
-      <div class="shadow rounded-3">
-        {{ media }}
-      </div>
+{% set media_layout = media_layout ?? 'left' %}
+<div class="side-by-side container {{ media_layout }} {{ layout_modifier }}">
+  <div class="row flex-column {{ ('right' in media_layout) ? 'flex-lg-row-reverse' : 'flex-lg-row' }} justify-content-between align-items-start">
+    {% if layout_modifier == '50-50' %}
+      <div class="col-lg-6">
+      {% elseif layout_modifier == '60-40' or layout_modifier == '40-60' %}
+        <div class="col-lg-4">
+      {% elseif layout_modifier == '70-30' or layout_modifier == '30-70' %}
+        <div class="col-lg-3">
+    {% endif %}
+    <div class="media {{ media_type }} mb-4 mb-lg-0">
+      {{ media }}
     </div>
-    <div class="col-lg-6 col-xxl-5 d-flex flex-column gap-3">
+    </div>
+    {% if layout_modifier == '50-50' %}
+      <div class="col-lg-6 d-flex flex-column">
+      {% elseif layout_modifier == '60-40' or layout_modifier == '40-60' %}
+      <div class="col-lg-7 d-flex flex-column">
+      {% elseif layout_modifier == '70-30' or layout_modifier == '30-70' %}
+      <div class="col-lg-8  d-flex flex-column">
+    {% endif %}
       {% if eyebrow %}
         <div class="eyebrow">{{ eyebrow }}</div>
       {% endif %}
@@ -27,7 +39,7 @@
       {% endif %}
       {% if link.url is not empty and link.text is not empty %}
         <p class="d-flex gap-2">
-          <a href="{{ link.url }}" class="btn rounded-pill btn-outline-primary">{{ link.text }}</a>
+          <a href="{{ link.url }}" class="btn rounded-pill btn-outline-primary mt-4">{{ link.text }}</a>
         </p>
       {% endif %}
     </div>

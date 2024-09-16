@@ -1,0 +1,2 @@
+#!/bin/bash
+cd web/themes/custom/drupalx_theme && npm run storybook

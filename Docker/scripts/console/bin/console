@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../../../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\HttpClient\HttpClient;
+use Console\Command\SecurityReportCommand;
+
+// Create a new Symfony Console Application
+$application = new Application();
+
+// Register commands here
+$application->add(new SecurityReportCommand(HttpClient::create()));
+
+// Run the application
+$application->run();

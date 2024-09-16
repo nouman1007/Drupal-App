@@ -1,0 +1,19 @@
+uuid: 160b2986-ef58-479c-beee-122283d05fa8
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scaler_steps
+    - field.storage.block_content.field_sub_title
+id: block_content.scaler_steps.field_sub_title
+field_name: field_sub_title
+entity_type: block_content
+bundle: scaler_steps
+label: Sub-Title
+description: 'Sub-title for the SCALER Step component'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

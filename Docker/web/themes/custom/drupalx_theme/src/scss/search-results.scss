@@ -28,23 +28,24 @@
           margin-bottom: 1em;
         }
 
-        h3 {
+        legend {
           font-size: 1em;
           font-weight: bold;
         }
 
-        > div {
+        fieldset {
           border-bottom: 1px $border-color solid;
           font-size: 0.8em;
           margin-bottom: 1em;
           padding-bottom: 1em;
         }
 
-        > div:last-child {
+        fieldset:last-of-type {
           border: none;
         }
 
-        .hidden {
+        .hidden,
+        .form-actions {
           display: none;
         }
 
@@ -60,7 +61,7 @@
 
       .view-header {
         font-weight: bold;
-        margin: 1em 0 1em 0;
+        margin: 1em 0;
       }
 
       .views-field-title {

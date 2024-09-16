@@ -1,0 +1,22 @@
+uuid: 3825a555-62af-4f26-be14-d5e0ab15b21f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jumbo_cta
+    - field.storage.block_content.field_summary
+  module:
+    - text
+id: block_content.jumbo_cta.field_summary
+field_name: field_summary
+entity_type: block_content
+bundle: jumbo_cta
+label: Summary
+description: 'Provide a description for the Accordion component.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

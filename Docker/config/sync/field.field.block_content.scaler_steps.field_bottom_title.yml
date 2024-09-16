@@ -1,0 +1,19 @@
+uuid: de5b69cf-af36-4530-b773-d5f49a46a0cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scaler_steps
+    - field.storage.block_content.field_bottom_title
+id: block_content.scaler_steps.field_bottom_title
+field_name: field_bottom_title
+entity_type: block_content
+bundle: scaler_steps
+label: 'Bottom Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

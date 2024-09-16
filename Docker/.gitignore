@@ -10,6 +10,7 @@
 
 # Ignore sensitive information
 /web/sites/*/settings.local.php
+/web/sites/*/settings.ddev.php
 
 # Ignore services configuration
 /web/sites/*/services.yml
@@ -28,6 +29,11 @@
 /.env
 /.editorconfig
 /.gitattributes
+
+# Ignore local tests & test reports.
+tests/**/local
+tests/**/*.local.feature
+tests/*/reports
 
 # Ignore local files.
 /local/

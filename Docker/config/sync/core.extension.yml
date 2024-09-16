@@ -5,8 +5,9 @@ module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
   allowed_formats: 0
-  asset_injector: 0
   americorps_migrate: 0
+  americorps_utils: 0
+  asset_injector: 0
   auto_entitylabel: 0
   autologout: 0
   automated_cron: 0
@@ -45,8 +46,6 @@ module:
   features: 0
   feeds: 0
   feeds_ex: 0
-  feeds_log: 0
-  feeds_tamper: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -109,7 +108,6 @@ module:
   svg_image_responsive: 0
   syslog: 0
   system: 0
-  tamper: 0
   taxonomy: 0
   taxonomy_access_fix: 0
   text: 0
@@ -124,7 +122,6 @@ module:
   viewsreference: 0
   webform: 0
   webform_ui: 0
-  webp: 0
   workflows: 0
   yearonly: 0
   pathauto: 1

@@ -16,7 +16,7 @@ export const FlagCard = CardTemplate.bind({});
 
 FlagCard.args = {
   card: {
-    modifier: 'flag-card col-md-12 col-lg-4',
+    modifier: 'flag-card col-md-12 col-lg-6',
     heading: {
       title: 'Serve',
       heading_level: '2',
@@ -27,7 +27,7 @@ FlagCard.args = {
     summary_text:
       'Do you want to make an impact in your community and your country? AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations to strengthen communities across our nation.',
     link: {
-      url: '/serve',
+      url: '#',
       text: 'Find Out More'
     }
   }
@@ -43,7 +43,7 @@ ImageCard.args = {
     heading: {
       title: 'Phasellus auctor, turpis',
       heading_level: '2',
-      url: '',
+      url: '#',
       modifier: 'card-title mb-3'
     },
     layout: '',
@@ -57,7 +57,7 @@ export const NodeCountCard = CardTemplate.bind({});
 
 NodeCountCard.args = {
   card: {
-    modifier: 'node-count-card col-sm-12 col-md-6 col-lg-3 shadow',
+    modifier: 'node-count-card col-sm-12 col-md-6 col-lg-3',
     media:
       "<img src='./images/evidence-report.webp' class='card-img-top' alt='test image' />",
     heading: {

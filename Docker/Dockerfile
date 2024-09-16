@@ -102,7 +102,7 @@ RUN echo "export NVM_DIR=$NVM_DIR" >> /root/.bashrc \
 RUN bash -c "source $NVM_DIR/nvm.sh && cd web/themes/custom/drupalx_theme && nvm install && nvm use && npm ci"
 # Copy Apache configuration
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY settings.php web/sites/default/settings.php
+# COPY settings.php web/sites/default/settings.php
 
 # Enable Apache modules
 RUN a2enmod rewrite headers
@@ -124,9 +124,12 @@ COPY DigiCertGlobalRootCA.crt.pem /var/www/html/DigiCertGlobalRootCA.crt.pem
 EXPOSE 80 2222 6006
 
 # Set the entrypoint script
-#COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+#COPY entrypoint.sh /usr/local/bin/entrypoint.shtart
 #RUN chmod +x /usr/local/bin/entrypoint.sh
 #ENTRYPOINT ["entrypoint.sh"]
 
 # Optional: If you need to run Drush commands on container start
-CMD ["sh", "-c", "vendor/bin/drush && vendor/bin/drush updb -y && vendor/bin/drush cim -y && vendor/bin/drush cr && apache2ctl -D FOREGROUND"]
+# CMD ["sh", "-c", "apache2ctl -D FOREGROUND"]
+# CMD ["sh", "-c", "vendor/bin/drush && vendor/bin/drush cim -y && vendor/bin/drush cr && apache2ctl -D FOREGROUND"]
+
+CMD ["sh", "-c", "cd /var/www/html/web && ../vendor/bin/drush cim -y && ../vendor/bin/drush updb -y && ../vendor/bin/drush cr && ../vendor/bin/drush cron && apache2ctl -D FOREGROUND"]

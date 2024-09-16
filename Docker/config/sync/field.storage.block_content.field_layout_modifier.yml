@@ -1,0 +1,33 @@
+uuid: 67a65caf-3280-442b-97ad-7b3bde9f07be
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_layout_modifier
+field_name: field_layout_modifier
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 50-50
+      label: 50-50
+    -
+      value: 60-40
+      label: 60-40
+    -
+      value: 70-30
+      label: 70-30
+    -
+      value: jumbo-cta
+      label: 'Jumbo CTA'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

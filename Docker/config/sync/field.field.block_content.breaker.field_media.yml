@@ -1,0 +1,29 @@
+uuid: c8fb4ca1-3e60-435d-b916-0bc9bdc09e9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.breaker
+    - field.storage.block_content.field_media
+    - media.type.image
+id: block_content.breaker.field_media
+field_name: field_media
+entity_type: block_content
+bundle: breaker
+label: Media
+description: 'Featured media item for the hero.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

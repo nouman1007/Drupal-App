@@ -1,9 +1,155 @@
 #!/bin/bash
+# Description: Installs & initializes Drupal.
+# set -x
+set -e
 
-## Description: Installs DrupalX and opens it in a browser.
+echo
+echo "This command can be run following a fresh repo clone, or if the project is already installed."
+echo
 
-ddev start
-ddev composer install
-ddev . drush si -y --verbose drupalx
-ddev . drush webform-libraries-download
-open $DDEV_PRIMARY_URL
+read -n1 -p "Would you like to view relevant documentation as commands execute (recommended)? [y|n] " docs
+echo
+if [[ $docs =~ ^[Yy]$ ]]; then
+  cd doc
+  nohup npm run start &
+  sleep 2
+  echo
+  cd ..
+fi
+
+read -n1 -p "Would you like to checkout develop & pull the latest from that branch? [y|n] " answer
+echo
+if [[ $answer =~ ^[Yy]$ ]]; then
+  git checkout develop
+  git pull origin develop
+fi
+
+ddev_status=$(ddev status 2>&1)
+if ! echo "${ddev_status}" | grep -q "OK"; then
+  echo "Starting DDEV..."
+  if [[ $docs =~ ^[Yy]$ ]]; then
+    sleep 1
+    open "http://localhost:3000/docs/develop/drupal/install"
+  fi
+  ddev start
+else
+  read -n1 -p "Would you like to restart DDEV to confirm it is up to date? [y|n] " answer
+  echo
+  if [[ $answer =~ ^[Yy]$ ]]; then
+    ddev restart
+  fi
+fi
+
+read -n1 -p "Would you like to install Composer dependencies? [y|n] " answer
+echo
+if [[ $answer =~ ^[Yy]$ ]]; then
+  echo "Installing Composer dependencies..."
+  if [[ $docs =~ ^[Yy]$ ]]; then
+    sleep 1
+    open "http://localhost:3000/docs/develop/composer"
+  fi
+  ddev composer install
+fi
+
+read -n1 -p "Would you like to import the latest DB file? THIS WILL OVERWRITE AN EXISTING DB. [y|n] " dbimport
+echo
+if [[ $dbimport =~ ^[Yy]$ ]]; then
+  echo "Importing latest DB from \`local/downloads/databases\` in 5s..."
+  sleep 5
+  ddev import-db --file=$(ls local/downloads/databases -t *.sql.gz | head -n 1)
+fi
+
+if [ -f ".ddev/config.local.yaml" ]; then
+  read -n1 -p "Would you like to recreate your Sandbox DDEV config file? [y|n] " answer
+  echo
+  if [[ $answer =~ ^[Yy]$ ]]; then
+    rm .ddev/config.local.yaml
+  fi
+fi
+
+reindex=false
+if [ ! -f ".ddev/config.local.yaml" ]; then
+  reindex=true
+
+  # Prompt user to enter their preferred username prefix for cloud resources.
+  read -n1 -p "What username would you prefer to use as a cloud Sandbox resource prefix (e.g. loremi, bazq, etc)? " username
+  echo
+
+  echo "Thanks ${username}!"
+  echo "Please confirm your \`${username}-container\` exists in \`sandboxstoragelmc\` at https://portal.azure.com"
+  open "http://localhost:3000/docs/develop/drupal/integrations/azure/blob-storage/#azure-sandbox-resource-configuration"
+  echo
+  echo "The distributed Sandbox configuration file needs to be decrypted."
+  echo "Please ask your supervisor for the Sandbox vault password:"
+  ddev decrypt .ddev/dist.config.local.yaml --output=.ddev/config.local.yaml
+  echo "Waiting for file system refresh..."
+  sleep 10
+
+  # Replace the user name tag with the username provided.
+  sed -i "s/{{ preferred-user-name }}/${username}/g" .ddev/config.local.yaml
+
+  # Restart DDEV so the local config can take effect.
+  ddev restart
+fi
+
+# Import config & update if DB import requested.
+if [[ $dbimport =~ ^[Yy]$ ]]; then
+  ddev drush cim -y
+  ddev drush updb -y
+else
+  # Prompt if an import & update should occur, just in case.
+  read -n1 -p "Would you like to import config? [y|n] " answer
+  echo
+  if [[ $answer =~ ^[Yy]$ ]]; then
+    ddev drush cim -y
+    ddev drush updb -y
+  fi
+fi
+
+if [ reindex ]; then
+  echo "Rebuilding the search index(es)..."
+  if [[ $docs =~ ^[Yy]$ ]]; then
+    sleep 1
+    open "http://localhost:3000/docs/develop/drupal/integrations/azure/ai-search"
+  fi
+
+  # Reinit the Evidence Report server & index.
+  ddev drush search-api-server-disable evidence_report
+  ddev drush search-api-server-enable evidence_report
+  ddev drush search-api-enable evidence_report
+  ddev drush search-api:reset-tracker
+  ddev drush search-api:rebuild-tracker
+
+  # Reindex the Evidence Report index.
+  ddev drush search-api-index evidence_report
+
+  # Show status.
+  ddev drush search-api-status
+fi
+
+# Install the correct NodeJS version & NodeJS dependencies.
+# Compile the CSS and JavaScript files with Gulp.
+echo "Preparing theme..."
+if [[ $docs =~ ^[Yy]$ ]]; then
+  sleep 1
+  open "http://localhost:3000/docs/develop/drupal/themes/drupal_x"
+fi
+ddev exec "cd web/themes/custom/drupalx_theme && nvm install && nvm use && npm ci && npm run build" 2 > /dev/null
+
+# Run basic tests to confirm things are in order.
+if [[ $docs =~ ^[Yy]$ ]]; then
+  open "http://localhost:3000/docs/test"
+fi
+ddev test
+
+echo "Preparing Drupal..."
+if [[ $docs =~ ^[Yy]$ ]]; then
+  sleep 1
+  open "http://localhost:3000/docs/develop/drupal"
+fi
+ddev drush cr
+ddev drush cron
+uli=$(ddev drush uli)
+open "${uli}"
+
+echo "Install complete!"

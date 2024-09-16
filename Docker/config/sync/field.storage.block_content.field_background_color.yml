@@ -13,13 +13,16 @@ settings:
   allowed_values:
     -
       value: white
-      label: White
+      label: white
     -
       value: grey
-      label: Grey
+      label: grey
     -
       value: blue
-      label: 'Light Blue'
+      label: blue
+    -
+      value: purple
+      label: purple
   allowed_values_function: ''
 module: options
 locked: false

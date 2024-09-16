@@ -1,0 +1,8 @@
+uuid: d21cc3ed-5d78-4398-a911-3c8c1cc4cf61
+langcode: en
+status: true
+dependencies: {  }
+id: breaker
+label: Breaker
+revision: false
+description: null

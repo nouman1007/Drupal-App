@@ -6,6 +6,7 @@
  */
 
 use Drupal\Component\Utility\Html;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Implements hook_preprocess_page_title().
@@ -26,7 +27,7 @@ function drupalx_theme_preprocess_page_title(&$variables) {
     }
   }
   // Hide page title on article and page node pages.
-  elseif ($node && is_object($node) && in_array($node->bundle(), ['article', 'page', 'homepage', 'evidence_report'])) {
+  elseif ($node && is_object($node) && in_array($node->bundle(), ['article', 'page', 'homepage', 'evidence_report', 'webinar'])) {
     $variables['title'] = '';
   }
 }
@@ -142,9 +143,12 @@ function drupalx_theme_preprocess_page(array &$variables) {
 
   foreach ($content_types as $content_type) {
     $query = \Drupal::entityQuery('node')
-      ->condition('type', $content_type->id())
-      ->accessCheck(FALSE);
+    ->condition('type', $content_type->id())
+    ->condition('status', 1) // Include published nodes
+    ->condition('status', 0, '<>') // Exclude unpublished nodes
+    ->accessCheck(FALSE);
     $count = $query->count()->execute();
+
     $content_type_data[] = [
       'name' => $content_type->label(),
       'count' => $count,
@@ -168,6 +172,14 @@ function drupalx_theme_preprocess_page(array &$variables) {
  */
 function drupalx_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
 
+  // Add a template suggestion for the page title for the layout content type.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $content_type = $node->bundle();
+    $suggestions[] = 'page__' . $content_type;
+    $title = $node ? strtolower(str_replace(' ', '_', $node->getTitle())) : '';
+    $suggestions[] = 'page__' . $content_type . '__' . $title;
+
+  }
 }
 
 /**
@@ -195,6 +207,14 @@ function drupalx_theme_preprocess_block(array &$variables) {
 function drupalx_theme_preprocess_block_content(array &$variables) {
   $block_content = $variables['elements']['#block_content'];
 
+  // Add link field from the paragraph to variables.
+  // if (isset($block_content->field_link)) {
+  //   $variables['field_link'] = [
+  //     'url' => $block_content->field_link->uri,
+  //     'title' => $block_content->field_link->title,
+  //   ];
+  // }
+
   if ($block_content->bundle() === 'views') {
     // Add wrapper to the paragraph views.
     $views_ref = $block_content->field_views_ref->getValue();
@@ -214,7 +234,7 @@ function drupalx_theme_preprocess_image(&$variables) {
   if (!empty($variables['attributes']['class']) && is_string($variables['attributes']['class'])) {
     $variables['attributes']['class'] = [$variables['attributes']['class']];
   }
-  $variables['attributes']['class'][] = 'img-fluid rounded';
+  $variables['attributes']['class'][] = 'img-fluid';
 }
 
 /**

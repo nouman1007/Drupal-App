@@ -31,7 +31,7 @@ FlagCardGroup.args = {
   card_items: [
     {
       card: {
-        modifier: 'flag-card col-md-12 col-lg-4',
+        modifier: 'flag-card col-md-12 col-lg-6 mb-4 mb-lg-0',
         heading: {
           title: 'Scaler',
           heading_level: '2',
@@ -48,7 +48,7 @@ FlagCardGroup.args = {
     },
     {
       card: {
-        modifier: 'flag-card col-md-12 col-lg-4',
+        modifier: 'flag-card col-md-12 col-lg-6 mb-4 mb-lg-0',
         heading: {
           title: 'Partner',
           heading_level: '2',
@@ -75,7 +75,7 @@ ImageCardGroup.args = {
   card_items: [
     {
       card: {
-        modifier: 'image-card col-md-12 col-lg-4',
+        modifier: 'image-card col-12 mb-4 col-lg-4 mb-lg-0',
         media:
           "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
         heading: {
@@ -91,7 +91,7 @@ ImageCardGroup.args = {
     },
     {
       card: {
-        modifier: 'image-card col-md-12 col-lg-4',
+        modifier: 'image-card col-12 mb-4 col-lg-4 mb-lg-0',
         media:
           "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
         heading: {
@@ -107,7 +107,7 @@ ImageCardGroup.args = {
     },
     {
       card: {
-        modifier: 'image-card col-md-12 col-lg-4',
+        modifier: 'image-card col-12 mb-4 col-lg-4 mb-lg-0',
         media:
           "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
         heading: {
@@ -133,13 +133,13 @@ NodeCountCardGroup.args = {
   card_items: [
     {
       card: {
-        modifier: 'node-count-card col-sm-12 col-md-6 col-lg-3 shadow',
+        modifier: 'node-count-card col-sm-8 col-md-6 col-lg-3 mb-4 mx-sm-auto mb-lg-0',
         media:
-          "<img src='./images/evidence-report.webp' class='card-img-top' alt='test image' />",
+          "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
         heading: {
           title: 'Evidence Report',
           heading_level: '2',
-          url: '/evidence-report',
+          url: '#',
           modifier: 'card-title'
         },
         node_count: 310
@@ -147,16 +147,72 @@ NodeCountCardGroup.args = {
     },
     {
       card: {
-        modifier: 'node-count-card col-sm-12 col-md-6 col-lg-3 shadow',
+        modifier: 'node-count-card col-sm-8 col-md-6 col-lg-3 mb-4 mx-sm-auto mb-lg-0',
         media:
-          "<img src='./images/webinar.png' class='card-img-top' alt='test image' />",
+          "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
         heading: {
           title: 'Webinars',
           heading_level: '2',
-          url: '/webinars',
+          url: '#',
           modifier: 'card-title'
         },
         node_count: 38
+      }
+    },
+    {
+      card: {
+        modifier: 'node-count-card col-sm-8 col-md-6 col-lg-3 mb-4 mx-sm-auto mb-lg-0',
+        media:
+          "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
+        heading: {
+          title: 'Coaching',
+          heading_level: '2',
+          url: '#',
+          modifier: 'card-title'
+        },
+        node_count: 70
+      }
+    },
+    {
+      card: {
+        modifier: 'node-count-card col-sm-8 col-md-6 col-lg-3 mb-4 mx-sm-auto mb-lg-0',
+        media:
+          "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
+        heading: {
+          title: 'Leadership',
+          heading_level: '2',
+          url: '#',
+          modifier: 'card-title'
+        },
+        node_count: 39
+      }
+    },
+    {
+      card: {
+        modifier: 'node-count-card col-sm-8 col-md-6 col-lg-3 mb-4 mx-sm-auto mb-lg-0',
+        media:
+          "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
+        heading: {
+          title: 'Diversity',
+          heading_level: '2',
+          url: '#',
+          modifier: 'card-title'
+        },
+        node_count: 26
+      }
+    },
+    {
+      card: {
+        modifier: 'node-count-card col-sm-8 col-md-6 col-lg-3 mb-4 mx-sm-auto mb-lg-0',
+        media:
+          "<img src='./images/card.webp' class='card-img-top' alt='test image' />",
+        heading: {
+          title: 'Safety',
+          heading_level: '2',
+          url: '#',
+          modifier: 'card-title'
+        },
+        node_count: 17
       }
     }
   ]

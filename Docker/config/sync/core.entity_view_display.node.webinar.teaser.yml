@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.webinar.body
-    - field.field.node.webinar.feeds_item
     - field.field.node.webinar.field_audio
     - field.field.node.webinar.field_files
     - field.field.node.webinar.field_program_department
@@ -40,7 +39,6 @@ content:
     weight: 100
     region: content
 hidden:
-  feeds_item: true
   field_audio: true
   field_files: true
   field_program_department: true

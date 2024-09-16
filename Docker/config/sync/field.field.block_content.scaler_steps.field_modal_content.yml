@@ -1,0 +1,46 @@
+uuid: 3305a67e-2e0f-459a-9384-1e64099bb172
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scaler_steps
+    - field.storage.block_content.field_modal_content
+    - paragraphs.paragraphs_type.scaler_steps_modal_content
+  module:
+    - entity_reference_revisions
+id: block_content.scaler_steps.field_modal_content
+field_name: field_modal_content
+entity_type: block_content
+bundle: scaler_steps
+label: 'Modal Target and Content'
+description: 'Add a Target ID and paste in the HTML markup into the modal field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      scaler_steps_modal_content: scaler_steps_modal_content
+    negate: 0
+    target_bundles_drag_drop:
+      accordion_item:
+        weight: 7
+        enabled: false
+      card:
+        weight: 8
+        enabled: false
+      carousel_item:
+        weight: 9
+        enabled: false
+      scaler_step_item:
+        weight: 11
+        enabled: false
+      scaler_steps_modal_content:
+        weight: 10
+        enabled: true
+      stats_item:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

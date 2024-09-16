@@ -1,0 +1,11 @@
+# temporary redirect to files stored in Azure Blob File Storage container
+# todo migrate these files into the Drupal Media Library & create references to them within appropriate fields
+americorps_migrate.document_redirect:
+  path: '/sites/default/files/document/{file}'
+  defaults:
+    _controller: '\Drupal\americorps_migrate\Controller\DocumentRedirectController::redirectFile'
+    _title: 'Document Redirect'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'

@@ -11,6 +11,8 @@ Heading.args = {
     title: 'Title Lorem Ipsum Dolor',
     subtitle: 'Subtitle Lorem Ipsum Dolor',
     level: '2',
-    modifier: 'display-3'
+    html_id: 'heading-id',
+    modifier: 'display-3',
+    url: ''
   }
 };

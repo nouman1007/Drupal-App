@@ -1,0 +1,44 @@
+// Import site utilities.
+@import './src/scss/bootstrap-init';
+
+// Include variables.
+@import './src/scss/_variables.scss';
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.btn {
+
+  &.btn-solid-blue {
+    background-color: $blue-secondary;
+    border: solid 2px $blue-secondary;
+    border-radius: var(--bs-border-radius-pill) !important;
+    color: $white;
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: 13px 29px;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+      border-color: transparent;
+      color: $white;
+      background-color: rgba(21, 80, 237, 0.8);
+    }
+
+    &:active {
+      background-color: rgba(21, 80, 237, 0.6);
+    }
+  }
+}

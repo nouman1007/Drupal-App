@@ -1,0 +1,10 @@
+uuid: 364a32ed-a74a-4cfa-851f-9f7a6781cd33
+langcode: en
+status: true
+dependencies: {  }
+id: scaler_step_item
+label: 'SCALER Step Item'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

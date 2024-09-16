@@ -19,20 +19,21 @@
   font-weight: bold;
   margin-bottom: 1em;
 }
-.path-search main aside form h3 {
+.path-search main aside form legend {
   font-size: 1em;
   font-weight: bold;
 }
-.path-search main aside form > div {
+.path-search main aside form fieldset {
   border-bottom: 1px #ddd solid;
   font-size: 0.8em;
   margin-bottom: 1em;
   padding-bottom: 1em;
 }
-.path-search main aside form > div:last-child {
+.path-search main aside form fieldset:last-of-type {
   border: none;
 }
-.path-search main aside form .hidden {
+.path-search main aside form .hidden,
+.path-search main aside form .form-actions {
   display: none;
 }
 .path-search main aside form a {
@@ -42,7 +43,7 @@
 }
 .path-search main .view-id-search .view-header {
   font-weight: bold;
-  margin: 1em 0 1em 0;
+  margin: 1em 0;
 }
 .path-search main .view-id-search .views-field-title {
   font-weight: bold;

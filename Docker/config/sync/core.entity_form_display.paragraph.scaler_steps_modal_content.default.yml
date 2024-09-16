@@ -1,0 +1,25 @@
+uuid: 384c59c0-a15e-47af-803a-b438acb36eb2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.scaler_steps_modal_content.field_modal_content
+    - paragraphs.paragraphs_type.scaler_steps_modal_content
+  module:
+    - text
+id: paragraph.scaler_steps_modal_content.default
+targetEntityType: paragraph
+bundle: scaler_steps_modal_content
+mode: default
+content:
+  field_modal_content:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

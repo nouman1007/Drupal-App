@@ -1,0 +1,188 @@
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+body .btn {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1;
+  width: fit-content;
+}
+
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+.heading strong {
+  color: var(--bs-primary);
+  font-weight: inherit;
+}
+
+.scaler-steps .title,
+.scaler-steps .subtitle {
+  text-align: center;
+}
+.scaler-steps .step {
+  background-color: #1550ed;
+  color: #fff;
+  position: relative;
+}
+.scaler-steps .step:not(:last-child) {
+  border-right: 1px solid #fff;
+}
+.scaler-steps .step .step-number {
+  font-size: 2rem;
+  line-height: 1rem;
+  margin-bottom: 0;
+  position: absolute;
+  top: 25px;
+  left: 30px;
+}
+.scaler-steps .step .step-body {
+  text-align: center;
+}
+.scaler-steps .step .step-body .step-title {
+  font-size: 1.75rem;
+  margin-bottom: 2rem !important;
+}
+.scaler-steps .step .step-body .step-text {
+  margin-bottom: 4rem;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.scaler-steps .step .step-body .btn {
+  display: inline-block;
+  font-weight: 700;
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+}
+.scaler-steps .step .step-body .btn:hover, .scaler-steps .step .step-body .btn:focus {
+  background-color: #1550ed !important;
+  border: 1px solid #fff;
+  color: #fff;
+}
+.scaler-steps .bottom {
+  background-color: #112542;
+  border-top: 1px solid #fff;
+  border-radius: 0 0 0 100px;
+  color: #fff;
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+  min-height: 250px;
+  padding: 80px;
+  position: relative;
+}
+.scaler-steps .bottom::before {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4) 40%, transparent 80%);
+  border-radius: 0 0 0 100px;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 0.8s cubic-bezier(0.61, 0.21, 0.49, 0.99);
+  width: 100%;
+  z-index: 0;
+}
+.scaler-steps .bottom .inner {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+.scaler-steps .bottom .inner .title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+.scaler-steps .bottom .inner .description {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin-bottom: 1.75rem;
+}
+.scaler-steps .bottom .inner .link {
+  color: #fff;
+  display: inline-block;
+  text-underline-offset: 0.35rem;
+}
+.scaler-steps .bottom .inner .link:hover, .scaler-steps .bottom .inner .link:focus {
+  text-decoration: none;
+}
+
+.modal-title {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.modal-header button {
+  background-color: unset;
+  border: none;
+  font-weight: 700;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.modal-body {
+  padding: 1rem 2rem 3rem;
+}
+.modal-body .modal-step-begin {
+  border-bottom: 1px solid #ddd;
+  padding: 0 10px 20px 0;
+}
+.modal-body p,
+.modal-body label {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.modal-body .button {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 1rem 2rem;
+}
+.modal-body input {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+  width: 100%;
+}
+.modal-body button.continue-1,
+.modal-body button.continue-2,
+.modal-body button.continue-3 {
+  margin: 0.5rem 0 0;
+}
+.modal-body button.continue-1.btn,
+.modal-body button.continue-2.btn,
+.modal-body button.continue-3.btn {
+  color: #343a40;
+  background-color: #fff;
+  border-color: #343a40;
+}
+.modal-body button.continue-1.btn:hover,
+.modal-body button.continue-2.btn:hover,
+.modal-body button.continue-3.btn:hover {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+.modal-body .link-input-error,
+.modal-body .link-input-error-2,
+.modal-body .link-input-error-3 {
+  margin-bottom: 20px;
+  color: #6d0000;
+  font-size: 1rem;
+  font-weight: bold;
+}

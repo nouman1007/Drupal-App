@@ -15,6 +15,11 @@ props:
       type: object
       title: Heading
       properties:
+        background_color:
+          type: boolean
+          title: Background Color On/Off
+          description: Define the Text Block heading background color status.
+          default: 'Off'
         title:
           type: string
           title: Title

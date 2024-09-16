@@ -17,6 +17,7 @@ use Drupal\search_api_aais\Azure\Query\QuerySortBuilder;
 use Drupal\search_api\Utility\FieldsHelperInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\field\Entity\FieldConfig;
 
 class QueryParamBuilderDecorator extends QueryParamBuilder {
 
@@ -77,6 +78,17 @@ class QueryParamBuilderDecorator extends QueryParamBuilder {
         }
       }
     }
+
+    switch ($this->get('sort_by')) {
+      case 'added':
+        $params['orderby'] = 'created desc';
+        break;
+
+      case 'updated':
+        $params['orderby'] = 'changed desc';
+        break;
+    }
+
     return $params;
   }
 

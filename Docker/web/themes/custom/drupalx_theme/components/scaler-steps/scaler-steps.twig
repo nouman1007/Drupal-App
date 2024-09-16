@@ -1,0 +1,24 @@
+{{ attach_library('drupalx_theme/scaler-steps') }}
+
+<div class="scaler-steps container-fluid">
+  {% if section_title %}
+    <h2 class="title">{{ section_title }}</h2>
+  {% endif %}
+
+  {% if section_subtitle %}
+    <p class="subtitle">{{ section_subtitle }}</p>
+  {% endif %}
+
+  {% if not attributes %}
+    <div class="row"> {# Only display this in Storybokk #}
+  {% endif %}
+
+    {% block step_items %}
+      {% for step in step_items %}
+        {% include '@drupalx_theme/scaler-steps/scaler-step-item.twig' with { step: step } only %}
+      {% endfor %}
+    {% endblock %}
+
+  {% if not attributes %}
+    </div> {# Only display this in Storybokk #}
+  {% endif %}

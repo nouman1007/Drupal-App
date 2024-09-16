@@ -1,0 +1,11 @@
+uuid: 956e8598-9ddb-475b-b06d-f44da6884909
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jump_links
+id: block_content.jump_links
+target_entity_type_id: block_content
+target_bundle: jump_links
+default_langcode: site_default
+language_alterable: false

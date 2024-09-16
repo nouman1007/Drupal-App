@@ -1,0 +1,11 @@
+uuid: 386348af-02e1-43a9-bfdb-ded09cb40184
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scaler_steps
+id: block_content.scaler_steps
+target_entity_type_id: block_content
+target_bundle: scaler_steps
+default_langcode: site_default
+language_alterable: false

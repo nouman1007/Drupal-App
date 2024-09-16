@@ -1,9 +1,18 @@
 import './accordion.scss';
+import './js/accordion.js';
 import AccordionTemplate from './accordion.twig';
 
 export default {
   title: 'Editorial/Accordion Group',
   argTypes: {
+    heading: {
+      control: 'text',
+      description: 'Heading for the accordion group'
+    },
+    summary: {
+      control: 'text',
+      description: 'Summary for the accordion group'
+    },
     modifier: {
       control: 'text',
       description: 'Modifier class for the accordion group'
@@ -22,6 +31,8 @@ export default {
 export const AccordionGroup = AccordionTemplate.bind({});
 
 AccordionGroup.args = {
+  heading: 'Accordion Group Heading',
+  summary: 'Accordion Group Summary Text',
   modifier: '',
   accordion_items: [
     {

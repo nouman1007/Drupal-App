@@ -1,0 +1,29 @@
+uuid: 7a4596b4-e87d-4d91-85d9-01ac84e3f3dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.jump_links
+    - field.field.block_content.jump_links.field_jump_link
+  module:
+    - link
+id: block_content.jump_links.default
+targetEntityType: block_content
+bundle: jump_links
+mode: default
+content:
+  field_jump_link:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: nofollow
+      target: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,5 @@
+#!/bin/bash
+# This script runs ansible-vault encrypt with the same arguments passed to ddev encrypt.
+
+# Forward all arguments to ansible-vault encrypt
+ansible-vault encrypt "$@"

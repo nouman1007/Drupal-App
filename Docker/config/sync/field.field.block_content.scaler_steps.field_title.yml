@@ -1,0 +1,19 @@
+uuid: 4aafb0ba-bd7d-463a-9556-e73655aa4ffd
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scaler_steps
+    - field.storage.block_content.field_title
+id: block_content.scaler_steps.field_title
+field_name: field_title
+entity_type: block_content
+bundle: scaler_steps
+label: Title
+description: 'Provide the primary heading for the SCALER Step component.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

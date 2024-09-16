@@ -1,0 +1,23 @@
+uuid: 4bb67f64-2977-4e30-a2b3-8cc5c81f6a29
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.text
+    - field.storage.block_content.field_add_grey
+id: block_content.text.field_add_grey
+field_name: field_add_grey
+entity_type: block_content
+bundle: text
+label: 'Add Grey Background'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

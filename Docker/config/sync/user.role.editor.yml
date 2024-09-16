@@ -267,6 +267,7 @@ permissions:
   - 'update any media'
   - 'update any term'
   - 'update media'
+  - 'use moderation_states transition archived'
   - 'use moderation_states transition create_new_draft'
   - 'use moderation_states transition publish'
   - 'use text format basic_html'

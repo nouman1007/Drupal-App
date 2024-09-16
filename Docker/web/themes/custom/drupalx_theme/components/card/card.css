@@ -22,7 +22,7 @@ body .btn {
   position: relative;
 }
 .card .card-body {
-  color: #ffffff;
+  color: #fff;
 }
 .card.flag-card {
   border-radius: 16px;
@@ -82,11 +82,11 @@ body .btn {
   font-size: 1.75rem;
 }
 .card.image-card .card-title a {
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
 }
 .card.image-card .card-title a:hover, .card.image-card .card-title a:focus {
-  color: #ffffff;
+  color: #fff;
   text-decoration: underline;
 }
 .card.image-card .card-text {
@@ -100,7 +100,7 @@ body .btn {
   bottom: 15px;
 }
 .card.node-count-card {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #212529;
   border-radius: 16px;
 }

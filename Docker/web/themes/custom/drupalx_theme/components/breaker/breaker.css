@@ -1,0 +1,74 @@
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+body .btn {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1;
+  width: fit-content;
+}
+
+/*!
+ * Bootstrap Utilities v5.3.3 (https://getbootstrap.com/)
+ * Copyright 2011-2024 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+.heading strong {
+  color: var(--bs-primary);
+  font-weight: inherit;
+}
+
+/* Make the image fill the entire teaser. */
+.breaker .white {
+  background-color: #fff;
+  border-top: 1px solid #f2f2f3;
+  border-bottom: 1px solid #f2f2f3;
+}
+.breaker .grey {
+  background-color: #f2f2f3;
+}
+.breaker .blue {
+  background-color: #1550ed;
+  color: #fff;
+}
+.breaker .purple {
+  background-color: #392e8e;
+  color: #fff;
+}
+.breaker picture {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.breaker picture img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* Classes added to all images by .theme function */
+}
+.breaker picture img.rounded {
+  border-radius: 0 !important;
+}
+.breaker picture img.w-auto {
+  width: 100% !important;
+}
+.breaker img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* Classes added to all images by .theme function */
+}
+.breaker img.rounded {
+  border-radius: 0 !important;
+}
+.breaker img.w-auto {
+  width: 100% !important;
+}
