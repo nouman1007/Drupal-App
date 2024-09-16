@@ -3,7 +3,7 @@ name: Build, Push, and Deploy Drupal
 on:
   push:
     branches:
-      - ssh-coonection-issue  # Trigger the workflow on push to the main branch
+      - main  # Trigger the workflow on push to the main branch
 
 env:
   IMAGE_NAME: uat1-tag-1.4.0  # Name for the Docker image
