@@ -58,13 +58,13 @@ jobs:
     #       --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
     #       --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest
 
-    - name: Deploy to Azure App Service
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name: ${{ env.APP_NAME }}
-        # slot-name: production
-        images: |
-          ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    # - name: Deploy to Azure App Service
+    #   uses: azure/webapps-deploy@v3
+    #   with:
+    #     app-name: ${{ env.APP_NAME }}
+    #     # slot-name: production
+    #     images: |
+    #       ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
     # - name: Fetch App Service logs
     #   run: |
