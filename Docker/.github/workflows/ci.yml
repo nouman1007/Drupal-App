@@ -1,0 +1,107 @@
+name: Build and Deploy Drupal Site
+# on:
+  # workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
+on:
+  push:
+    branches:
+      - develop  # Adjust if you want to trigger on a different branch
+
+env:
+  APP_SERVICE_NAME: devdrupal10-3-1
+  RESOURCE_GROUP_NAME: rg-pt-drupal-webapp-us-east-1-001
+  # DB_HOST: your-database-host
+  # DB_NAME: your-database-name
+  # DB_USER: your-database-username
+  # DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Login to Azure Container Registry
+      run: az acr login --name ${{ secrets.ACR_NAME }}
+
+    # - name: Extract and Import Database
+    #   run: |
+    #     gzip -d < learning-campus-lms-db-08142024.sql.gz | mysql -h ${{ secrets.AZURE_MYSQL_HOST }} -u ${{ secrets.AZURE_MYSQL_USER }} -p${{ secrets.AZURE_MYSQL_PASSWORD }} ${{ secrets.AZURE_MYSQL_DB }}
+
+    # - name: Build and Tag Docker image
+    #   run: |
+    #     docker build --progress=plain --no-cache -t ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest .
+    #    # Run the container in detached mode
+    #     CONTAINER_ID=$(docker run -d ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest)
+    #     # Execute the Drush commands inside the running container
+    #     docker exec -it $CONTAINER_ID vendor/bin/drush updb -y
+    #     docker exec -it $CONTAINER_ID vendor/bin/drush cim -y
+    #     docker exec -it $CONTAINER_ID vendor/bin/drush cr
+
+    #     # docker exec -it "vendor/bin/drush && vendor/bin/drush updb -y && vendor/bin/drush cim -y && vendor/bin/drush cr"
+    #     docker tag ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:${{ github.sha }}
+
+    - name: Build and Tag Docker image
+      run: |
+        # Build the Docker image
+        docker build --progress=plain --no-cache -t ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest .
+        
+        # docker tag ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:${{ github.sha }}
+        
+        # Run the container in detached mode and capture the container ID
+        # CONTAINER_ID=$(docker run -d ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest)
+
+        # docker exec $CONTAINER_ID ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest "cd /var/www/html/web && ../vendor/bin/drush && vendor/bin/drush cim -y"
+        # docker exec $CONTAINER_ID ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest "cd /var/www/html/web && ../vendor/bin/drush && vendor/bin/drush updb -y"
+        # docker exec $CONTAINER_ID ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest "cd /var/www/html/web && ../vendor/bin/drush && vendor/bin/drush cr"
+        # docker exec $CONTAINER_ID ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest "cd /var/www/html/web && ../vendor/bin/drush && vendor/bin/drush cron"
+
+        # docker exec $CONTAINER_ID bash -c "cd /var/www/html/web && ../vendor/bin/drush cim -y --debug"
+        # docker exec $CONTAINER_ID bash -c "cd /var/www/html/web && ../vendor/bin/drush updb -y --debug"
+        # docker exec $CONTAINER_ID bash -c "cd /var/www/html/web && ../vendor/bin/drush cr --debug"
+        # docker exec $CONTAINER_ID bash -c "cd /var/www/html/web && ../vendor/bin/drush cron --debug"
+        
+        docker tag ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:${{ github.sha }}
+
+        # # Run the container in detached mode and capture the container ID
+        # CONTAINER_ID=$(docker run -d ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest)
+
+        # # Execute the Drush commands inside the running container
+        # docker exec $CONTAINER_ID vendor/bin/drush updb -y -vvv
+        # docker exec $CONTAINER_ID vendor/bin/drush cim -y -vvv
+        # docker exec $CONTAINER_ID vendor/bin/drush cr -vvv
+
+    - name: Push Docker image to ACR
+      run: |
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:${{ github.sha }}
+
+    - name: Deploy to Azure App Service
+      run: |
+        az webapp config container set \
+          --name ${{ env.APP_SERVICE_NAME }} \
+          --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
+          --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/drupal-10-11-${{ github.run_id }}:latest
+
+    # - name: Enable SSH in Azure App Service
+    #   run: |
+    #     az webapp config appsettings set --resource-group ${{ env.RESOURCE_GROUP_NAME }} --name ${{ env.APP_SERVICE_NAME }} --settings WEBSITES_PORT=80
+    #     az webapp config appsettings set --resource-group ${{ env.RESOURCE_GROUP_NAME }} --name ${{ env.APP_SERVICE_NAME }} --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=true
+
+    # - name: SSH into Azure App Service and run Drush commands
+    #   run: |
+    #     az webapp create-remote-connection --resource-group ${{ env.RESOURCE_GROUP_NAME }} --name ${{ env.APP_SERVICE_NAME }} --port 2222 &
+    #     sleep 15
+    #     ssh -o StrictHostKeyChecking=no root@127.0.0.1 -p 2222 << 'EOF'
+    #       vendor/bin/drush cim -y
+    #       vendor/bin/drush cr
+    #     EOF

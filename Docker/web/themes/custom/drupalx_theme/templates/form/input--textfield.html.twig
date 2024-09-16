@@ -20,4 +20,4 @@
   {% do attributes.setAttribute("placeholder", "What topic would you like to learn?") %}
 {% endif %}
 
-<input{{ attributes.addClass("form-control") }} />{{ children }}
+<input{{ attributes.addClass("form-control")|without('value') }} data-raw-value="{{ attributes.value|e }}" />{{ children }}

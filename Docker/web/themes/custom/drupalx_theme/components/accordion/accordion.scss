@@ -85,3 +85,21 @@
   }
 }
 
+// Styles for the accordion on the Scaler Resources page only
+.scaler-resources {
+
+  .accordion-body li {
+    line-height: 1.5;
+    margin-bottom: 25px;
+  }
+  .accordion-body li > a {
+    display: block;
+    margin-bottom: 2px;
+    text-underline-offset: 3px;
+
+    &:hover,
+    &:focus {
+      text-decoration: none !important;
+    }
+  }
+}

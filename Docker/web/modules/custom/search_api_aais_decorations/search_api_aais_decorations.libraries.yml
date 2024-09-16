@@ -1,5 +1,6 @@
 facets_block:
   js:
+    js/search_keywords_block.js: {}
     js/facets_block.js: {}
   dependencies:
     - core/drupal

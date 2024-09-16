@@ -1,0 +1,7 @@
+americorps_utils.environment_report_link:
+  route_name: americorps_utils.environment
+  title: 'Environment Report'
+  description: 'View the current environment details.'
+  parent: system.admin_reports
+  weight: 10
+  menu_name: admin

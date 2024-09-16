@@ -219,7 +219,7 @@ class FacetsForm extends FormBase {
     if (empty($raw)) {
       return '';
     }
-    return Html::escape(Xss::filter(trim($raw)));
+    return trim($raw);
   }
 
 }

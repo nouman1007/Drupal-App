@@ -1,0 +1,7 @@
+americorps_utils.environment:
+  path: '/admin/reports/environment'
+  defaults:
+    _controller: '\Drupal\americorps_utils\Controller\EnvironmentController::page'
+    _title: 'Environment'
+  requirements:
+    _permission: 'administer site configuration'

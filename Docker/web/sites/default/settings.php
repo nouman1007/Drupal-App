@@ -898,15 +898,17 @@ $config['key.key.azure_blob_storage']['key_provider_settings']['key_value'] = ge
 // Azure AI Search configuration.
 $config['search_api.server.evidence_report']['backend_config']['connector_config']['url'] = getenv('KEYSTORE_URL');
 $config['search_api.server.evidence_report']['backend_config']['connector_config']['api_key'] = getenv('KEYSTORE_API_KEY');
-if (isset($_ENV['AZURE_AI_SEARCH_INDEX'])) {
-  $config['search_api.server.evidence_report']['third_party_settings']['search_api_aais']['index_name'] = getenv('AZURE_AI_SEARCH_INDEX');
+$index_name = getenv('AZURE_AI_SEARCH_INDEX');
+if (!empty($index_name)) {
+  $config['search_api.server.evidence_report']['third_party_settings']['search_api_aais']['index_name'] = $index_name;
 }
 
 // Override drupal/symfony_mailer default config to use Mailpit.
-if (isset($_ENV['MAILER_USER'])) {
+$mailer_user = getenv('MAILER_USER');
+if (!empty($mailer_user)) {
   $config['symfony_mailer.settings']['default_transport'] = 'sendmail';
   $config['symfony_mailer.mailer_transport.sendmail']['plugin'] = 'smtp';
-  $config['symfony_mailer.mailer_transport.sendmail']['configuration']['user'] = getenv('MAILER_USER');
+  $config['symfony_mailer.mailer_transport.sendmail']['configuration']['user'] = $mailer_user;
   $config['symfony_mailer.mailer_transport.sendmail']['configuration']['pass'] = getenv('MAILER_PASS');
   $config['symfony_mailer.mailer_transport.sendmail']['configuration']['host'] = 'localhost';
   $config['symfony_mailer.mailer_transport.sendmail']['configuration']['port'] = '1025';
@@ -924,7 +926,13 @@ if (is_readable($app_root . '/' . $site_path . '/settings.local.php')) {
 }
 
 // Allow environment-based overrides of settings defined above.
-$environment_name = isset($_ENV['ENV_NAME']) ? rtrim($_ENV['ENV_NAME'], '0123456789') : 'sandbox';
-if (is_readable($app_root . '/' . $site_path . '/settings.' . $environment_name . '.php')) {
-  include $app_root . '/' . $site_path . '/settings.' . $environment_name . '.php';
+$environment_name = getenv('ENV_NAME');
+if (!empty($environment_name)) {
+  if (is_readable($app_root . '/' . $site_path . '/settings.' . $environment_name . '.php')) {
+    include $app_root . '/' . $site_path . '/settings.' . $environment_name . '.php';
+  }
+  $environment_name = rtrim($environment_name, '0123456789');
+  if (is_readable($app_root . '/' . $site_path . '/settings.' . $environment_name . '.php')) {
+    include $app_root . '/' . $site_path . '/settings.' . $environment_name . '.php';
+  }
 }

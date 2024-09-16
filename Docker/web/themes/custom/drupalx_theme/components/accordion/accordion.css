@@ -195,3 +195,16 @@
   height: 48px;
   width: 48px;
 }
+
+.scaler-resources .accordion-body li {
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+.scaler-resources .accordion-body li > a {
+  display: block;
+  margin-bottom: 2px;
+  text-underline-offset: 3px;
+}
+.scaler-resources .accordion-body li > a:hover, .scaler-resources .accordion-body li > a:focus {
+  text-decoration: none !important;
+}
