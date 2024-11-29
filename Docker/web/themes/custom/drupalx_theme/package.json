@@ -58,7 +58,7 @@
     "jquery": "^3.7.1",
     "postcss": "^8.4.35",
     "postcss-scss": "^4.0.9",
-    "twing": "^2.3.7",
-    "twing-loader": "^2.0.2"
+    "twing": "^7.1.0-beta.2",
+    "twing-loader": "^5.0.0-beta.3"
   }
 }
