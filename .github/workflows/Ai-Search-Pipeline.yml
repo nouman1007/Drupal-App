@@ -108,18 +108,19 @@ jobs:
       - name: Configure API Management
         run: |
           # Create a new API operation
-          az apim api operation create \
-            # --service-name ${{ secrets.API_MANAGEMENT_SERVICE_NAME }} \
-            --service-name "Ai-Search-AMS" \
-            --api-id "search-api" \
-            --operation-id "search-operation" \
-            --method POST \
-            --url-template "/search" \
-            --response-status 200 \
-            --response-description "Search Results" \
-            --request-description "Search request" \
-            --request-body "application/json" \
-            --service-url "https://azure-html-search.azurewebsites.net/api/search"
+          # az apim api operation create \
+          #   # --service-name ${{ secrets.API_MANAGEMENT_SERVICE_NAME }} \
+          #   --service-name "Ai-Search-AMS" \
+          #   --api-id "search-api" \
+          #   --operation-id "search-operation" \
+          #   --method POST \
+          #   --url-template "/search" \
+          #   --response-status 200 \
+          #   --response-description "Search Results" \
+          #   --request-description "Search request" \
+          #   --request-body "application/json" \
+          #   --service-url "https://azure-html-search.azurewebsites.net/api/search"
+          az apim api operation create --service-name "Ai-Search-AMS" --api-id "search-api" --operation-id "search-operation" --method POST --url-template "/search" --response-status 200 --response-description "Search Results" --request-description "Search request" --request-body "application/json" --service-url "https://azure-html-search.azurewebsites.net/api/search"
 
       # Step 9: Verify Deployment
       - name: Test Deployment
