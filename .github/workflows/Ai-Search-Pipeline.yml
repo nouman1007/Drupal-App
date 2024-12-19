@@ -42,9 +42,9 @@ jobs:
         run: |
           az appservice plan create \
             # --name ${{ secrets.APP_SERVICE_PLAN }} \
-            --name Ai-Search-Plan \
+            --name "Ai-Search-Plan" \
             # --resource-group ${{ secrets.RESOURCE_GROUP }} \
-            --resource-group pipeline-deployment \
+            --resource-group "pipeline-deployment" \
             --location eastus \
             --sku B1 \
             --is-linux
