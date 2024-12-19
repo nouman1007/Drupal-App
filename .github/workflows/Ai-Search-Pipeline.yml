@@ -61,23 +61,24 @@ jobs:
     #         --functions-version 4 \
     #         --os-type linux
 
-    #   # Step 6: Set Environment Variables
-    #   - name: Configure App Settings
-    #     run: |
-    #       az functionapp config appsettings set \
-    #         --name ${{ secrets.FUNCTION_APP_NAME }} \
-    #         --resource-group ${{ secrets.RESOURCE_GROUP }} \
-    #         --settings \
-    #         AzureWebJobsStorage=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }} \
-    #         FUNCTIONS_WORKER_RUNTIME="python" \
-    #         SEARCH_SERVICE_ENDPOINT="${{ secrets.SEARCH_SERVICE_ENDPOINT }}" \
-    #         SEARCH_SERVICE_API_KEY="${{ secrets.SEARCH_SERVICE_API_KEY }}" \
-    #         SEARCH_INDEX_NAME="${{ secrets.SEARCH_INDEX_NAME }}" \
-    #         SECONDARY_SEARCH_INDEX_NAME="${{ secrets.SECONDARY_SEARCH_INDEX_NAME }}" \
-    #         OPENAI_ENDPOINT="${{ secrets.OPENAI_ENDPOINT }}" \
-    #         OPENAI_KEY="${{ secrets.OPENAI_KEY }}"
+      # Step 6: Set Environment Variables
+      - name: Configure App Settings
+        run: |
+          # az functionapp config appsettings set \
+            # --name ${{ secrets.FUNCTION_APP_NAME }} \
+            # --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            # --settings \
+            # AzureWebJobsStorage=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }} \
+            # FUNCTIONS_WORKER_RUNTIME="python" \
+            # SEARCH_SERVICE_ENDPOINT="${{ secrets.SEARCH_SERVICE_ENDPOINT }}" \
+            # SEARCH_SERVICE_API_KEY="${{ secrets.SEARCH_SERVICE_API_KEY }}" \
+            # SEARCH_INDEX_NAME="${{ secrets.SEARCH_INDEX_NAME }}" \
+            # SECONDARY_SEARCH_INDEX_NAME="${{ secrets.SECONDARY_SEARCH_INDEX_NAME }}" \
+            # OPENAI_ENDPOINT="${{ secrets.OPENAI_ENDPOINT }}" \
+            # OPENAI_KEY="${{ secrets.OPENAI_KEY }}"
+          az functionapp config appsettings set --name azure-html-search --resource-group pipeline-deployment --settings AzureWebJobsStorage= "" FUNCTIONS_WORKER_RUNTIME="python" SEARCH_SERVICE_ENDPOINT="https://gptkb-kf5c5wgrhtage.search.windows.net" SEARCH_SERVICE_API_KEY="3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q" SEARCH_INDEX_NAME="html-dev-index-updated" SECONDARY_SEARCH_INDEX_NAME="pdf-html" OPENAI_ENDPOINT="https://sementickernal1627560484.openai.azure.com/" OPENAI_KEY="7669d8794eb64532807d8a573d4fbcfc"
 
-    #   # Step 7: Deploy Function App
+          #   # Step 7: Deploy Function App
     #   - name: Deploy to Azure Function App
     #     uses: Azure/functions-action@v1
     #     with:
