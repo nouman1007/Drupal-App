@@ -76,8 +76,8 @@ jobs:
             # SECONDARY_SEARCH_INDEX_NAME="${{ secrets.SECONDARY_SEARCH_INDEX_NAME }}" \
             # OPENAI_ENDPOINT="${{ secrets.OPENAI_ENDPOINT }}" \
             # OPENAI_KEY="${{ secrets.OPENAI_KEY }}"
-          az functionapp config appsettings set --name azure-html-search --resource-group pipeline-deployment --settings AzureWebJobsStorage= "" FUNCTIONS_WORKER_RUNTIME="python" SEARCH_SERVICE_ENDPOINT="https://gptkb-kf5c5wgrhtage.search.windows.net" SEARCH_SERVICE_API_KEY="3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q" SEARCH_INDEX_NAME="html-dev-index-updated" SECONDARY_SEARCH_INDEX_NAME="pdf-html" OPENAI_ENDPOINT="https://sementickernal1627560484.openai.azure.com/" OPENAI_KEY="7669d8794eb64532807d8a573d4fbcfc"
-
+          # az functionapp config appsettings set --name azure-html-search --resource-group pipeline-deployment --settings AzureWebJobsStorage= "" FUNCTIONS_WORKER_RUNTIME="python" SEARCH_SERVICE_ENDPOINT="https://gptkb-kf5c5wgrhtage.search.windows.net" SEARCH_SERVICE_API_KEY="3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q" SEARCH_INDEX_NAME="html-dev-index-updated" SECONDARY_SEARCH_INDEX_NAME="pdf-html" OPENAI_ENDPOINT="https://sementickernal1627560484.openai.azure.com/" OPENAI_KEY="7669d8794eb64532807d8a573d4fbcfc"
+          az functionapp config appsettings set --name azure-html-search --resource-group pipeline-deployment --settings AzureWebJobsStorage= "DefaultEndpointsProtocol=https;AccountName=aisearchstorageacct;AccountKey=tJJV5DqccwZXhamY65b4+H7PTlIJT+82MqbSg2Rvn6T+J7OPT4HQG9FBVzLqNRRYL/hEnDNZcesh+AStzecSgg==;EndpointSuffix=core.windows.net" FUNCTIONS_WORKER_RUNTIME="python" SEARCH_SERVICE_ENDPOINT="https://gptkb-kf5c5wgrhtage.search.windows.net" SEARCH_SERVICE_API_KEY="3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q" SEARCH_INDEX_NAME="html-dev-index-updated" SECONDARY_SEARCH_INDEX_NAME="pdf-html" OPENAI_ENDPOINT="https://sementickernal1627560484.openai.azure.com/" OPENAI_KEY="7669d8794eb64532807d8a573d4fbcfc"
           #   # Step 7: Deploy Function App
     #   - name: Deploy to Azure Function App
     #     uses: Azure/functions-action@v1
