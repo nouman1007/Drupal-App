@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=americorpevidencestore;AccountKey=arvoBvsu8ZznXmU7RUduyPX/szQvlJVXz0gch/wb9sMVqzQ6fR5cOsNd5pGzDGLIKQCmorISSVZt+ASt7M8JhQ==;EndpointSuffix=core.windows.net",
+    "AZURE_SEARCH_SERVICE_ENDPOINT": "https://gptkb-kf5c5wgrhtage.search.windows.net",
+    "AZURE_SEARCH_ADMIN_KEY": "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q",
+    "AZURE_SEARCH_INDEX_NAME": "gptkbindex",
+    "AZURE_OPENAI_ENDPOINT": "https://sementickernal1627560484.openai.azure.com",
+    "AZURE_OPENAI_KEY": "7669d8794eb64532807d8a573d4fbcfc"
+  }
+}

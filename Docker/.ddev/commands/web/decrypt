@@ -1,5 +1,0 @@
-#!/bin/bash
-# This script runs ansible-vault decrypt with the same arguments passed to ddev decrypt.
-
-# Forward all arguments to ansible-vault decrypt
-ansible-vault decrypt "$@"

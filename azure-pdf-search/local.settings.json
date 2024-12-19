@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+      "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+      "FUNCTIONS_WORKER_RUNTIME": "python",
+      "SEARCH_ENDPOINT": "https://gptkb-kf5c5wgrhtage.search.windows.net",
+      "SEARCH_KEY": "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q",
+      "INDEX_NAMES": "pdf-html",
+      "OPENAI_ENDPOINT": "https://sementickernal1627560484.openai.azure.com/",
+      "OPENAI_KEY": "7669d8794eb64532807d8a573d4fbcfc"
+  }
+}

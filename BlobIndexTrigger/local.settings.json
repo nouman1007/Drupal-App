@@ -1,0 +1,16 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=americorpevidencestore;AccountKey=arvoBvsu8ZznXmU7RUduyPX/szQvlJVXz0gch/wb9sMVqzQ6fR5cOsNd5pGzDGLIKQCmorISSVZt+ASt7M8JhQ==;EndpointSuffix=core.windows.net",
+        "FUNCTIONS_WORKER_RUNTIME": "python",
+        "WEBSITE_ENABLE_FEATURE_EVENT_GRID_SOURCE": "true",
+        "AZURE_SEARCH_SERVICE_ENDPOINT": "https://gptkb-kf5c5wgrhtage.search.windows.net",
+        "AZURE_SEARCH_ADMIN_KEY": "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q",
+        "AZURE_SEARCH_INDEX_NAME": "gptkbindex",
+        "AZURE_STORAGE_ACCOUNT_NAME": "americorpevidencestore",
+        "AZURE_OPENAI_SERVICE": "cog-kf5c5wgrhtage",
+        "AZURE_OPENAI_DEPLOYMENT": "embedding",
+        "AZURE_OPENAI_ENDPOINT": "https://cog-kf5c5wgrhtage.openai.azure.com/",
+        "AZURE_OPENAI_MODEL": "text-embedding-ada-002"
+    }
+}

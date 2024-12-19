@@ -1,0 +1,88 @@
+name: Deploy Azure Functions to Azure
+
+on:
+  push:
+    # branches:
+    #   - main  # Trigger deployment on push to 'main' branch
+    paths:
+      - 'azure-html-search/**'  # Trigger only when changes occur in the app1 directory
+      - '.github/workflows/Ai-Search-Pipeline.yml'
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Step 3: Install Dependencies
+      - name: Install Dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
+
+      # Step 4: Set up Azure CLI
+      - name: Azure CLI Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    #   # Step 5: Create Azure Resources (Optional: Skip if already created)
+    #   - name: Create Azure Function App Resources
+    #     run: |
+    #       az appservice plan create \
+    #         --name ${{ secrets.APP_SERVICE_PLAN }} \
+    #         --resource-group ${{ secrets.RESOURCE_GROUP }} \
+    #         --location eastus \
+    #         --sku B1 \
+    #         --is-linux
+
+    #       az functionapp create \
+    #         --name ${{ secrets.FUNCTION_APP_NAME }} \
+    #         --storage-account ${{ secrets.STORAGE_ACCOUNT }} \
+    #         --resource-group ${{ secrets.RESOURCE_GROUP }} \
+    #         --plan ${{ secrets.APP_SERVICE_PLAN }} \
+    #         --runtime python \
+    #         --runtime-version 3.9 \
+    #         --functions-version 4 \
+    #         --os-type linux
+
+    #   # Step 6: Set Environment Variables
+    #   - name: Configure App Settings
+    #     run: |
+    #       az functionapp config appsettings set \
+    #         --name ${{ secrets.FUNCTION_APP_NAME }} \
+    #         --resource-group ${{ secrets.RESOURCE_GROUP }} \
+    #         --settings \
+    #         AzureWebJobsStorage=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }} \
+    #         FUNCTIONS_WORKER_RUNTIME="python" \
+    #         SEARCH_SERVICE_ENDPOINT="${{ secrets.SEARCH_SERVICE_ENDPOINT }}" \
+    #         SEARCH_SERVICE_API_KEY="${{ secrets.SEARCH_SERVICE_API_KEY }}" \
+    #         SEARCH_INDEX_NAME="${{ secrets.SEARCH_INDEX_NAME }}" \
+    #         SECONDARY_SEARCH_INDEX_NAME="${{ secrets.SECONDARY_SEARCH_INDEX_NAME }}" \
+    #         OPENAI_ENDPOINT="${{ secrets.OPENAI_ENDPOINT }}" \
+    #         OPENAI_KEY="${{ secrets.OPENAI_KEY }}"
+
+    #   # Step 7: Deploy Function App
+    #   - name: Deploy to Azure Function App
+    #     uses: Azure/functions-action@v1
+    #     with:
+    #       app-name: ${{ secrets.FUNCTION_APP_NAME }}
+    #       package: .
+    #       publish-profile: ${{ secrets.FUNCTION_APP_PUBLISH_PROFILE }}
+
+    #   # Step 8: Verify Deployment
+    #   - name: Test Deployment
+    #     run: |
+    #       echo "Deployment successful!"
+    #       az functionapp show --name ${{ secrets.FUNCTION_APP_NAME }} --resource-group ${{ secrets.RESOURCE_GROUP }}
