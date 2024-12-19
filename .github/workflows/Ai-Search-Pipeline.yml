@@ -40,14 +40,15 @@ jobs:
       # Step 5: Create Azure Resources (Optional: Skip if already created)
       - name: Create Azure Function App Resources
         run: |
-          az appservice plan create \
+          # az appservice plan create \
             # --name ${{ secrets.APP_SERVICE_PLAN }} \
-            --name "Ai-Search-Plan" \
+            # --name "Ai-Search-Plan" \
             # --resource-group ${{ secrets.RESOURCE_GROUP }} \
-            --resource-group "pipeline-deployment" \
-            --location eastus \
-            --sku B1 \
-            --is-linux
+            # --resource-group "pipeline-deployment" \
+            # --location eastus \
+            # --sku B1 \
+            # --is-linux
+          az appservice plan create --resource-group pipeline-deployment --name Ai-Search-Plan  --sku B1 --is-linux
 
     #       az functionapp create \
     #         --name ${{ secrets.FUNCTION_APP_NAME }} \
