@@ -29,7 +29,8 @@ jobs:
         run: |
           python -m venv .venv
           source .venv/bin/activate
-          pip install -r requirements.txt
+          # pip install -r requirements.txt
+          pip install -r azure-html-search/requirements.txt
 
       # Step 4: Set up Azure CLI
       - name: Azure CLI Login
@@ -89,7 +90,30 @@ jobs:
           # publish-profile: ${{ secrets.FUNCTION_APP_PUBLISH_PROFILE }}
           publish-profile: <publishData><publishProfile profileName="azure-html-search - Web Deploy" publishMethod="MSDeploy" publishUrl="azure-html-search.scm.azurewebsites.net:443" msdeploySite="azure-html-search" userName="$azure-html-search" userPWD="aj5wS3rnSobsSPeiy7g6l2DXT3pchQutgSSLNk07Kuf9rhPhFEP48Qtgsgxt" destinationAppUrl="http://azure-html-search.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="https://portal.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="azure-html-search - FTP" publishMethod="FTP" publishUrl="ftps://waws-prod-blu-533.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="azure-html-search\$azure-html-search" userPWD="aj5wS3rnSobsSPeiy7g6l2DXT3pchQutgSSLNk07Kuf9rhPhFEP48Qtgsgxt" destinationAppUrl="http://azure-html-search.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="https://portal.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="azure-html-search - Zip Deploy" publishMethod="ZipDeploy" publishUrl="azure-html-search.scm.azurewebsites.net:443" userName="$azure-html-search" userPWD="aj5wS3rnSobsSPeiy7g6l2DXT3pchQutgSSLNk07Kuf9rhPhFEP48Qtgsgxt" destinationAppUrl="http://azure-html-search.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="https://portal.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>
 
-      # Step 8: Verify Deployment
+      - name: Debug List Files
+        run: |
+          ls -l ./azure-html-search
+          zip -T ./azure-html-search.zip
+        
+
+      # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
+      - name: Configure API Management
+        run: |
+          # Create a new API operation
+          az apim api operation create \
+            # --service-name ${{ secrets.API_MANAGEMENT_SERVICE_NAME }} \
+            --service-name "Ai-Search-AMS" \
+            --api-id "search-api" \
+            --operation-id "search-operation" \
+            --method POST \
+            --url-template "/search" \
+            --response-status 200 \
+            --response-description "Search Results" \
+            --request-description "Search request" \
+            --request-body "application/json" \
+            --service-url "https://azure-html-search.azurewebsites.net/api/search"
+
+      # Step 9: Verify Deployment
       - name: Test Deployment
         run: |
           echo "Deployment successful!"
