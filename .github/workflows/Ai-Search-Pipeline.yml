@@ -35,8 +35,16 @@ jobs:
       - name: Debug List Files
         run: |
           ls -l ./azure-html-search
-          zip -T ./azure-html-search.zip
-                    
+
+      - name: Create ZIP File
+        run: |
+          zip -r ./azure-html-search.zip ./azure-html-search
+                            
+      - name: Debug Workflow Environment
+        run: |
+          pwd
+          ls -l
+        
       # Step 4: Set up Azure CLI
       - name: Azure CLI Login
         uses: azure/login@v1
@@ -91,7 +99,7 @@ jobs:
           # app-name: ${{ secrets.FUNCTION_APP_NAME }}
           app-name: "azure-html-search"
           # package: .
-          package: './azure-html-search'  # Path to the API 2 code
+          package: './azure-html-search.zip'  # Path to the API 2 code
           # publish-profile: ${{ secrets.FUNCTION_APP_PUBLISH_PROFILE }}
           publish-profile: <publishData><publishProfile profileName="azure-html-search - Web Deploy" publishMethod="MSDeploy" publishUrl="azure-html-search.scm.azurewebsites.net:443" msdeploySite="azure-html-search" userName="$azure-html-search" userPWD="aj5wS3rnSobsSPeiy7g6l2DXT3pchQutgSSLNk07Kuf9rhPhFEP48Qtgsgxt" destinationAppUrl="http://azure-html-search.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="https://portal.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="azure-html-search - FTP" publishMethod="FTP" publishUrl="ftps://waws-prod-blu-533.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="azure-html-search\$azure-html-search" userPWD="aj5wS3rnSobsSPeiy7g6l2DXT3pchQutgSSLNk07Kuf9rhPhFEP48Qtgsgxt" destinationAppUrl="http://azure-html-search.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="https://portal.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="azure-html-search - Zip Deploy" publishMethod="ZipDeploy" publishUrl="azure-html-search.scm.azurewebsites.net:443" userName="$azure-html-search" userPWD="aj5wS3rnSobsSPeiy7g6l2DXT3pchQutgSSLNk07Kuf9rhPhFEP48Qtgsgxt" destinationAppUrl="http://azure-html-search.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="https://portal.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>
 
