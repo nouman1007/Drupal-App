@@ -71,7 +71,7 @@ jobs:
           #   operation_description: "Operation to execute search queries"
 
     # Run only if the first project (`azure-html-search`) is modified
-    if: needs.filter.outputs.azure-html-search == 'true'
+    # if: needs.filter.outputs.azure-html-search == 'true'
 
     # # Run only if the corresponding project is modified
     # if: |
