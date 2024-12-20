@@ -146,7 +146,56 @@ jobs:
           # Output the subscription ID for later use in other steps
           echo "::set-output name=subscription-id::$SUBSCRIPTION_ID"
 
-      # - name: Create Service Principal for GitHub Actions
+      - name: Set Azure Access Token
+        id: azure_token
+        run: |
+          echo "##[set-output name=token;]$(az account get-access-token --query accessToken --output tsv)"
+        
+      - name: Store Access Token
+        run: |
+          echo "AZURE_ACCESS_TOKEN=${{ steps.azure_token.outputs.token }}" >> $GITHUB_ENV
+
+      # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
+      - name: Configure API Management
+        run: |
+
+          # Set inbound policy for the operation using REST API (via curl)
+          curl -X POST \
+            "https://management.azure.com/subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }}/resourceGroups/pipeline-deployment/providers/Microsoft.ApiManagement/service/Ai-Search-AMS/apis/search-api/operations/search-api/policy?api-version=2023-03-01-preview" \
+            -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '
+            {
+              "properties": {
+                "inbound": {
+                  "base": {},
+                  "set-backend-service": {
+                    "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
+                  },
+                  "set-method": "POST",
+                  "rewrite-uri": {
+                    "template": "/search"
+                  },
+                  "set-header": {
+                    "name": "Content-Type",
+                    "exists-action": "override",
+                    "value": "application/json"
+                  }
+                },
+                "backend": {
+                  "base": {}
+                },
+                "outbound": {
+                  "base": {}
+                },
+                "on-error": {
+                  "base": {}
+                }
+              }
+            }'
+
+
+          # - name: Create Service Principal for GitHub Actions
       #   run: |
       #     # Use the dynamically retrieved subscription ID to create the service principal
       #     SP_OUTPUT=$(az ad sp create-for-rbac --name "GitHub-Actions-SP" --role Contributor --scopes /subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }} --query "{client_id: appId, tenant_id: tenant, client_secret: password}" --output json)
@@ -167,42 +216,42 @@ jobs:
       #     echo "::set-output name=tenant_id::$TENANT_ID"
       #     echo "::set-output name=client_secret::$CLIENT_SECRET"
 
-      - name: Set API Management Policy
-        run: |
-          # Authenticate with Service Principal
-          # az login --service-principal -u ${{ steps.deploy.outputs.client_id }} -p ${{ steps.deploy.outputs.client_secret }} --tenant ${{ steps.deploy.outputs.tenant_id }}
+      # - name: Set API Management Policy
+      #   run: |
+      #     # Authenticate with Service Principal
+      #     # az login --service-principal -u ${{ steps.deploy.outputs.client_id }} -p ${{ steps.deploy.outputs.client_secret }} --tenant ${{ steps.deploy.outputs.tenant_id }}
           
-          # Define the policy content
-          $PolicyContent = @"
-          <policies>
-              <inbound>
-                  <base />
-                  <set-backend-service base-url="https://uat1-html-search-api.azurewebsites.net/api" />
-                  <set-method>POST</set-method>
-                  <rewrite-uri template="/search" />
-                  <set-header name="Content-Type" exists-action="override">
-                      <value>application/json</value>
-                  </set-header>
-              </inbound>
-              <backend>
-                  <base />
-              </backend>
-              <outbound>
-                  <base />
-              </outbound>
-              <on-error>
-                  <base />
-              </on-error>
-          </policies>
-          "@
+      #     # Define the policy content
+      #     $PolicyContent = @"
+      #     <policies>
+      #         <inbound>
+      #             <base />
+      #             <set-backend-service base-url="https://uat1-html-search-api.azurewebsites.net/api" />
+      #             <set-method>POST</set-method>
+      #             <rewrite-uri template="/search" />
+      #             <set-header name="Content-Type" exists-action="override">
+      #                 <value>application/json</value>
+      #             </set-header>
+      #         </inbound>
+      #         <backend>
+      #             <base />
+      #         </backend>
+      #         <outbound>
+      #             <base />
+      #         </outbound>
+      #         <on-error>
+      #             <base />
+      #         </on-error>
+      #     </policies>
+      #     "@
 
-          # Use Set-AzApiManagementPolicy to apply the policy in Azure API Management
-          Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
-                                     -ServiceName "Ai-Search-AMS" `
-                                     -ApiId "search-api" `
-                                     -PolicyContent $PolicyContent
+      #     # Use Set-AzApiManagementPolicy to apply the policy in Azure API Management
+      #     Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
+      #                                -ServiceName "Ai-Search-AMS" `
+      #                                -ApiId "search-api" `
+      #                                -PolicyContent $PolicyContent
 
-          Write-Host "Policy applied successfully!"
+      #     Write-Host "Policy applied successfully!"
 
       # Step 9: Verify Deployment
       - name: Test Deployment
