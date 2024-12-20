@@ -86,12 +86,16 @@ jobs:
         run: |
           # Authenticate with Azure using the credentials from Azure login
           # The following cmdlet should work directly after the Azure CLI login
-          Install-Module -Name Az.ApiManagement -Force -AllowClobber
+          # Install-Module -Name Az.ApiManagement -Force -AllowClobber
+          Install-Module -Name Az.ApiManagement -Force -AllowClobber -Scope CurrentUser
+
+          # Authenticate with Azure
+          $Connection = Connect-AzAccount -Identity
 
           Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
                                      -ServiceName "Ai-Search-AMS" `
                                      -ApiId "search-api" `
-                                     -OperationId "search-operation" `
+                                    #  -OperationId "search-operation" `
                                      -PolicyContent @"
           <policies>
               <inbound>
