@@ -120,6 +120,7 @@ jobs:
           #   --request-description "Search request" \
           #   --request-body "application/json" \
           #   --service-url "https://azure-html-search.azurewebsites.net/api/search"
+          az apim create --name Ai-Search-AMS -g pipeline-deployment -l eastus --publisher-email nshafiq@prudenttechnology.com --publisher-name Microsoft
           az apim api operation create \
             --resource-group pipeline-deployment \
             --service-name Ai-Search-AMS \
