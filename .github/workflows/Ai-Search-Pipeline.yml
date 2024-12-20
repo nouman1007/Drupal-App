@@ -146,31 +146,31 @@ jobs:
           # Output the subscription ID for later use in other steps
           echo "::set-output name=subscription-id::$SUBSCRIPTION_ID"
 
-      - name: Create Service Principal for GitHub Actions
-        run: |
-          # Use the dynamically retrieved subscription ID to create the service principal
-          SP_OUTPUT=$(az ad sp create-for-rbac --name "GitHub-Actions-SP" --role Contributor --scopes /subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }} --query "{client_id: appId, tenant_id: tenant, client_secret: password}" --output json)
+      # - name: Create Service Principal for GitHub Actions
+      #   run: |
+      #     # Use the dynamically retrieved subscription ID to create the service principal
+      #     SP_OUTPUT=$(az ad sp create-for-rbac --name "GitHub-Actions-SP" --role Contributor --scopes /subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }} --query "{client_id: appId, tenant_id: tenant, client_secret: password}" --output json)
 
-          # Extract the values from the output
-          CLIENT_ID=$(echo $SP_OUTPUT | jq -r '.client_id')
-          TENANT_ID=$(echo $SP_OUTPUT | jq -r '.tenant_id')
-          CLIENT_SECRET=$(echo $SP_OUTPUT | jq -r '.client_secret')
+      #     # Extract the values from the output
+      #     CLIENT_ID=$(echo $SP_OUTPUT | jq -r '.client_id')
+      #     TENANT_ID=$(echo $SP_OUTPUT | jq -r '.tenant_id')
+      #     CLIENT_SECRET=$(echo $SP_OUTPUT | jq -r '.client_secret')
 
-          # Output the results to verify
-          echo "Service Principal Created:"
-          echo "Client ID: $CLIENT_ID"
-          echo "Tenant ID: $TENANT_ID"
-          echo "Client Secret: $CLIENT_SECRET"
+      #     # Output the results to verify
+      #     echo "Service Principal Created:"
+      #     echo "Client ID: $CLIENT_ID"
+      #     echo "Tenant ID: $TENANT_ID"
+      #     echo "Client Secret: $CLIENT_SECRET"
 
-          # Store the values in GitHub Secrets (use GitHub API or a secure method for storing secrets)
-          echo "::set-output name=client_id::$CLIENT_ID"
-          echo "::set-output name=tenant_id::$TENANT_ID"
-          echo "::set-output name=client_secret::$CLIENT_SECRET"
+      #     # Store the values in GitHub Secrets (use GitHub API or a secure method for storing secrets)
+      #     echo "::set-output name=client_id::$CLIENT_ID"
+      #     echo "::set-output name=tenant_id::$TENANT_ID"
+      #     echo "::set-output name=client_secret::$CLIENT_SECRET"
 
       - name: Set API Management Policy
         run: |
           # Authenticate with Service Principal
-          az login --service-principal -u ${{ steps.deploy.outputs.client_id }} -p ${{ steps.deploy.outputs.client_secret }} --tenant ${{ steps.deploy.outputs.tenant_id }}
+          # az login --service-principal -u ${{ steps.deploy.outputs.client_id }} -p ${{ steps.deploy.outputs.client_secret }} --tenant ${{ steps.deploy.outputs.tenant_id }}
           
           # Define the policy content
           $PolicyContent = @"
