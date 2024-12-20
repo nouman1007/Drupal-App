@@ -162,7 +162,8 @@ jobs:
           # Set inbound policy for the operation using REST API (via curl)
           curl -X POST \
             "https://management.azure.com/subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }}/resourceGroups/pipeline-deployment/providers/Microsoft.ApiManagement/service/Ai-Search-AMS/apis/search-api/operations/search-api/policy?api-version=2023-03-01-preview" \
-            -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
+            # -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
+            -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
             -H "Content-Type: application/json" \
             -d '
             {
