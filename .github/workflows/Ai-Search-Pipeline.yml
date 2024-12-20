@@ -36,7 +36,7 @@ jobs:
           - name: azure-html-search-api
             plan: Ai-Search-Plan-html-search
             resource_group: pipeline-deployment
-            functionapp: azure-html-search
+            functionapp: azure-html-search-api
             requirements: azure-html-search/requirements.txt
             storage_account: apisearchstorageacct
             search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
@@ -46,10 +46,10 @@ jobs:
             openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
             openai_key: "7669d8794eb64532807d8a573d4fbcfc"
             api_management_name: Ai-Search-AMS-api
-            api_id: search-api
-            operation_id: search-operation
-            operation_display_name: "Search Operation"
-            operation_description: "Operation to execute search queries"
+            api_id: ai-search-api
+            operation_id: ai-search-operation
+            operation_display_name: "AI Search Operation"
+            operation_description: "Operation to execute AI search queries"
           
           # Disable second project for testing
           # - name: azure-pdf-search
