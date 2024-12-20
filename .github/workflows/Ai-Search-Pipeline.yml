@@ -120,7 +120,15 @@ jobs:
           #   --request-description "Search request" \
           #   --request-body "application/json" \
           #   --service-url "https://azure-html-search.azurewebsites.net/api/search"
-          az apim api operation create --resource-group pipeline-deployment --service-name "Ai-Search-AMS" --api-id "search-api" --operation-id "search-operation" --method POST --url-template "/search" --response-status 200 --response-description "Search Results" --request-description "Search request" --request-body "application/json" --display-name "Search Operation" --service-url "https://azure-html-search.azurewebsites.net/api/search"
+          az apim api operation create \
+            --resource-group pipeline-deployment \
+            --service-name Ai-Search-AMS \
+            --api-id search-api \
+            --url-template "/search" \
+            --method POST \
+            --display-name "Search Operation" \
+            --operation-id "search-operation" \
+            --description "Operation to execute search queries"
 
           # Step 9: Verify Deployment
       - name: Test Deployment
