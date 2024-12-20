@@ -81,29 +81,40 @@ jobs:
           az apim api operation create --resource-group pipeline-deployment --service-name "Ai-Search-AMS" --api-id "search-api" --url-template "/search" --method POST --display-name "Search Operation" --operation-id "search-operation" --description "Operation to execute search queries"
           
 
-          # Set inbound policy for the operation (using correct API Management command)
-          az apim api operation policy set --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api --operation-id search-operation --xml-content '
+      # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
+      - name: Configure API Management with PowerShell
+        run: |
+          # Authenticate with Azure using the credentials from Azure login
+          # The following cmdlet should work directly after the Azure CLI login
+          Install-Module -Name Az.ApiManagement -Force -AllowClobber
+
+          Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
+                                     -ServiceName "Ai-Search-AMS" `
+                                     -ApiId "search-api" `
+                                     -OperationId "search-operation" `
+                                     -PolicyContent @"
           <policies>
-            <inbound>
-                <base />
-                <set-backend-service base-url="https://uat1-html-search-api.azurewebsites.net/api" />
-                <set-method>POST</set-method>
-                <rewrite-uri template="/search" />
-                <set-header name="Content-Type" exists-action="override">
-                    <value>application/json</value>
-                </set-header>
-            </inbound>
-            <backend>
-                <base />
-            </backend>
-            <outbound>
-                <base />
-            </outbound>
-            <on-error>
-                <base />
-            </on-error>
+              <inbound>
+                  <base />
+                  <set-backend-service base-url="https://uat1-html-search-api.azurewebsites.net/api" />
+                  <set-method>POST</set-method>
+                  <rewrite-uri template="/search" />
+                  <set-header name="Content-Type" exists-action="override">
+                      <value>application/json</value>
+                  </set-header>
+              </inbound>
+              <backend>
+                  <base />
+              </backend>
+              <outbound>
+                  <base />
+              </outbound>
+              <on-error>
+                  <base />
+              </on-error>
           </policies>
-          '
+          "@
+        shell: pwsh
 
       # Step 9: Verify Deployment
       - name: Test Deployment
