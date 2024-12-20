@@ -194,37 +194,34 @@ jobs:
             #     }
             #   }
             # }'
-          --data-binary @- <<EOF
-          {
-            "properties": {
-              "inbound": {
-                "base": {},
-                "set-backend-service": {
-                  "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
+            --data-binary '{
+              "properties": {
+                "inbound": {
+                  "base": {},
+                  "set-backend-service": {
+                    "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
+                  },
+                  "set-method": "POST",
+                  "rewrite-uri": {
+                    "template": "/search"
+                  },
+                  "set-header": {
+                    "name": "Content-Type",
+                    "exists-action": "override",
+                    "value": "application/json"
+                  }
                 },
-                "set-method": "POST",
-                "rewrite-uri": {
-                  "template": "/search"
+                "backend": {
+                  "base": {}
                 },
-                "set-header": {
-                  "name": "Content-Type",
-                  "exists-action": "override",
-                  "value": "application/json"
+                "outbound": {
+                  "base": {}
+                },
+                "on-error": {
+                  "base": {}
                 }
-              },
-              "backend": {
-                "base": {}
-              },
-              "outbound": {
-                "base": {}
-              },
-              "on-error": {
-                "base": {}
               }
-            }
-          }
-          EOF
-
+            }'
           # - name: Create Service Principal for GitHub Actions
       #   run: |
       #     # Use the dynamically retrieved subscription ID to create the service principal
