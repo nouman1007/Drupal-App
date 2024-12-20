@@ -165,36 +165,65 @@ jobs:
             # -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
             -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
             -H "Content-Type: application/json" \
-            --data '
-            {
-              "properties": {
-                "inbound": {
-                  "base": {},
-                  "set-backend-service": {
-                    "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
-                  },
-                  "set-method": "POST",
-                  "rewrite-uri": {
-                    "template": "/search"
-                  },
-                  "set-header": {
-                    "name": "Content-Type",
-                    "exists-action": "override",
-                    "value": "application/json"
-                  }
+            # --data '
+            # {
+            #   "properties": {
+            #     "inbound": {
+            #       "base": {},
+            #       "set-backend-service": {
+            #         "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
+            #       },
+            #       "set-method": "POST",
+            #       "rewrite-uri": {
+            #         "template": "/search"
+            #       },
+            #       "set-header": {
+            #         "name": "Content-Type",
+            #         "exists-action": "override",
+            #         "value": "application/json"
+            #       }
+            #     },
+            #     "backend": {
+            #       "base": {}
+            #     },
+            #     "outbound": {
+            #       "base": {}
+            #     },
+            #     "on-error": {
+            #       "base": {}
+            #     }
+            #   }
+            # }'
+          --data-binary @- <<EOF
+          {
+            "properties": {
+              "inbound": {
+                "base": {},
+                "set-backend-service": {
+                  "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
                 },
-                "backend": {
-                  "base": {}
+                "set-method": "POST",
+                "rewrite-uri": {
+                  "template": "/search"
                 },
-                "outbound": {
-                  "base": {}
-                },
-                "on-error": {
-                  "base": {}
+                "set-header": {
+                  "name": "Content-Type",
+                  "exists-action": "override",
+                  "value": "application/json"
                 }
+              },
+              "backend": {
+                "base": {}
+              },
+              "outbound": {
+                "base": {}
+              },
+              "on-error": {
+                "base": {}
               }
-            }'
-
+            }
+          }
+          EOF
 
           # - name: Create Service Principal for GitHub Actions
       #   run: |
