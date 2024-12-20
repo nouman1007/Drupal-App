@@ -165,6 +165,34 @@ jobs:
             # -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
             -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
             -H "Content-Type: application/json" \
+            --data-raw '{
+              "properties": {
+                "inbound": {
+                  "base": {},
+                  "set-backend-service": {
+                    "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
+                  },
+                  "set-method": "POST",
+                  "rewrite-uri": {
+                    "template": "/search"
+                  },
+                  "set-header": {
+                    "name": "Content-Type",
+                    "exists-action": "override",
+                    "value": "application/json"
+                  }
+                },
+                "backend": {
+                  "base": {}
+                },
+                "outbound": {
+                  "base": {}
+                },
+                "on-error": {
+                  "base": {}
+                }
+              }
+            }'
             # --data '
             # {
             #   "properties": {
@@ -194,34 +222,7 @@ jobs:
             #     }
             #   }
             # }'
-            --data-binary '{
-              "properties": {
-                "inbound": {
-                  "base": {},
-                  "set-backend-service": {
-                    "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
-                  },
-                  "set-method": "POST",
-                  "rewrite-uri": {
-                    "template": "/search"
-                  },
-                  "set-header": {
-                    "name": "Content-Type",
-                    "exists-action": "override",
-                    "value": "application/json"
-                  }
-                },
-                "backend": {
-                  "base": {}
-                },
-                "outbound": {
-                  "base": {}
-                },
-                "on-error": {
-                  "base": {}
-                }
-              }
-            }'
+
           # - name: Create Service Principal for GitHub Actions
       #   run: |
       #     # Use the dynamically retrieved subscription ID to create the service principal
