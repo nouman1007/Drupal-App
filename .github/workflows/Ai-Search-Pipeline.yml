@@ -128,7 +128,7 @@ jobs:
           az apim show --name Ai-Search-AMS --resource-group pipeline-deployment
 
           # Create the API if it doesn't exist
-          az apim api create --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api --revision 1 --display-name "Search API" --path "search" --protocols https
+          az apim api create --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api  --display-name "Search API" --path "search" --protocols https
           
           # Add operation to the created API
           az apim api operation create --resource-group pipeline-deployment --service-name "Ai-Search-AMS" --api-id "search-api" --url-template "/search" --method POST --display-name "Search Operation" --operation-id "search-operation" --description "Operation to execute search queries"
