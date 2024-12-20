@@ -82,21 +82,92 @@ jobs:
           
 
       # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
-      - name: Configure API Management with PowerShell
+      # - name: Configure API Management with PowerShell
+      #   run: |
+      #     # Authenticate with Azure using the credentials from Azure login
+      #     # The following cmdlet should work directly after the Azure CLI login
+      #     # Install-Module -Name Az.ApiManagement -Force -AllowClobber
+      #     Install-Module -Name Az.ApiManagement -Force -AllowClobber -Scope CurrentUser
+
+      #     # Authenticate with Azure
+      #     $Connection = Connect-AzAccount -Identity
+
+      #     Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
+      #                                -ServiceName "Ai-Search-AMS" `
+      #                                -ApiId "search-api" `
+      #                               #  -OperationId "search-operation" `
+      #                                -PolicyContent @"
+      #     <policies>
+      #         <inbound>
+      #             <base />
+      #             <set-backend-service base-url="https://uat1-html-search-api.azurewebsites.net/api" />
+      #             <set-method>POST</set-method>
+      #             <rewrite-uri template="/search" />
+      #             <set-header name="Content-Type" exists-action="override">
+      #                 <value>application/json</value>
+      #             </set-header>
+      #         </inbound>
+      #         <backend>
+      #             <base />
+      #         </backend>
+      #         <outbound>
+      #             <base />
+      #         </outbound>
+      #         <on-error>
+      #             <base />
+      #         </on-error>
+      #     </policies>
+      #     "@
+      #   shell: pwsh
+
+      - name: Set up Azure CLI
+        uses: azure/setup-azurecli@v1
+        with:
+          azure-cli-version: '2.44.0'
+
+      - name: Authenticate to Azure
         run: |
-          # Authenticate with Azure using the credentials from Azure login
-          # The following cmdlet should work directly after the Azure CLI login
-          # Install-Module -Name Az.ApiManagement -Force -AllowClobber
-          Install-Module -Name Az.ApiManagement -Force -AllowClobber -Scope CurrentUser
+          az login --identity
+          echo "Successfully authenticated to Azure!"
 
-          # Authenticate with Azure
-          $Connection = Connect-AzAccount -Identity
+      - name: Get Subscription ID Dynamically
+        id: get-subscription-id
+        run: |
+          # Get the current subscription information
+          SUBSCRIPTION_ID=$(az account list --query "[?state=='Enabled'].id" -o tsv)
+          echo "Current Subscription ID: $SUBSCRIPTION_ID"
+          
+          # Output the subscription ID for later use in other steps
+          echo "::set-output name=subscription-id::$SUBSCRIPTION_ID"
 
-          Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
-                                     -ServiceName "Ai-Search-AMS" `
-                                     -ApiId "search-api" `
-                                    #  -OperationId "search-operation" `
-                                     -PolicyContent @"
+      - name: Create Service Principal for GitHub Actions
+        run: |
+          # Use the dynamically retrieved subscription ID to create the service principal
+          SP_OUTPUT=$(az ad sp create-for-rbac --name "GitHub-Actions-SP" --role Contributor --scopes /subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }} --query "{client_id: appId, tenant_id: tenant, client_secret: password}" --output json)
+
+          # Extract the values from the output
+          CLIENT_ID=$(echo $SP_OUTPUT | jq -r '.client_id')
+          TENANT_ID=$(echo $SP_OUTPUT | jq -r '.tenant_id')
+          CLIENT_SECRET=$(echo $SP_OUTPUT | jq -r '.client_secret')
+
+          # Output the results to verify
+          echo "Service Principal Created:"
+          echo "Client ID: $CLIENT_ID"
+          echo "Tenant ID: $TENANT_ID"
+          echo "Client Secret: $CLIENT_SECRET"
+
+          # Store the values in GitHub Secrets (use GitHub API or a secure method for storing secrets)
+          echo "::set-output name=client_id::$CLIENT_ID"
+          echo "::set-output name=tenant_id::$TENANT_ID"
+          echo "::set-output name=client_secret::$CLIENT_SECRET"
+
+      - name: Set API Management Policy
+        run: |
+          # Authenticate with Service Principal
+          az login --service-principal -u ${{ steps.deploy.outputs.client_id }} -p ${{ steps.deploy.outputs.client_secret }} --tenant ${{ steps.deploy.outputs.tenant_id }}
+          
+          # Define the policy content
+          $PolicyContent = @"
           <policies>
               <inbound>
                   <base />
@@ -118,7 +189,14 @@ jobs:
               </on-error>
           </policies>
           "@
-        shell: pwsh
+
+          # Use Set-AzApiManagementPolicy to apply the policy in Azure API Management
+          Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
+                                     -ServiceName "Ai-Search-AMS" `
+                                     -ApiId "search-api" `
+                                     -PolicyContent $PolicyContent
+
+          Write-Host "Policy applied successfully!"
 
       # Step 9: Verify Deployment
       - name: Test Deployment
