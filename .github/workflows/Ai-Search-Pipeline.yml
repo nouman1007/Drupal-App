@@ -121,6 +121,7 @@ jobs:
           #   --request-body "application/json" \
           #   --service-url "https://azure-html-search.azurewebsites.net/api/search"
           az apim create --name Ai-Search-AMS -g pipeline-deployment -l eastus --publisher-email nshafiq@prudenttechnology.com --publisher-name Microsoft
+          az apim show --name Ai-Search-AMS --resource-group pipeline-deployment
           az apim api operation create --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api --url-template "/search" --method POST --display-name "Search Operation" --operation-id "search-operation" --description "Operation to execute search queries"
 
           # az apim api operation create \
