@@ -165,7 +165,7 @@ jobs:
             # -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
             -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
             -H "Content-Type: application/json" \
-            -d '
+            --data '
             {
               "properties": {
                 "inbound": {
