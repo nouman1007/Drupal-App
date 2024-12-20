@@ -2,16 +2,81 @@ name: Deploy Azure Functions to Azure
 
 on:
   push:
-    # branches:
-    #   - main  # Trigger deployment on push to 'main' branch
     paths:
-      - 'azure-html-search/**'  # Trigger only when changes occur in the app1 directory
+      # - 'azure-html-search/**'
+      # - 'azure-pdf-search/**'
       - '.github/workflows/Ai-Search-Pipeline.yml'
 
-
 jobs:
-  deploy:
+  filter:
     runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Determine Changed Paths
+      - name: Determine Changed Paths
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            azure-html-search:
+              - 'azure-html-search/**'
+            azure-pdf-search:
+              - 'azure-pdf-search/**'
+
+  deploy:
+    needs: filter
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project:
+          - name: azure-html-search-api
+            plan: Ai-Search-Plan-html-search
+            resource_group: pipeline-deployment
+            functionapp: azure-html-search
+            requirements: azure-html-search/requirements.txt
+            storage_account: apisearchstorageacct
+            search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
+            search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
+            search_index_name: "html-dev-index-updated"
+            secondary_search_index_name: "pdf-html"
+            openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
+            openai_key: "7669d8794eb64532807d8a573d4fbcfc"
+            api_management_name: Ai-Search-AMS-api
+            api_id: search-api
+            operation_id: search-operation
+            operation_display_name: "Search Operation"
+            operation_description: "Operation to execute search queries"
+          
+          # Disable second project for testing
+          # - name: azure-pdf-search
+          #   plan: Ai-Search-Plan-azure-pdf-search
+            # resource_group: pipeline-deployment
+          #   functionapp: azure-pdf-search
+          #   requirements: azure-pdf-search/requirements.txt
+          #   storage_account: ${{ matrix.project.storage_account}}
+          #   search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
+          #   search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
+          #   search_index_name: "pdf-dev-index-updated"
+          #   secondary_search_index_name: "html-pdf"
+          #   openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
+          #   openai_key: "7669d8794eb64532807d8a573d4fbcfc"
+          #   api_management_name: Ai-Search-AMS
+          #   api_id: search-api
+          #   operation_id: search-operation
+          #   operation_display_name: "Search Operation"
+          #   operation_description: "Operation to execute search queries"
+
+    # Run only if the first project (`azure-html-search`) is modified
+    if: steps.filter.outputs.azure-html-search == 'true'
+
+    # # Run only if the corresponding project is modified
+    # if: |
+    #   (matrix.project.name == 'azure-html-search' && steps.filter.outputs.azure-html-search == 'true') ||
+    #   (matrix.project.name == 'azure-pdf-search' && steps.filter.outputs.azure-pdf-search == 'true')
 
     steps:
       # Step 1: Checkout Code
@@ -29,8 +94,7 @@ jobs:
         run: |
           python -m venv .venv
           source .venv/bin/activate
-          # pip install -r requirements.txt
-          pip install -r azure-html-search/requirements.txt
+          pip install -r ${{ matrix.project.requirements }}
 
       - name: Debug List Files
         run: |
@@ -39,127 +103,101 @@ jobs:
       - name: Create ZIP File
         run: |
           zip -r ./azure-html-search.zip ./azure-html-search
-                            
+
       - name: Debug Workflow Environment
         run: |
           pwd
           ls -l
 
+      # Step 4: Set up Azure CLI
       - name: Set up Azure CLI
         run: |
-          # Install the Azure CLI if it's not already installed
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-          az --version         
+          az --version
 
-      # Step 4: Set up Azure CLI
+      # Step 5: Azure Login
       - name: Azure CLI Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Step 5: Create Azure Resources (Optional: Skip if already created)
+      # Step 6: Create the storage account (if not already created)
+      - name: Create Storage Account (if not already created)
+        run: |
+          az storage account create --name ${{ matrix.project.storage_account }} --resource-group ${{ matrix.project.resource_group}} --location eastus --sku Standard_LRS
+
+
+      # Step 7: Create Azure Resources
       - name: Create Azure Function App Resources
         run: |
-          az appservice plan create --resource-group pipeline-deployment --name Ai-Search-Plan  --sku B1 --is-linux
-          az functionapp create --name azure-html-search --storage-account aisearchstorageacct --resource-group pipeline-deployment --plan Ai-Search-Plan --runtime python --runtime-version 3.9 --functions-version 4 --os-type linux
+          az appservice plan create --resource-group ${{ matrix.project.resource_group}} --name ${{ matrix.project.plan }} --sku B1 --is-linux
+          az functionapp create --name ${{ matrix.project.functionapp }} --storage-account ${{ matrix.project.storage_account}} --resource-group ${{ matrix.project.resource_group}} --plan ${{ matrix.project.plan }} --runtime python --runtime-version 3.9 --functions-version 4 --os-type linux
 
-
-      # Step 6: Set Environment Variables
+      # Step 8: Configure App Settings (Environment Variables)
       - name: Configure App Settings
         run: |
-          az functionapp config appsettings set --name azure-html-search --resource-group pipeline-deployment --settings AzureWebJobsStorage= "DefaultEndpointsProtocol=https;AccountName=aisearchstorageacct;AccountKey=tJJV5DqccwZXhamY65b4+H7PTlIJT+82MqbSg2Rvn6T+J7OPT4HQG9FBVzLqNRRYL/hEnDNZcesh+AStzecSgg==;EndpointSuffix=core.windows.net" FUNCTIONS_WORKER_RUNTIME="python" SEARCH_SERVICE_ENDPOINT="https://gptkb-kf5c5wgrhtage.search.windows.net" SEARCH_SERVICE_API_KEY="3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q" SEARCH_INDEX_NAME="html-dev-index-updated" SECONDARY_SEARCH_INDEX_NAME="pdf-html" OPENAI_ENDPOINT="https://sementickernal1627560484.openai.azure.com/" OPENAI_KEY="7669d8794eb64532807d8a573d4fbcfc"
+          az functionapp config appsettings set \
+            --name ${{ matrix.project.functionapp }} \
+            --resource-group pipeline-deployment \
+            --settings \
+            AzureWebJobsStorage="DefaultEndpointsProtocol=https;AccountName=${{ matrix.project.storage_account }};AccountKey=${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }};EndpointSuffix=core.windows.net" \
+            FUNCTIONS_WORKER_RUNTIME="python" \
+            SEARCH_SERVICE_ENDPOINT="${{ matrix.project.search_service_endpoint }}" \
+            SEARCH_SERVICE_API_KEY="${{ matrix.project.search_service_api_key }}" \
+            SEARCH_INDEX_NAME="${{ matrix.project.search_index_name }}" \
+            SECONDARY_SEARCH_INDEX_NAME="${{ matrix.project.secondary_search_index_name }}" \
+            OPENAI_ENDPOINT="${{ matrix.project.openai_endpoint }}" \
+            OPENAI_KEY="${{ matrix.project.openai_key }}"
 
+      # Step 9: Deploy to Azure Function App
+      # - name: Deploy API 1 to Azure Function App
+      #   uses: azure/webapps-deploy@v2
+      #   with:
+      #     app-name: 'your-function-app-1-name'  # Replace with your first Function App name
+      #     publish-profile: ${{ secrets.FUNCTION_APP_1_PUBLISH_PROFILE }}
+      #     package: '.'  # The folder containing the API code
+          
+      # OR Using Azure Functions Action (you can choose the appropriate method)
+      - name: Deploy to Azure Function App
+        uses: Azure/functions-action@v1
+        with:
+          app-name: "${{ matrix.project.functionapp }}"
+          package: './${{ matrix.project.name }}.zip'
+          
+          # OR Using az CLI (uncomment to use this method)
+          # az functionapp deployment source config-zip --name ${{ matrix.project.functionapp }} --resource-group ${{ matrix.project.resource_group}} --src-path ./${{ matrix.project.name }}.zip
 
-      # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
+      # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
       - name: Configure API Management
         run: |
-         
-          # Create API Management service if it doesn't exist
-          az apim create --name Ai-Search-AMS -g pipeline-deployment -l eastus --publisher-email nshafiq@prudenttechnology.com --publisher-name Microsoft
+          az apim create --name ${{ matrix.project.api_management_name }} --resource-group pipeline-deployment --location eastus --publisher-email nshafiq@prudenttechnology.com --publisher-name Microsoft
+          az apim show --name ${{ matrix.project.api_management_name }} --resource-group pipeline-deployment
+          az apim api operation create --resource-group pipeline-deployment --service-name ${{ matrix.project.api_management_name }} --api-id ${{ matrix.project.api_id }} --url-template "/search" --method POST --display-name "${{ matrix.project.operation_display_name }}" --operation-id "${{ matrix.project.operation_id }}" --description "${{ matrix.project.operation_description }}"
 
-          # Show to the created API
-          az apim show --name Ai-Search-AMS --resource-group pipeline-deployment
-
-          # Create the API if it doesn't exist
-          az apim api create --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api  --display-name "Search API" --path "search" --protocols https
-          
-          # Add operation to the created API
-          az apim api operation create --resource-group pipeline-deployment --service-name "Ai-Search-AMS" --api-id "search-api" --url-template "/search" --method POST --display-name "Search Operation" --operation-id "search-operation" --description "Operation to execute search queries"
-          
-
-      # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
-      # - name: Configure API Management with PowerShell
-      #   run: |
-      #     # Authenticate with Azure using the credentials from Azure login
-      #     # The following cmdlet should work directly after the Azure CLI login
-      #     # Install-Module -Name Az.ApiManagement -Force -AllowClobber
-      #     Install-Module -Name Az.ApiManagement -Force -AllowClobber -Scope CurrentUser
-
-      #     # Authenticate with Azure
-      #     $Connection = Connect-AzAccount -Identity
-
-      #     Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
-      #                                -ServiceName "Ai-Search-AMS" `
-      #                                -ApiId "search-api" `
-      #                               #  -OperationId "search-operation" `
-      #                                -PolicyContent @"
-      #     <policies>
-      #         <inbound>
-      #             <base />
-      #             <set-backend-service base-url="https://uat1-html-search-api.azurewebsites.net/api" />
-      #             <set-method>POST</set-method>
-      #             <rewrite-uri template="/search" />
-      #             <set-header name="Content-Type" exists-action="override">
-      #                 <value>application/json</value>
-      #             </set-header>
-      #         </inbound>
-      #         <backend>
-      #             <base />
-      #         </backend>
-      #         <outbound>
-      #             <base />
-      #         </outbound>
-      #         <on-error>
-      #             <base />
-      #         </on-error>
-      #     </policies>
-      #     "@
-      #   shell: pwsh
-
-      # - name: Set up Azure CLI
-      #   uses: azure/setup-azurecli@v1
-      #   with:
-      #     azure-cli-version: '2.44.0'
-
-      # - name: Authenticate to Azure
-      #   run: |
-      #     az login --identity
-      #     echo "Successfully authenticated to Azure!"
-
+      # Step 11: Get Subscription ID Dynamically
       - name: Get Subscription ID Dynamically
         id: get-subscription-id
         run: |
-          # Get the current subscription information
           SUBSCRIPTION_ID=$(az account list --query "[?state=='Enabled'].id" -o tsv)
           echo "Current Subscription ID: $SUBSCRIPTION_ID"
-          
-          # Output the subscription ID for later use in other steps
           echo "::set-output name=subscription-id::$SUBSCRIPTION_ID"
 
+      # Step 12: Set Azure Access Token
       - name: Set Azure Access Token
         id: azure_token
         run: |
           echo "##[set-output name=token;]$(az account get-access-token --query accessToken --output tsv)"
-        
+
+      # Step 13: Store Access Token
       - name: Store Access Token
         run: |
           echo "AZURE_ACCESS_TOKEN=${{ steps.azure_token.outputs.token }}" >> $GITHUB_ENV
 
-      # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
+      # Step 14: Integrate with API Management
       - name: Configure API Management
         run: |
           curl -X PUT \
-            "https://management.azure.com/subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }}/resourceGroups/pipeline-deployment/providers/Microsoft.ApiManagement/service/Ai-Search-AMS/apis/search-api/operations/search-api/policy?api-version=2023-03-01-preview" \
+            "https://management.azure.com/subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }}/resourceGroups/${{ matrix.project.resource_group}}/providers/Microsoft.ApiManagement/service/Ai-Search-AMS/apis/search-api/operations/search-api/policy?api-version=2023-03-01-preview" \
             -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
             -H "Content-Type: application/json" \
             --data-raw '{
@@ -167,131 +205,9 @@ jobs:
                 "policyContent": "<policies><inbound><set-backend-service base-url=\"https://uat1-html-search-api.azurewebsites.net/api\" /><rewrite-uri template=\"/search\" /><set-method>POST</set-method><set-header name=\"Content-Type\" exists-action=\"override\"><value>application/json</value></set-header></inbound><backend /><outbound /><on-error /></policies>"
               }
             }'
-            
-          # # Set inbound policy for the operation using REST API (via curl)
-          # curl -X POST \
-          #   "https://management.azure.com/subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }}/resourceGroups/pipeline-deployment/providers/Microsoft.ApiManagement/service/Ai-Search-AMS/apis/search-api/operations/search-api/policy?api-version=2023-03-01-preview" \
-          #   # -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
-          #   -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
-          #   -H "Content-Type: application/json" \
-          #   --data-raw '{
-          #     "properties": {
-          #       "inbound": {
-          #         "base": {},
-          #         "set-backend-service": {
-          #           "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
-          #         },
-          #         "set-method": "POST",
-          #         "rewrite-uri": {
-          #           "template": "/search"
-          #         },
-          #         "set-header": {
-          #           "name": "Content-Type",
-          #           "exists-action": "override",
-          #           "value": "application/json"
-          #         }
-          #       },
-          #       "backend": {
-          #         "base": {}
-          #       },
-          #       "outbound": {
-          #         "base": {}
-          #       },
-          #       "on-error": {
-          #         "base": {}
-          #       }
-          #     }
-          #   }'
-            # --data '
-            # {
-            #   "properties": {
-            #     "inbound": {
-            #       "base": {},
-            #       "set-backend-service": {
-            #         "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
-            #       },
-            #       "set-method": "POST",
-            #       "rewrite-uri": {
-            #         "template": "/search"
-            #       },
-            #       "set-header": {
-            #         "name": "Content-Type",
-            #         "exists-action": "override",
-            #         "value": "application/json"
-            #       }
-            #     },
-            #     "backend": {
-            #       "base": {}
-            #     },
-            #     "outbound": {
-            #       "base": {}
-            #     },
-            #     "on-error": {
-            #       "base": {}
-            #     }
-            #   }
-            # }'
 
-          # - name: Create Service Principal for GitHub Actions
-      #   run: |
-      #     # Use the dynamically retrieved subscription ID to create the service principal
-      #     SP_OUTPUT=$(az ad sp create-for-rbac --name "GitHub-Actions-SP" --role Contributor --scopes /subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }} --query "{client_id: appId, tenant_id: tenant, client_secret: password}" --output json)
-
-      #     # Extract the values from the output
-      #     CLIENT_ID=$(echo $SP_OUTPUT | jq -r '.client_id')
-      #     TENANT_ID=$(echo $SP_OUTPUT | jq -r '.tenant_id')
-      #     CLIENT_SECRET=$(echo $SP_OUTPUT | jq -r '.client_secret')
-
-      #     # Output the results to verify
-      #     echo "Service Principal Created:"
-      #     echo "Client ID: $CLIENT_ID"
-      #     echo "Tenant ID: $TENANT_ID"
-      #     echo "Client Secret: $CLIENT_SECRET"
-
-      #     # Store the values in GitHub Secrets (use GitHub API or a secure method for storing secrets)
-      #     echo "::set-output name=client_id::$CLIENT_ID"
-      #     echo "::set-output name=tenant_id::$TENANT_ID"
-      #     echo "::set-output name=client_secret::$CLIENT_SECRET"
-
-      # - name: Set API Management Policy
-      #   run: |
-      #     # Authenticate with Service Principal
-      #     # az login --service-principal -u ${{ steps.deploy.outputs.client_id }} -p ${{ steps.deploy.outputs.client_secret }} --tenant ${{ steps.deploy.outputs.tenant_id }}
-          
-      #     # Define the policy content
-      #     $PolicyContent = @"
-      #     <policies>
-      #         <inbound>
-      #             <base />
-      #             <set-backend-service base-url="https://uat1-html-search-api.azurewebsites.net/api" />
-      #             <set-method>POST</set-method>
-      #             <rewrite-uri template="/search" />
-      #             <set-header name="Content-Type" exists-action="override">
-      #                 <value>application/json</value>
-      #             </set-header>
-      #         </inbound>
-      #         <backend>
-      #             <base />
-      #         </backend>
-      #         <outbound>
-      #             <base />
-      #         </outbound>
-      #         <on-error>
-      #             <base />
-      #         </on-error>
-      #     </policies>
-      #     "@
-
-      #     # Use Set-AzApiManagementPolicy to apply the policy in Azure API Management
-      #     Set-AzApiManagementPolicy -ResourceGroupName "pipeline-deployment" `
-      #                                -ServiceName "Ai-Search-AMS" `
-      #                                -ApiId "search-api" `
-      #                                -PolicyContent $PolicyContent
-
-      #     Write-Host "Policy applied successfully!"
-
-      # Step 9: Verify Deployment
+      # Step 15: Test Deployment
       - name: Test Deployment
         run: |
           echo "Deployment successful!"
-          az functionapp show --name azure-html-search --resource-group pipeline-deployment
+          az functionapp show --name ${{ matrix.project.functionapp }} --resource-group ${{ matrix.project.resource_group}}
