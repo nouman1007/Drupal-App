@@ -81,8 +81,8 @@ jobs:
           az apim api operation create --resource-group pipeline-deployment --service-name "Ai-Search-AMS" --api-id "search-api" --url-template "/search" --method POST --display-name "Search Operation" --operation-id "search-operation" --description "Operation to execute search queries"
           
 
-          # Set inbound policy for the API
-          az apim api operation policy set --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api --operation-id search-operation --policy-content '
+          # Set inbound policy for the operation (using correct API Management command)
+          az apim api operation policy set --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api --operation-id search-operation --xml-content '
           <policies>
             <inbound>
                 <base />
