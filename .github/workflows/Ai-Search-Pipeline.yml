@@ -173,6 +173,7 @@ jobs:
         run: |
           az apim create --name ${{ matrix.project.api_management_name }} --resource-group pipeline-deployment --location eastus --publisher-email nshafiq@prudenttechnology.com --publisher-name Microsoft
           az apim show --name ${{ matrix.project.api_management_name }} --resource-group pipeline-deployment
+          az apim api list --resource-group pipeline-deployment --service-name Ai-Search-AMS-api
           az apim api operation create --resource-group pipeline-deployment --service-name ${{ matrix.project.api_management_name }} --api-id ${{ matrix.project.api_id }} --url-template "/search" --method POST --display-name "${{ matrix.project.operation_display_name }}" --operation-id "${{ matrix.project.operation_id }}" --description "${{ matrix.project.operation_description }}"
 
       # Step 11: Get Subscription ID Dynamically
