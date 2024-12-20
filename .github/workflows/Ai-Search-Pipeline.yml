@@ -158,11 +158,8 @@ jobs:
       # Step 8: Integrate with API Management (Add API Operation and Inbound Policy)
       - name: Configure API Management
         run: |
-
-          # Set inbound policy for the operation using REST API (via curl)
           curl -X POST \
             "https://management.azure.com/subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }}/resourceGroups/pipeline-deployment/providers/Microsoft.ApiManagement/service/Ai-Search-AMS/apis/search-api/operations/search-api/policy?api-version=2023-03-01-preview" \
-            # -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
             -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
             -H "Content-Type: application/json" \
             --data-raw '{
@@ -193,6 +190,41 @@ jobs:
                 }
               }
             }'
+
+          # # Set inbound policy for the operation using REST API (via curl)
+          # curl -X POST \
+          #   "https://management.azure.com/subscriptions/${{ steps.get-subscription-id.outputs.subscription-id }}/resourceGroups/pipeline-deployment/providers/Microsoft.ApiManagement/service/Ai-Search-AMS/apis/search-api/operations/search-api/policy?api-version=2023-03-01-preview" \
+          #   # -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
+          #   -H "Authorization: Bearer ${{ steps.azure_token.outputs.token }}" \
+          #   -H "Content-Type: application/json" \
+          #   --data-raw '{
+          #     "properties": {
+          #       "inbound": {
+          #         "base": {},
+          #         "set-backend-service": {
+          #           "base-url": "https://uat1-html-search-api.azurewebsites.net/api"
+          #         },
+          #         "set-method": "POST",
+          #         "rewrite-uri": {
+          #           "template": "/search"
+          #         },
+          #         "set-header": {
+          #           "name": "Content-Type",
+          #           "exists-action": "override",
+          #           "value": "application/json"
+          #         }
+          #       },
+          #       "backend": {
+          #         "base": {}
+          #       },
+          #       "outbound": {
+          #         "base": {}
+          #       },
+          #       "on-error": {
+          #         "base": {}
+          #       }
+          #     }
+          #   }'
             # --data '
             # {
             #   "properties": {
