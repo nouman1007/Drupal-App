@@ -131,10 +131,10 @@ jobs:
       #   with:
       #     azure-cli-version: '2.44.0'
 
-      - name: Authenticate to Azure
-        run: |
-          az login --identity
-          echo "Successfully authenticated to Azure!"
+      # - name: Authenticate to Azure
+      #   run: |
+      #     az login --identity
+      #     echo "Successfully authenticated to Azure!"
 
       - name: Get Subscription ID Dynamically
         id: get-subscription-id
