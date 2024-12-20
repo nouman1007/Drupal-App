@@ -44,7 +44,13 @@ jobs:
         run: |
           pwd
           ls -l
-        
+
+      - name: Set up Azure CLI
+        run: |
+          # Install the Azure CLI if it's not already installed
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          az --version         
+
       # Step 4: Set up Azure CLI
       - name: Azure CLI Login
         uses: azure/login@v1
@@ -120,10 +126,10 @@ jobs:
       #     "@
       #   shell: pwsh
 
-      - name: Set up Azure CLI
-        uses: azure/setup-azurecli@v1
-        with:
-          azure-cli-version: '2.44.0'
+      # - name: Set up Azure CLI
+      #   uses: azure/setup-azurecli@v1
+      #   with:
+      #     azure-cli-version: '2.44.0'
 
       - name: Authenticate to Azure
         run: |
