@@ -120,10 +120,19 @@ jobs:
           #   --request-description "Search request" \
           #   --request-body "application/json" \
           #   --service-url "https://azure-html-search.azurewebsites.net/api/search"
+         
+          # Create API Management service if it doesn't exist
           az apim create --name Ai-Search-AMS -g pipeline-deployment -l eastus --publisher-email nshafiq@prudenttechnology.com --publisher-name Microsoft
-          az apim show --name Ai-Search-AMS --resource-group pipeline-deployment
-          az apim api operation create --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api --url-template "/search" --method POST --display-name "Search Operation" --operation-id "search-operation" --description "Operation to execute search queries"
 
+          # Show to the created API
+          az apim show --name Ai-Search-AMS --resource-group pipeline-deployment
+
+          # Create the API if it doesn't exist
+          az apim api create --resource-group pipeline-deployment --service-name Ai-Search-AMS --api-id search-api --revision 1 --display-name "Search API" --path "search" --protocols https
+          
+          # Add operation to the created API
+          az apim api operation create --resource-group pipeline-deployment --service-name "Ai-Search-AMS" --api-id "search-api" --url-template "/search" --method POST --display-name "Search Operation" --operation-id "search-operation" --description "Operation to execute search queries"
+          
           # az apim api operation create \
           #   --resource-group pipeline-deployment \
           #   --service-name Ai-Search-AMS \
