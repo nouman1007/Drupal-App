@@ -1,7 +1,7 @@
 {
     "IsEncrypted": false,
     "Values": {
-        "AzureWebJobsStorage": "",
+        "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=searchstorageacctv1;AccountKey=KmnEQoMDOSiNJE2OWxBA2YLGeeM5n/lKDva6wdT63EnQaMtS0teoVUXgwtIJ0Hw9KxThflxy3LOF+AStv9EkEA==;EndpointSuffix=core.windows.net",
         "FUNCTIONS_WORKER_RUNTIME": "python",
         "SEARCH_SERVICE_ENDPOINT": "https://gptkb-kf5c5wgrhtage.search.windows.net",
         "SEARCH_SERVICE_API_KEY": "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q",
