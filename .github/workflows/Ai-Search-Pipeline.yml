@@ -134,14 +134,14 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd ${{ matrix.project.name }}
-          zip release.zip ./* -r
+          zip release-123.zip ./* -r
 
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v3
         with:
           name: python-app-${{ matrix.project.name }}
           path: |
-            ${{ matrix.project.name }}/release.zip
+            ${{ matrix.project.name }}/release-123.zip
             !${{ matrix.project.name }}/venv/
 
       # # Step 3: Install Dependencies
@@ -360,8 +360,8 @@ jobs:
       - name: Extract release.zip
         run: |
           # unzip ./downloaded_artifacts/release.zip -d ./downloaded_artifacts/
-          unzip ./${{ matrix.project.name }}/release.zip -d ./${{ matrix.project.name }}/
-          # rm ./${{ matrix.project.name }}/release.zip
+          unzip ./${{ matrix.project.name }}/release-123.zip -d ./${{ matrix.project.name }}/
+          # rm ./${{ matrix.project.name }}/release-123.zip
         
       - name: Check if directory exists
         run: |
@@ -398,7 +398,7 @@ jobs:
           app-name: "${{ matrix.project.functionapp }}"
           # package: ./downloaded_artifacts/${{ matrix.project.name }}
           # package: ./${{ matrix.project.name }}
-          package: ./${{ matrix.project.name }}/release.zip
+          package: ./${{ matrix.project.name }}/release-123.zip
 
       # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
       - name: Configure API Management
