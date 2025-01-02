@@ -373,10 +373,10 @@ jobs:
       #   run: |
       #     unzip -l ./${{ matrix.project.name }}/release.zip
 
-      # - name: List contents
-      #   run: |
-      #     # unzip -l ./${{ matrix.project.name }}/release.zip
-      #     ls -l ./${{ matrix.project.name }}/
+      - name: List contents
+        run: |
+          # unzip -l ./${{ matrix.project.name }}/release.zip
+          ls -l ./${{ matrix.project.name }}/
   
       # - name: Deploy to Azure Function App
       #   run: |
@@ -410,7 +410,7 @@ jobs:
         with:
           node-version: '16'
             
-      - name: Install dependencies
+      - name: Deploy to Azure Function
         run: |
           cd ${{ matrix.project.name }}
           func azure functionapp publish ${{ matrix.project.functionapp }}
