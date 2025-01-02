@@ -26,7 +26,36 @@ jobs:
               - 'azure-html-search/**'
             azure-pdf-search:
               - 'azure-pdf-search/**'
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
 
+  #     - name: Setup Python version
+  #       uses: actions/setup-python@v1
+  #       with:
+  #         python-version: ${{ env.PYTHON_VERSION }}
+
+  #     - name: Create and start virtual environment
+  #       run: |
+  #         python -m venv venv
+  #         source venv/bin/activate
+  #     - name: Install dependencies
+  #       run: pip install -r requirements.txt
+
+      
+
+  #     - name: Zip artifact for deployment
+  #       run: zip release.zip ./* -r
+
+  #     - name: Upload artifact for deployment job
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: python-app
+  #         path: |
+  #           release.zip
+  #           !venv/
   deploy:
     needs: filter
     runs-on: ubuntu-latest
@@ -211,7 +240,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: python-app-${{ matrix.project.name }}
-          path: ./downloaded_artifacts
+          # path: ./downloaded_artifacts
+          path: ./${{ matrix.project.name }}
 
       - name: Check current directory and list files
         run: |
@@ -220,16 +250,18 @@ jobs:
 
       - name: Extract release.zip
         run: |
-          unzip ./downloaded_artifacts/release.zip -d ./downloaded_artifacts/
+          # unzip ./downloaded_artifacts/release.zip -d ./downloaded_artifacts/
+          unzip ./${{ matrix.project.name }}/release.zip -d ./${{ matrix.project.name }}/
         
       - name: Check if directory exists
         run: |
-          ls -l ./downloaded_artifacts/
-          ls -d ./downloaded_artifacts/azure-html-search
+          ls -l ./${{ matrix.project.name }}/
+          # ls -d ./downloaded_artifacts/azure-html-search
+          ls -d ./${{ matrix.project.name }}
 
       - name: List contents of release.zip
         run: |
-          unzip -l ./downloaded_artifacts/release.zip
+          unzip -l ./${{ matrix.project.name }}/release.zip
                   
       # # Step 8: Unzip the downloaded artifact
       # - name: Unzip downloaded artifact
@@ -242,7 +274,8 @@ jobs:
         uses: Azure/functions-action@v1
         with:
           app-name: "${{ matrix.project.functionapp }}"
-          package: ./downloaded_artifacts/${{ matrix.project.name }}
+          # package: ./downloaded_artifacts/${{ matrix.project.name }}
+          package: ./${{ matrix.project.name }}
 
       # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
       - name: Configure API Management
