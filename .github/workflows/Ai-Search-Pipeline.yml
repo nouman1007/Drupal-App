@@ -33,19 +33,19 @@ jobs:
     strategy:
       matrix:
         project:
-          - name: azure-html-search-api
-            plan: Ai-Search-Plan-html-search
+          - name: azure-html-search
+            plan: Search-Plan-html-search-v1
             resource_group: pipeline-deployment
-            functionapp: azure-html-search-api
+            functionapp: azure-html-search-api-v1
             requirements: azure-html-search/requirements.txt
-            storage_account: apisearchstorageacct
+            storage_account: searchstorageacctv1
             search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
             search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
             search_index_name: "html-dev-index-updated"
             secondary_search_index_name: "pdf-html"
             openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
             openai_key: "7669d8794eb64532807d8a573d4fbcfc"
-            api_management_name: Ai-Search-AMS-api
+            api_management_name: Ai-Search-AMS-v1
             api_id: search-api
             operation_id: ai-search-operation
             operation_display_name: "AI Search Operation"
@@ -69,6 +69,8 @@ jobs:
           #   operation_id: search-operation
           #   operation_display_name: "Search Operation"
           #   operation_description: "Operation to execute search queries"
+    env:
+      AZURE_FUNCTIONAPP_PACKAGE_PATH: './${{ matrix.project.name }}'
 
     # Run only if the first project (`azure-html-search`) is modified
     # if: needs.filter.outputs.azure-html-search == 'true'
@@ -89,20 +91,44 @@ jobs:
         with:
           python-version: '3.9'
 
-      # Step 3: Install Dependencies
-      - name: Install Dependencies
+      - name: Create and start virtual environment
         run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install -r ${{ matrix.project.requirements }}
+          cd ${{ matrix.project.name }}
+          python -m venv venv
+          source venv/bin/activate
 
-      - name: Debug List Files
+      - name: Install dependencies
         run: |
-          ls -l ./azure-html-search
+          cd ${{ matrix.project.name }}
+          pip install -r requirements.txt
 
-      - name: Create ZIP File
+      - name: Zip artifact for deployment
         run: |
-          zip -r ./azure-html-search.zip ./azure-html-search
+          cd ${{ matrix.project.name }}
+          zip release.zip ./* -r
+
+      - name: Upload artifact for deployment
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-app-${{ matrix.project.name }}
+          path: |
+            ${{ matrix.project.name }}/release.zip
+            !${{ matrix.project.name }}/venv/
+
+      # # Step 3: Install Dependencies
+      # - name: Install Dependencies
+      #   run: |
+      #     python -m venv .venv
+      #     source .venv/bin/activate
+      #     pip install -r ${{ matrix.project.requirements }}
+
+      # - name: Debug List Files
+      #   run: |
+      #     ls -l ./azure-html-search
+
+      # - name: Create ZIP File
+      #   run: |
+      #     zip -r ./azure-html-search.zip ./azure-html-search
 
       - name: Debug Workflow Environment
         run: |
@@ -126,6 +152,16 @@ jobs:
         run: |
           az storage account create --name ${{ matrix.project.storage_account }} --resource-group ${{ matrix.project.resource_group}} --location eastus --sku Standard_LRS
 
+      - name: Retrieve Azure Storage Connection String
+        id: storage-connection
+        run: |
+          CONNECTION_STRING=$(az storage account show-connection-string \
+            --name ${{ matrix.project.storage_account }} \
+            --resource-group ${{ matrix.project.resource_group }} \
+            --query connectionString \
+            --output tsv)
+          echo "AzureWebJobsStorage=$CONNECTION_STRING" >> $GITHUB_ENV
+        shell: bash
 
       # Step 7: Create Azure Resources
       - name: Create Azure Function App Resources
@@ -140,7 +176,8 @@ jobs:
             --name ${{ matrix.project.functionapp }} \
             --resource-group pipeline-deployment \
             --settings \
-            AzureWebJobsStorage="DefaultEndpointsProtocol=https;AccountName=${{ matrix.project.storage_account }};AccountKey=${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }};EndpointSuffix=core.windows.net" \
+            # AzureWebJobsStorage="DefaultEndpointsProtocol=https;AccountName=${{ matrix.project.storage_account }};AccountKey=${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }};EndpointSuffix=core.windows.net" \
+            AzureWebJobsStorage="${{ env.AzureWebJobsStorage }}" \
             FUNCTIONS_WORKER_RUNTIME="python" \
             SEARCH_SERVICE_ENDPOINT="${{ matrix.project.search_service_endpoint }}" \
             SEARCH_SERVICE_API_KEY="${{ matrix.project.search_service_api_key }}" \
@@ -163,9 +200,8 @@ jobs:
         with:
           app-name: "${{ matrix.project.functionapp }}"
           # package: './${{ matrix.project.name }}.zip'
-          package: './azure-html-search.zip'
-          
-          # OR Using az CLI (uncomment to use this method)
+          # package: './azure-html-search.zip'
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}          # OR Using az CLI (uncomment to use this method)
           # az functionapp deployment source config-zip --name ${{ matrix.project.functionapp }} --resource-group ${{ matrix.project.resource_group}} --src-path ./${{ matrix.project.name }}.zip
 
       # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
