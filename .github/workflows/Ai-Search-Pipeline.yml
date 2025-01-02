@@ -361,6 +361,7 @@ jobs:
         run: |
           # unzip ./downloaded_artifacts/release.zip -d ./downloaded_artifacts/
           unzip ./${{ matrix.project.name }}/release.zip -d ./${{ matrix.project.name }}/
+          rm release.zip
         
       - name: Check if directory exists
         run: |
@@ -372,7 +373,7 @@ jobs:
         run: |
           unzip -l ./${{ matrix.project.name }}/release.zip
 
-      - name: List contents of release.zip
+      - name: List contents
         run: |
           # unzip -l ./${{ matrix.project.name }}/release.zip
           ls -l ./${{ matrix.project.name }}/
