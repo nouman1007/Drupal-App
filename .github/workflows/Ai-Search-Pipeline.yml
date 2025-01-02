@@ -161,7 +161,9 @@ jobs:
             --query connectionString \
             --output tsv)
           echo "AzureWebJobsStorage=$CONNECTION_STRING" >> $GITHUB_ENV
-          echo "Environment Variable: ${{ env.AzureWebJobsStorage }}"
+          # echo "Environment Variable: ${{ env.AzureWebJobsStorage }}"
+          echo "Environment Variable:"
+          echo "AzureWebJobsStorage=$CONNECTION_STRING"
         shell: bash
 
       # Step 7: Create Azure Resources
