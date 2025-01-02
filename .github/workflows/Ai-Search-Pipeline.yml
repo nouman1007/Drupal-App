@@ -401,7 +401,9 @@ jobs:
       #     package: ./${{ matrix.project.name }}/release-123.zip
       - name: Install Azure Functions Core Tools
         run: |
-          curl -sL https://aka.ms/InstallAzureFunctionCoreTools | sudo bash
+          # curl -sL https://aka.ms/InstallAzureFunctionCoreTools | sudo bash
+          sudo apt-get update
+          sudo apt-get install azure-functions-core-tools-4
 
       - name: Install Node.js
         uses: actions/setup-node@v3
