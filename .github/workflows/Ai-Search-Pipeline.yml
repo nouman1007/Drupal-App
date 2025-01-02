@@ -217,7 +217,12 @@ jobs:
         run: |
           pwd
           ls -R
-        
+
+      - name: Check if directory exists
+        run: |
+          ls -l ./downloaded_artifacts/
+          ls -d ./downloaded_artifacts/azure-html-search
+                
       # Step 8: Unzip the downloaded artifact
       - name: Unzip downloaded artifact
         run: |
