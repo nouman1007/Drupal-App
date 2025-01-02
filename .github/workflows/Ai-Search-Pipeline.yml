@@ -218,16 +218,24 @@ jobs:
           pwd
           ls -R
 
+      - name: Extract release.zip
+        run: |
+          unzip ./downloaded_artifacts/release.zip -d ./downloaded_artifacts/
+        
       - name: Check if directory exists
         run: |
           ls -l ./downloaded_artifacts/
           ls -d ./downloaded_artifacts/azure-html-search
-                
-      # Step 8: Unzip the downloaded artifact
-      - name: Unzip downloaded artifact
+
+      - name: List contents of release.zip
         run: |
-          cd ./downloaded_artifacts/${{ matrix.project.name }}
-          unzip release.zip -d ./
+          unzip -l ./downloaded_artifacts/release.zip
+                  
+      # # Step 8: Unzip the downloaded artifact
+      # - name: Unzip downloaded artifact
+      #   run: |
+      #     cd ./downloaded_artifacts/${{ matrix.project.name }}
+      #     unzip release.zip -d ./
 
       # Step 9: Deploy to Azure Function App
       - name: Deploy to Azure Function App
