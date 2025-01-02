@@ -371,20 +371,27 @@ jobs:
       - name: List contents of release.zip
         run: |
           unzip -l ./${{ matrix.project.name }}/release.zip
-                  
+
+      - name: Deploy to Azure Function App
+        run: |
+          az functionapp deployment source config-zip \
+            --resource-group ${{ matrix.project.resource_group }} \
+            --name ${{ matrix.project.functionapp }} \
+            --src ./${{ matrix.project.name }}/release.zip
+
       # # Step 8: Unzip the downloaded artifact
       # - name: Unzip downloaded artifact
       #   run: |
       #     cd ./downloaded_artifacts/${{ matrix.project.name }}
       #     unzip release.zip -d ./
 
-      # Step 9: Deploy to Azure Function App
-      - name: Deploy to Azure Function App
-        uses: Azure/functions-action@v1
-        with:
-          app-name: "${{ matrix.project.functionapp }}"
-          # package: ./downloaded_artifacts/${{ matrix.project.name }}
-          package: ./${{ matrix.project.name }}/
+      # # Step 9: Deploy to Azure Function App
+      # - name: Deploy to Azure Function App
+      #   uses: Azure/functions-action@v1
+      #   with:
+      #     app-name: "${{ matrix.project.functionapp }}"
+      #     # package: ./downloaded_artifacts/${{ matrix.project.name }}
+      #     package: ./${{ matrix.project.name }}/
 
       # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
       - name: Configure API Management
