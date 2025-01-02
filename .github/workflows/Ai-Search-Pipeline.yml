@@ -213,6 +213,11 @@ jobs:
           name: python-app-${{ matrix.project.name }}
           path: ./downloaded_artifacts
 
+      - name: Check current directory and list files
+        run: |
+          pwd
+          ls -R
+        
       # Step 8: Unzip the downloaded artifact
       - name: Unzip downloaded artifact
         run: |
