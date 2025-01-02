@@ -399,7 +399,15 @@ jobs:
       #     # package: ./downloaded_artifacts/${{ matrix.project.name }}
       #     # package: ./${{ matrix.project.name }}
       #     package: ./${{ matrix.project.name }}/release-123.zip
+      - name: Install Azure Functions Core Tools
+        run: |
+          curl -sL https://aka.ms/InstallAzureFunctionCoreTools | sudo bash
 
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+            
       - name: Install dependencies
         run: |
           cd ${{ matrix.project.name }}
