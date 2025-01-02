@@ -369,9 +369,9 @@ jobs:
           # ls -d ./downloaded_artifacts/azure-html-search
           ls -d ./${{ matrix.project.name }}
 
-      - name: List contents of release.zip
-        run: |
-          unzip -l ./${{ matrix.project.name }}/release.zip
+      # - name: List contents of release.zip
+      #   run: |
+      #     unzip -l ./${{ matrix.project.name }}/release.zip
 
       - name: List contents
         run: |
