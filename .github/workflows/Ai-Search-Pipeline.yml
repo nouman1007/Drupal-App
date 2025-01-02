@@ -26,7 +26,7 @@ jobs:
               - 'azure-html-search/**'
             azure-pdf-search:
               - 'azure-pdf-search/**'
-  build:
+  # build:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repository
@@ -57,7 +57,116 @@ jobs:
   #           release.zip
   #           !venv/
 
+    # needs: filter
+    # runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     project:
+    #       - name: azure-html-search
+    #         plan: Search-Plan-html-search-v1
+    #         resource_group: pipeline-deployment
+    #         functionapp: azure-html-search-api-v1
+    #         requirements: azure-html-search/requirements.txt
+    #         storage_account: searchstorageacctv1
+    #         search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
+    #         search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
+    #         search_index_name: "html-dev-index-updated"
+    #         secondary_search_index_name: "pdf-html"
+    #         openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
+    #         openai_key: "7669d8794eb64532807d8a573d4fbcfc"
+    #         api_management_name: Ai-Search-AMS-v1
+    #         api_id: search-api
+    #         operation_id: ai-search-operation
+    #         operation_display_name: "AI Search Operation"
+    #         operation_description: "Operation to execute AI search queries"
+          
+          # Disable second project for testing
+          # - name: azure-pdf-search
+          #   plan: Ai-Search-Plan-azure-pdf-search
+            # resource_group: pipeline-deployment
+          #   functionapp: azure-pdf-search
+          #   requirements: azure-pdf-search/requirements.txt
+          #   storage_account: ${{ matrix.project.storage_account}}
+          #   search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
+          #   search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
+          #   search_index_name: "pdf-dev-index-updated"
+          #   secondary_search_index_name: "html-pdf"
+          #   openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
+          #   openai_key: "7669d8794eb64532807d8a573d4fbcfc"
+          #   api_management_name: Ai-Search-AMS
+          #   api_id: search-api
+          #   operation_id: search-operation
+          #   operation_display_name: "Search Operation"
+          #   operation_description: "Operation to execute search queries"
+    # env:
+    #   AZURE_FUNCTIONAPP_PACKAGE_PATH: './${{ matrix.project.name }}'
+
+    # Run only if the first project (`azure-html-search`) is modified
+    # if: needs.filter.outputs.azure-html-search == 'true'
+
+    # # Run only if the corresponding project is modified
+    # if: |
+    #   (matrix.project.name == 'azure-html-search' && steps.filter.outputs.azure-html-search == 'true') ||
+    #   (matrix.project.name == 'azure-pdf-search' && steps.filter.outputs.azure-pdf-search == 'true')
+
+    # steps:
+    #   # Step 1: Checkout Code
+    #   - name: Checkout Code
+    #     uses: actions/checkout@v4
+
+    #   # Step 2: Set up Python
+    #   - name: Set up Python 3.9
+    #     uses: actions/setup-python@v4
+    #     with:
+    #       python-version: '3.9'
+
+    #   - name: Create and start virtual environment
+    #     run: |
+    #       cd ${{ matrix.project.name }}
+    #       python -m venv venv
+    #       source venv/bin/activate
+
+    #   - name: Install dependencies
+    #     run: |
+    #       cd ${{ matrix.project.name }}
+    #       pip install -r requirements.txt
+
+    #   - name: Zip artifact for deployment
+    #     run: |
+    #       cd ${{ matrix.project.name }}
+    #       zip release-123.zip ./* -r
+
+    #   - name: Upload artifact for deployment
+    #     uses: actions/upload-artifact@v3
+    #     with:
+    #       name: python-app-${{ matrix.project.name }}
+    #       path: |
+    #         ${{ matrix.project.name }}/release-123.zip
+    #         !${{ matrix.project.name }}/venv/
+
+    #   # # Step 3: Install Dependencies
+    #   # - name: Install Dependencies
+    #   #   run: |
+    #   #     python -m venv .venv
+    #   #     source .venv/bin/activate
+    #   #     pip install -r ${{ matrix.project.requirements }}
+
+    #   # - name: Debug List Files
+    #   #   run: |
+    #   #     ls -l ./azure-html-search
+
+    #   # - name: Create ZIP File
+    #   #   run: |
+    #   #     zip -r ./azure-html-search.zip ./azure-html-search
+
+    #   - name: Debug Workflow Environment
+    #     run: |
+    #       pwd
+    #       ls -l
+
+  deploy:
     needs: filter
+    # needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -113,115 +222,6 @@ jobs:
       # Step 1: Checkout Code
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      # Step 2: Set up Python
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
-      - name: Create and start virtual environment
-        run: |
-          cd ${{ matrix.project.name }}
-          python -m venv venv
-          source venv/bin/activate
-
-      - name: Install dependencies
-        run: |
-          cd ${{ matrix.project.name }}
-          pip install -r requirements.txt
-
-      - name: Zip artifact for deployment
-        run: |
-          cd ${{ matrix.project.name }}
-          zip release-123.zip ./* -r
-
-      - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v3
-        with:
-          name: python-app-${{ matrix.project.name }}
-          path: |
-            ${{ matrix.project.name }}/release-123.zip
-            !${{ matrix.project.name }}/venv/
-
-      # # Step 3: Install Dependencies
-      # - name: Install Dependencies
-      #   run: |
-      #     python -m venv .venv
-      #     source .venv/bin/activate
-      #     pip install -r ${{ matrix.project.requirements }}
-
-      # - name: Debug List Files
-      #   run: |
-      #     ls -l ./azure-html-search
-
-      # - name: Create ZIP File
-      #   run: |
-      #     zip -r ./azure-html-search.zip ./azure-html-search
-
-      - name: Debug Workflow Environment
-        run: |
-          pwd
-          ls -l
-
-  deploy:
-    # needs: filter
-    needs: build
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project:
-          - name: azure-html-search
-            plan: Search-Plan-html-search-v1
-            resource_group: pipeline-deployment
-            functionapp: azure-html-search-api-v1
-            requirements: azure-html-search/requirements.txt
-            storage_account: searchstorageacctv1
-            search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
-            search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
-            search_index_name: "html-dev-index-updated"
-            secondary_search_index_name: "pdf-html"
-            openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
-            openai_key: "7669d8794eb64532807d8a573d4fbcfc"
-            api_management_name: Ai-Search-AMS-v1
-            api_id: search-api
-            operation_id: ai-search-operation
-            operation_display_name: "AI Search Operation"
-            operation_description: "Operation to execute AI search queries"
-          
-          # Disable second project for testing
-          # - name: azure-pdf-search
-          #   plan: Ai-Search-Plan-azure-pdf-search
-            # resource_group: pipeline-deployment
-          #   functionapp: azure-pdf-search
-          #   requirements: azure-pdf-search/requirements.txt
-          #   storage_account: ${{ matrix.project.storage_account}}
-          #   search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
-          #   search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
-          #   search_index_name: "pdf-dev-index-updated"
-          #   secondary_search_index_name: "html-pdf"
-          #   openai_endpoint: "https://sementickernal1627560484.openai.azure.com/"
-          #   openai_key: "7669d8794eb64532807d8a573d4fbcfc"
-          #   api_management_name: Ai-Search-AMS
-          #   api_id: search-api
-          #   operation_id: search-operation
-          #   operation_display_name: "Search Operation"
-          #   operation_description: "Operation to execute search queries"
-    env:
-      AZURE_FUNCTIONAPP_PACKAGE_PATH: './${{ matrix.project.name }}'
-
-    # Run only if the first project (`azure-html-search`) is modified
-    # if: needs.filter.outputs.azure-html-search == 'true'
-
-    # # Run only if the corresponding project is modified
-    # if: |
-    #   (matrix.project.name == 'azure-html-search' && steps.filter.outputs.azure-html-search == 'true') ||
-    #   (matrix.project.name == 'azure-pdf-search' && steps.filter.outputs.azure-pdf-search == 'true')
-
-    steps:
-    #   # Step 1: Checkout Code
-    #   - name: Checkout Code
-    #     uses: actions/checkout@v4
 
     #   # Step 2: Set up Python
     #   - name: Set up Python 3.9
@@ -344,39 +344,39 @@ jobs:
       #     package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}          # OR Using az CLI (uncomment to use this method)
       #     # az functionapp deployment source config-zip --name ${{ matrix.project.functionapp }} --resource-group ${{ matrix.project.resource_group}} --src-path ./${{ matrix.project.name }}.zip
 
-      # Step 7: Download artifact for deployment
-      - name: Download artifact for deployment
-        uses: actions/download-artifact@v3
-        with:
-          name: python-app-${{ matrix.project.name }}
-          # path: ./downloaded_artifacts
-          path: ./${{ matrix.project.name }}
+      # # Step 7: Download artifact for deployment
+      # - name: Download artifact for deployment
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: python-app-${{ matrix.project.name }}
+      #     # path: ./downloaded_artifacts
+      #     path: ./${{ matrix.project.name }}
 
-      - name: Check current directory and list files
-        run: |
-          pwd
-          ls -R
+      # - name: Check current directory and list files
+      #   run: |
+      #     pwd
+      #     ls -R
 
-      - name: Extract release.zip
-        run: |
-          # unzip ./downloaded_artifacts/release.zip -d ./downloaded_artifacts/
-          unzip ./${{ matrix.project.name }}/release-123.zip -d ./${{ matrix.project.name }}/
-          # rm ./${{ matrix.project.name }}/release-123.zip
+      # - name: Extract release.zip
+      #   run: |
+      #     # unzip ./downloaded_artifacts/release.zip -d ./downloaded_artifacts/
+      #     unzip ./${{ matrix.project.name }}/release-123.zip -d ./${{ matrix.project.name }}/
+      #     # rm ./${{ matrix.project.name }}/release-123.zip
         
-      - name: Check if directory exists
-        run: |
-          ls -l ./${{ matrix.project.name }}/
-          # ls -d ./downloaded_artifacts/azure-html-search
-          ls -d ./${{ matrix.project.name }}
+      # - name: Check if directory exists
+      #   run: |
+      #     ls -l ./${{ matrix.project.name }}/
+      #     # ls -d ./downloaded_artifacts/azure-html-search
+      #     ls -d ./${{ matrix.project.name }}
 
       # - name: List contents of release.zip
       #   run: |
       #     unzip -l ./${{ matrix.project.name }}/release.zip
 
-      - name: List contents
-        run: |
-          # unzip -l ./${{ matrix.project.name }}/release.zip
-          ls -l ./${{ matrix.project.name }}/
+      # - name: List contents
+      #   run: |
+      #     # unzip -l ./${{ matrix.project.name }}/release.zip
+      #     ls -l ./${{ matrix.project.name }}/
   
       # - name: Deploy to Azure Function App
       #   run: |
@@ -391,16 +391,21 @@ jobs:
       #     cd ./downloaded_artifacts/${{ matrix.project.name }}
       #     unzip release.zip -d ./
 
-      # Step 9: Deploy to Azure Function App
-      - name: Deploy to Azure Function App
-        uses: Azure/functions-action@v1
-        with:
-          app-name: "${{ matrix.project.functionapp }}"
-          # package: ./downloaded_artifacts/${{ matrix.project.name }}
-          # package: ./${{ matrix.project.name }}
-          package: ./${{ matrix.project.name }}/release-123.zip
+      # # Step 9: Deploy to Azure Function App
+      # - name: Deploy to Azure Function App
+      #   uses: Azure/functions-action@v1
+      #   with:
+      #     app-name: "${{ matrix.project.functionapp }}"
+      #     # package: ./downloaded_artifacts/${{ matrix.project.name }}
+      #     # package: ./${{ matrix.project.name }}
+      #     package: ./${{ matrix.project.name }}/release-123.zip
 
-      # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
+      - name: Install dependencies
+        run: |
+          cd ${{ matrix.project.name }}
+          func azure functionapp publish ${{ matrix.project.functionapp }}
+
+        # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
       - name: Configure API Management
         run: |
           az apim create --name ${{ matrix.project.api_management_name }} --resource-group pipeline-deployment --location eastus --publisher-email nshafiq@prudenttechnology.com --publisher-name Microsoft
