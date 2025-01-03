@@ -172,11 +172,11 @@ jobs:
       matrix:
         project:
           - name: azure-html-search
-            plan: Search-Plan-html-search-v1
+            plan: Search-Plan-html-search-v2
             resource_group: pipeline-deployment
-            functionapp: azure-html-search-api-v1
+            functionapp: azure-html-search-api-v2
             requirements: azure-html-search/requirements.txt
-            storage_account: searchstorageacctv1
+            storage_account: searchstorageacctv2
             search_service_endpoint: "https://gptkb-kf5c5wgrhtage.search.windows.net"
             search_service_api_key: "3zMUbBwoeNOtU1LIuoP9vFou0PTMwv1L3HcAm5JvS1AzSeA4he0q"
             search_index_name: "html-dev-index-updated"
@@ -415,7 +415,7 @@ jobs:
           cd ${{ matrix.project.name }}
           ls -l
           # func azure functionapp publish ${{ matrix.project.functionapp }}
-          func azure functionapp publish ${{ matrix.project.functionapp }} --publish-settings-only
+          # func azure functionapp publish ${{ matrix.project.functionapp }} --publish-settings-only
 
         # Step 10: Integrate with API Management (Add API Operation and Inbound Policy)
       - name: Configure API Management
